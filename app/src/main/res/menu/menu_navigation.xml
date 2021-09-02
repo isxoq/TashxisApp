@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="yondagi_oyna">
+
+    <item
+        android:id="@+id/bosh_menu_2"
+        android:title="Bosh sahifa"
+        android:icon="@drawable/ic_home_2"
+        />
+    <item
+        android:id="@+id/id_profil_fragment"
+        android:title="Mening profilim"
+        android:icon="@drawable/ic_user"
+        />
+    <item
+    android:id="@+id/id_share_fragment"
+    android:title="Doslaringingizga ulashing"
+    android:icon="@drawable/ic_share"
+    />
+    <item
+        android:id="@+id/id_settings_fragment"
+        android:title="Sozlamalar"
+        android:icon="@drawable/ic_settings"
+        />
+    <item
+        android:id="@+id/id_aloqa_fragment"
+        android:title="Biz bilan aloqa"
+        android:icon="@drawable/ic_telephone"
+        />
+
+
+</menu>

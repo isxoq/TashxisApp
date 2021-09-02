@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bosh_menu"
+        android:title="Bosh sahifa"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/shifokor_menu"
+        android:title="Shifokor"
+        android:icon="@drawable/ic_doctor"/>
+    <item
+        android:id="@+id/tashxis_menu"
+        android:title="Tashxis"
+        android:icon="@drawable/ic_tashxis"/>
+    <item
+        android:id="@+id/navbat_menu"
+        android:title="Navbat"
+        android:icon="@drawable/ic_navbat"/>
+    <item
+        android:id="@+id/menu"
+        android:title="Menu"
+        android:icon="@drawable/ic_menu"/>
+</menu>

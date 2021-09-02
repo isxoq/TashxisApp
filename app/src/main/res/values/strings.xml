@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Tashxis</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_tashxislash">Ushbu bo\'lim orqali sizga ma\'lum bo\'lgan kasallik belgilari haqidagi ma\'lumotlarni bizga bergan holda kasalligingizga dasturning o\'zi birlamchi ehtimoli tashxis qo\'yib beradi. Tashxislash natijalariga ko\'ra aynan sizda kuzatilayotgan kasallikni davolay oladigan malakali shifokorning onlayn navbatiga yozilish imkoniyatini beradi!</string>
+    <string name="text_tashxislash_2">Ushbu bo\'lim tez orada ishga tushadi. Bizni doyimiy kuzatib boring. Ilovani yangilanishlaridan doyimiy xabardor bo\'lib, turing. Ilova yangilansa biz sizga ijtimoiy tarmoqlarimiz va ilovani o\'zida ham habar beramiz.</string>
+    <string name="text_navbat">Ushbu bo\'lim orqali shifokor ko\'rigi uchun onlayn navbatdan o\'tgan kunlaringiz monitoring taxlilini ko\'rishingiz mumkun.</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="tashxis">Tashxis</string>
+    <string name="bildirishnomalar">Bildirishnomalar</string>
+</resources>
