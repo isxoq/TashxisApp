@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tashxis">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/tashxis_logo"
@@ -10,16 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tashxis">
         <activity
-            android:name=".korinishlar.RegisterActivity"
+            android:name=".ui.auth.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".korinishlar.SlideActivity"
+            android:name=".ui.activity.SlideActivity"
             android:exported="true" />
         <activity
-            android:name=".korinishlar.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".korinishlar.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

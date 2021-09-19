@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".ui.auth.ui.OtpFragment">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_190sdp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_sms_kod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Biz +998 99 793 96 96 telefon raqamingizga
+sms orqali faollashtirish kodini yubordik."
+                    android:textColor="@color/black"
+                    android:layout_margin="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:gravity="center_horizontal"
+                    />
+<com.example.tashxis.util.maskeditText.MaskedEditText
+    android:id="@+id/sms_kod"
+    android:maxLength="10"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_80sdp"
+    android:layout_marginEnd="@dimen/_80sdp"
+    android:inputType="phone"
+    android:textSize="@dimen/_18sdp"
+    mask:mask="#-#-#-#-#"
+    android:typeface="monospace"
+    app:allowed_chars="1234567890"
+    app:keep_hint="false"
+    android:hint="12345"
+    android:gravity="center_horizontal"
+    />
+
+
+                <TextView
+                    android:id="@+id/resend_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kod yetib kelmadimi?"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="#045476"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>

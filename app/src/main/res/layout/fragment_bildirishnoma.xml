@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#EEEEEE"
     android:orientation="vertical"
-    tools:context=".korinishlar.bildirishnoma_oyna.BildirishnomaFragment">
+    tools:context=".ui.bildirishnoma_oyna.BildirishnomaFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

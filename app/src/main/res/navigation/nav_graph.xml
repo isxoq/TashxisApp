@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/bosh_menu_2"
-        android:name="com.example.tashxis.korinishlar.bosh_oyna.BoshFragment"
+        android:name="com.example.tashxis.ui.bosh_oyna.BoshFragment"
         android:label="fragment_bosh"
         tools:layout="@layout/fragment_bosh" />
     <fragment
         android:id="@+id/id_profil_fragment"
-        android:name="com.example.tashxis.korinishlar.yondagi_oyna.ProfilFragment"
+        android:name="com.example.tashxis.ui.yondagi_oyna.ProfilFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/id_settings_fragment"
-        android:name="com.example.tashxis.korinishlar.yondagi_oyna.SettigFragment"
+        android:name="com.example.tashxis.ui.yondagi_oyna.SettigFragment"
         android:label="fragment_settig"
         tools:layout="@layout/fragment_settig" />
     <fragment
         android:id="@+id/id_share_fragment"
-        android:name="com.example.tashxis.korinishlar.yondagi_oyna.ShareFragment"
+        android:name="com.example.tashxis.ui.yondagi_oyna.ShareFragment"
         android:label="fragment_share"
         tools:layout="@layout/fragment_share" />
     <fragment
         android:id="@+id/id_aloqa_fragment"
-        android:name="com.example.tashxis.korinishlar.yondagi_oyna.AloqaFragment"
+        android:name="com.example.tashxis.ui.yondagi_oyna.AloqaFragment"
         android:label="fragment_aloqa"
         tools:layout="@layout/fragment_aloqa" />
 </navigation>

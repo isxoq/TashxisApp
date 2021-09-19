@@ -1,140 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#F3F3F3"
-    tools:context=".korinishlar.RegisterActivity">
-
-    <LinearLayout
-        android:id="@+id/raqam_terish"
+    tools:context=".ui.auth.RegisterActivity">
+    <fragment
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="@dimen/_20sdp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Telefon raqamingizni kiriting:"
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:textSize="@dimen/_18sdp"
-                    />
-
-                <br.com.sapereaude.maskedEditText.MaskedEditText
-                    android:id="@+id/tel_raqam"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_40sdp"
-                    android:layout_marginEnd="@dimen/_40sdp"
-                    android:inputType="phone"
-                    android:textSize="@dimen/_18sdp"
-                    android:typeface="monospace"
-                    app:allowed_chars="1234567890"
-                    app:mask="+998(##)###-##-##"
-                    android:hint="995193150"
-                    app:keep_hint="true"
-                    android:gravity="center_horizontal"
-                    />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_tasdiqlash"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:text="Tasdiqlash"
-                    android:textSize="@dimen/_14sdp"
-                    android:textAllCaps="false"
-                    android:backgroundTint="#1998CF"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    android:layout_marginEnd="@dimen/_50sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    app:cornerRadius="@dimen/_20sdp"
-                    />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/kod_terish"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_190sdp"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="@dimen/_20sdp">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_sms_kod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Biz +998 99 793 96 96 telefon raqamingizga
-sms orqali faollashtirish kodini yubordik."
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:textSize="@dimen/_14sdp"
-                    android:gravity="center_horizontal"
-                    />
-
-                <br.com.sapereaude.maskedEditText.MaskedEditText
-                    android:id="@+id/sms_kod"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_80sdp"
-                    android:layout_marginEnd="@dimen/_80sdp"
-                    android:inputType="phone"
-                    android:textSize="@dimen/_18sdp"
-                    android:typeface="monospace"
-                    app:allowed_chars="1234567890"
-                    app:mask="# # # #"
-                    android:hint="1122"
-                    app:keep_hint="true"
-                    android:gravity="center_horizontal"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kod yetib kelmadimi?"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="#045476"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-</LinearLayout>
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/register_navigation"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

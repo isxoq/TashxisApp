@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.2" />
         <entry key="..\:/Android projects/Tashxis/app/src/main/res/drawable/bot_nav_view_shape.xml" value="0.165234375" />
         <entry key="..\:/Android projects/Tashxis/app/src/main/res/drawable/ic_home.xml" value="0.2203125" />
         <entry key="..\:/Android projects/Tashxis/app/src/main/res/drawable/ic_home_2.xml" value="0.165234375" />
@@ -40,6 +41,15 @@
         <entry key="..\:/Android projects/Tashxis/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Android projects/Tashxis/app/src/main/res/menu/bottom_navigation_view.xml" value="0.20416666666666666" />
         <entry key="..\:/Android projects/Tashxis/app/src/main/res/menu/menu_navigation.xml" value="0.153125" />
+        <entry key="app/src/main/res/drawable/shape_edt_text.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2296875" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/fragment_royxatda_otish2.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/fragment_royxatdan_otish.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_royxatdan_otish_test.xml" value="0.240625" />
       </map>
     </option>
   </component>
