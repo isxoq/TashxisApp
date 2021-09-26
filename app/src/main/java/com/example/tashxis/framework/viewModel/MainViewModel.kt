@@ -30,7 +30,7 @@ class MainViewModel(
     override fun getSpeciality() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-
+                
             }
             catch (e: Exception)
             {
