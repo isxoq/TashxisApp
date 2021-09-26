@@ -26,6 +26,7 @@
 
 
     </LinearLayout>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/register_iv_avatar"
         android:layout_width="@dimen/_100sdp"
@@ -35,227 +36,238 @@
         android:src="@drawable/ic_man" />
 
     <androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:layout_marginEnd="@dimen/_16sdp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="Name"
-                android:background="@drawable/shape_edt_text"
-                android:hint="  Ism"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/_16sdp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_sure_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_16sdp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_sure_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_edt_text"
-                android:hint="  Familiya"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/_16sdp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_third_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_16sdp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_third_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_edt_text"
-                android:hint="  Sharif"
-                android:inputType="textPersonName"
-                android:textSize="@dimen/_16sdp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_birth_date"
+                android:id="@+id/til_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_16sdp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_birth_date"
+                    android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="Name"
                     android:background="@drawable/shape_edt_text"
-                    android:hint="  Tug'ilgan kun / oy / yil"
+                    android:hint="  Ism"
                     android:inputType="textPersonName"
                     android:textSize="@dimen/_16sdp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
-                android:src="@drawable/ic_calendar"
-                app:layout_constraintBottom_toBottomOf="@+id/til_birth_date"
-                app:layout_constraintEnd_toEndOf="@+id/til_birth_date"
-                app:layout_constraintTop_toTopOf="@+id/til_birth_date"
-                tools:ignore="ContentDescription" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_gender"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_sure_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:gravity="center_vertical"
-                android:text="Jinsi:"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16sdp"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_16sdp">
 
-            <RadioGroup
-                android:layout_width="@dimen/_200sdp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_sure_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edt_text"
+                    android:hint="  Familiya"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/_16sdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_third_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_16sdp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_third_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edt_text"
+                    android:hint="  Sharif"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/_16sdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_birth_date"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_birth_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_edt_text"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="  Tug'ilgan kun / oy / yil"
+                        android:inputType="textPersonName"
+                        android:textSize="@dimen/_16sdp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_birth_date"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:src="@drawable/ic_calendar"
+                    app:layout_constraintBottom_toBottomOf="@+id/til_birth_date"
+                    app:layout_constraintEnd_toEndOf="@+id/til_birth_date"
+                    app:layout_constraintTop_toTopOf="@+id/til_birth_date"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_male"
+                <TextView
+                    android:id="@+id/tv_gender"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:gravity="center_vertical"
+                    android:text="Jinsi:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Erkak"
-                    android:textSize="@dimen/_16sdp" />
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_female"
+                    <RadioButton
+                        android:id="@+id/rb_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="Erkak"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_28sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:text="Ayol"
+                        android:textSize="@dimen/_16sdp" />
+
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:text="Ayol"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_32sdp"
+                    android:text="Viloyat"
                     android:textSize="@dimen/_16sdp" />
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    app:cardCornerRadius="@dimen/_16sdp">
 
-            </RadioGroup>
+                    <Spinner
+                        android:id="@+id/spinner_region"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_16sdp" />
 
-        </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_32sdp"
-                android:text="Viloyat"
-                android:textSize="@dimen/_16sdp" />
-
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                app:cardCornerRadius="@dimen/_16sdp">
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/spinner_region"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_32sdp"
+                    android:text="Tuman"
+                    android:textSize="@dimen/_16sdp" />
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_16sdp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    app:cardCornerRadius="@dimen/_16sdp">
 
-            </androidx.cardview.widget.CardView>
+                    <Spinner
+                        android:id="@+id/spinner_district"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginStart="@dimen/_16sdp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_register_commit"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_45sdp"
+                    android:text="Tasdiqlash"
+                    app:cornerRadius="@dimen/_20sdp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_32sdp"
-                android:text="Tuman"
-                android:textSize="@dimen/_16sdp" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                app:cardCornerRadius="@dimen/_16sdp">
-
-                <Spinner
-                    android:id="@+id/spinner_district"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_16sdp" />
-
-            </androidx.cardview.widget.CardView>
-            <Button
-                android:id="@+id/btn_register_commit"
-                android:text="Tasdiqlash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

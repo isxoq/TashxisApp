@@ -1,6 +1,7 @@
 package com.example.tashxis.presentation.ui.auth.ui
 
-import android.content.Intent
+import android.R
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,27 +9,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tashxis.Application
-import com.example.tashxis.business.util.Status
+import com.example.tashxis.business.util.NetworkStatus
+import com.example.tashxis.business.util.hideKeyboard
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentRoyxatdanOtishBinding
 import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.framework.viewModel.AuthViewModel
 import com.example.tashxis.framework.viewModel.AuthViewModelFactory
-import com.example.tashxis.presentation.ui.activity.MainActivity
-import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.Data
+import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
+import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.RegionData
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class RoyxatdanOtishFragment : Fragment(),
-AdapterView.OnItemSelectedListener{
+    AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener {
 
     private var _binding: FragmentRoyxatdanOtishBinding? = null
     private lateinit var authViewModel: AuthViewModel
     private val binding get() = _binding!!
     private val TAG = "TAG"
-    lateinit var regions: List<Data>
-
+    private var regions: List<RegionData>? = null
+    private var districts: List<DistrictData>? = null
+    private var myCalendar: Calendar = Calendar.getInstance()
+    private val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +48,7 @@ AdapterView.OnItemSelectedListener{
                 AuthRepository(api)
             )
         )[AuthViewModel::class.java]
-
+        authViewModel.getRegion()
     }
 
     override fun onCreateView(
@@ -54,36 +62,75 @@ AdapterView.OnItemSelectedListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // binding = FragmentRoyxatdanOtishBinding.bind(view)
-        authViewModel.liveState.observe(viewLifecycleOwner, {
+        setupView()
+        observer()
+    }
+
+    private fun setupView() {
+        binding.etBirthDate.setOnClickListener { setDataListener() }
+        binding.ivBirthDate.setOnClickListener { setDataListener() }
+    }
+
+    private fun setDataListener() {
+        hideKeyboard()
+        val datePickerDialog = DatePickerDialog(
+            requireContext(), this, myCalendar.get(Calendar.YEAR),
+            myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)
+        )
+        val calendar = Calendar.getInstance()
+        calendar.set(1920, 1, 1)
+        datePickerDialog.datePicker.minDate = calendar.time.time
+        datePickerDialog.datePicker.maxDate = Date().time
+        datePickerDialog.show()
+    }
+
+
+    private fun observer() {
+        authViewModel.liveRegionState.observe(viewLifecycleOwner, {
             when (it) {
-                Status.LOADING -> {
-                    Log.d(TAG, "AddRegisterInfo onViewCreated: Loading")
+                is NetworkStatus.LOADING -> {
                 }
-                Status.ERROR -> {
-                    Log.d(TAG, "AddRegisterInfo onViewCreated: Error")
+                is NetworkStatus.SUCCESS -> {
+                    Log.i(TAG, "observer: ${it.data}")
+                    val list = mutableListOf<String>()
+                    val dataRegion = it.data
+                    regions = dataRegion
+                    regions?.map { list.add(it.name) }
+                    val regionAdapter: ArrayAdapter<*> =
+                        ArrayAdapter<Any?>(
+                            requireContext(),
+                            R.layout.simple_spinner_item,
+                            list.toList()
+                        )
+                    binding.spinnerRegion.adapter = regionAdapter
+                    binding.spinnerRegion.onItemSelectedListener = this
                 }
-                Status.SUCCESS -> {
-                    val intent = Intent(requireActivity(), MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    activity?.startActivity(intent)
+                is NetworkStatus.ERROR -> {
                 }
             }
         })
-        authViewModel.regionList.observe(viewLifecycleOwner, {
-            var list: MutableList<String> = mutableListOf()
-
-            val dataRegion = it as List<Data>
-            regions = dataRegion
-            for (i in 0..regions.size) {
-                list[i] = regions[i].name
+        authViewModel.liveDistrictState.observe(viewLifecycleOwner, {
+            when (it) {
+                is NetworkStatus.LOADING -> {
+                }
+                is NetworkStatus.SUCCESS -> {
+                    val list = mutableListOf<String>()
+                    val dataDistrict = it.data
+                    districts = dataDistrict
+                    districts?.map { list.add(it.name) }
+                    val regionAdapter: ArrayAdapter<*> =
+                        ArrayAdapter<Any?>(
+                            requireContext(),
+                            R.layout.simple_spinner_item,
+                            list.toList()
+                        )
+                    binding.spinnerDistrict.adapter = regionAdapter
+                    binding.spinnerDistrict.onItemSelectedListener = this
+                }
+                is NetworkStatus.ERROR -> {
+                }
             }
-
         })
-        var list1 = mutableListOf<String>("1","2","3")
-        binding.spinnerRegion.adapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, list1)
-
 
     }
 
@@ -92,12 +139,26 @@ AdapterView.OnItemSelectedListener{
         _binding = null
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("Not yet implemented")
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when (parent?.id) {
+            binding.spinnerRegion.id -> {
+                if (regions != null)
+                    authViewModel.getDistrict(regions!![position].id)
+            }
+            binding.spinnerDistrict.id -> {
+
+            }
+        }
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        myCalendar.set(Calendar.YEAR, year)
+        myCalendar.set(Calendar.MONTH, month)
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        binding.etBirthDate.setText(sdf.format(myCalendar.time))
     }
 
 }

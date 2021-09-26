@@ -22,9 +22,11 @@
         android:gravity="center"
         />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_next"
         android:layout_width="@dimen/_40sdp"
+        android:visibility="gone"
+        android:elevation="2dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"

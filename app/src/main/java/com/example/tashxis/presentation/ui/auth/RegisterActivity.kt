@@ -6,7 +6,7 @@ import com.example.tashxis.databinding.ActivityRegisterBinding
 
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

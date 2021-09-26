@@ -56,12 +56,10 @@ interface Api {
         @Field("code") code: String
     ): Response<LoginVerifyResponse>
 
-    @FormUrlEncoded
     @GET("/api/client/user/regions")
     suspend fun getRegions(
     ): Response<RegionResponse>
 
-    @FormUrlEncoded
     @GET("/api/client/user/districts?region_id")
     suspend fun getDistrict(
         @Query("region_id") region_id: Int

@@ -13,14 +13,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tashxis.Application
 import com.example.tashxis.R
+import com.example.tashxis.business.util.Constants
+import com.example.tashxis.business.util.Status
+import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentOtpBinding
 import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.framework.viewModel.AuthViewModel
 import com.example.tashxis.framework.viewModel.AuthViewModelFactory
-import com.example.tashxis.business.util.Constants
-import com.example.tashxis.business.util.Status
 import com.example.tashxis.presentation.ui.activity.MainActivity
-import com.example.tashxis.data.RetrofitClient
 
 class OtpFragment : Fragment() {
     var logReg = 0
@@ -70,23 +70,21 @@ class OtpFragment : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-              /*  if (p0 != null) {
-                    Log.d(TAG, "onTextChanged:p0 ${p0.length}")
-                }
-                if (p1 != null) {
-                    Log.d(TAG, "onTextChanged:p1 ${p1}")
-                }
-                if (p2 != null) {
-                    Log.d(TAG, "onTextChanged:p2 ${p2}")
-                }*/
-                if (p2==9 ) {
+                /*  if (p0 != null) {
+                      Log.d(TAG, "onTextChanged:p0 ${p0.length}")
+                  }
+                  if (p1 != null) {
+                      Log.d(TAG, "onTextChanged:p1 ${p1}")
+                  }
+                  if (p2 != null) {
+                      Log.d(TAG, "onTextChanged:p2 ${p2}")
+                  }*/
+                if (p2 == 9) {
                     Log.d(TAG, "onTextChanged: p3")
                     if (logReg == Constants.LOG) {
                         authViewModel.login_verify(phoneNumber, "12345")
-                    }
-                    else
-                    {
-                        authViewModel.verify_code(phoneNumber,"12345")
+                    } else {
+                        authViewModel.verify_code(phoneNumber, "12345")
                     }
                 }
 
@@ -106,15 +104,17 @@ class OtpFragment : Fragment() {
                 }
                 Status.SUCCESS -> {
                     if (logReg == Constants.REG) {
-                        val intent  = Intent(requireActivity(), MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        activity?.startActivity(intent)
+                        findNavController().navigate(R.id.action_otpFragment_to_royxatdanOtishFragment)
+//                        val intent  = Intent(requireActivity(), MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                        activity?.startActivity(intent)
                     }
                     if (logReg == Constants.LOG) {
                         Log.d(TAG, "OTP LOG onViewCreated: Success")
 //                        findNavController().navigate(R.id.action_otpFragment_to_nav_graph2)
-                        val intent  = Intent(requireActivity(), MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        val intent = Intent(requireActivity(), MainActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         activity?.startActivity(intent)
                     }
 

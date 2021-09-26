@@ -3,7 +3,7 @@ package com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class DistrictData(
     @SerializedName("id")
     val id: Int, // 15
     @SerializedName("name")

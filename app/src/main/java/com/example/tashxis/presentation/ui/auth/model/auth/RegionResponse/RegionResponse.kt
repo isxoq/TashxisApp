@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RegionResponse(
     @SerializedName("data")
-    val `data`: Any?,
+    val data: List<RegionData>?,
     @SerializedName("message")
     val message: String,
     @SerializedName("success")
