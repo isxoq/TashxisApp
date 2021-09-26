@@ -7,19 +7,18 @@
     android:background="#EEEEEE"
     tools:context=".presentation.ui.bottom_nav.shifokor_oyna.ShifokorFragment">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/toolbar_mutaxassis"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/mutahassis_shape"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
@@ -28,14 +27,14 @@
             android:textSize="@dimen/_22sdp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-<androidx.recyclerview.widget.RecyclerView
-
-    app:layout_constraintTop_toBottomOf="@+id/toolbar_mutaxassis"
-    android:layout_width="match_parent"
-    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-    app:spanCount="2"
-    tools:listitem="@layout/item_speciality"
-    android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_speciality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_mutaxassis"
+        app:spanCount="2"
+        tools:listitem="@layout/item_speciality" />
 </androidx.constraintlayout.widget.ConstraintLayout>
