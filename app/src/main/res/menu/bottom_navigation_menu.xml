@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/bosh_menu"
-        android:title="Bosh sahifa"
-        android:icon="@drawable/ic_home"/>
+        android:id="@+id/boshFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Bosh sahifa" />
     <item
-        android:id="@+id/shifokor_menu"
-        android:title="Shifokor"
-        android:icon="@drawable/ic_doctor"/>
+        android:id="@+id/shifokorFragment"
+        android:icon="@drawable/ic_doctor"
+        android:title="Shifokor" />
     <item
-        android:id="@+id/tashxis_menu"
-        android:title="Tashxis"
-        android:icon="@drawable/ic_tashxis"/>
+        android:id="@+id/tashxisFragment"
+        android:icon="@drawable/ic_tashxis"
+        android:title="Tashxis" />
     <item
-        android:id="@+id/navbat_menu"
-        android:title="Navbat"
-        android:icon="@drawable/ic_navbat"/>
+        android:id="@+id/navbatFragment"
+        android:icon="@drawable/ic_navbat"
+        android:title="Navbat" />
     <item
         android:id="@+id/menu"
-        android:title="Menu"
-        android:icon="@drawable/ic_menu"/>
+        android:icon="@drawable/ic_menu"
+        android:title="Menu" />
 </menu>

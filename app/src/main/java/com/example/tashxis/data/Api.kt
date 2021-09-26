@@ -1,12 +1,15 @@
 package com.example.tashxis.data
 
-import com.example.tashxis.ui.auth.model.VerifyCodeResponse.VerifyCodeResponse
-import com.example.tashxis.ui.auth.model.login_verify.LoginVerifyResponse
-import com.example.tashxis.ui.auth.model.test2.Loginresponse2
+import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.LoginResponse.LoginResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.RegionResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.RegisterResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.VerifyCodeResponse.VerifyCodeResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.verify_code_response_final.VerifyCodeResponseFinal
+import com.example.tashxis.presentation.ui.auth.model.main.SpecialityResponse
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Api {
     //register so'rov
@@ -14,7 +17,7 @@ interface Api {
     @POST("api/client/user/register")
     suspend fun register(
         @Field("phone") number: String
-    ): Response<Loginresponse2>
+    ): Response<RegisterResponse>
 
     //verify_code
     @FormUrlEncoded
@@ -22,7 +25,7 @@ interface Api {
     suspend fun verify_code(
         @Field("phone") phone: String,
         @Field("code") code: String
-    ): Response<VerifyCodeResponse>
+    ): Response<VerifyCodeResponseFinal>
 
     //add_profile_info
     @FormUrlEncoded
@@ -43,13 +46,30 @@ interface Api {
     @POST("/api/client/user/login")
     suspend fun login(
         @Field("phone") number: String
-    ): Response<Loginresponse2>
+    ): Response<LoginResponse>
 
     //login_verify
     @FormUrlEncoded
     @POST("/api/client/user/login-verify")
     suspend fun login_verify(
         @Field("phone") phone: String,
-        @Field("code")  code: String
-    ) : Response<LoginVerifyResponse>
+        @Field("code") code: String
+    ): Response<LoginVerifyResponse>
+
+    @FormUrlEncoded
+    @GET("/api/client/user/regions")
+    suspend fun getRegions(
+    ): Response<RegionResponse>
+
+    @FormUrlEncoded
+    @GET("/api/client/user/districts?region_id")
+    suspend fun getDistrict(
+        @Query("region_id") region_id: Int
+    ): Response<DistrictResponse>
+
+    @FormUrlEncoded
+    @GET("/api/client/speciality/index")
+    suspend fun getSpecialty(
+
+    ): Response<SpecialityResponse>
 }

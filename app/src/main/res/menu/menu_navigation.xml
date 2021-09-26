@@ -4,7 +4,7 @@
     tools:showIn="yondagi_oyna">
 
     <item
-        android:id="@+id/bosh_menu_2"
+        android:id="@+id/bottom_nav_fragment"
         android:title="Bosh sahifa"
         android:icon="@drawable/ic_home_2"
         />

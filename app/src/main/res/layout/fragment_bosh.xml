@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
-    tools:context=".ui.bosh_oyna.BoshFragment">
+    tools:context=".presentation.ui.bottom_nav.bosh_oyna.BoshFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

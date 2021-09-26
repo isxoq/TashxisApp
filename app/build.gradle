@@ -48,9 +48,18 @@ dependencies {
 //material design
     implementation 'com.google.android.material:material:1.5.0-alpha02'
     implementation 'com.makeramen:roundedimageview:2.3.0'
-//navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha07'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha07'
+
+
+    //navigation
+    def navigation_version = "2.4.0-alpha09"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    //fragment
+    def fragment_version = "1.4.0-alpha09"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
 //third-part
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'ru.egslava:MaskedEditText:1.0.5'

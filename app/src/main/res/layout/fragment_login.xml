@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#F3F3F3"
-    tools:context=".ui.auth.ui.LoginFragment">
+    tools:context=".presentation.ui.auth.ui.LoginFragment">
 
     <LinearLayout
         android:id="@+id/raqam_terish"
@@ -48,7 +48,7 @@
                     android:typeface="monospace"
                     app:allowed_chars="1234567890"
                     app:mask="+998(##)###-##-##"
-                    android:hint="995193150"
+                    android:hint="901234567"
                     app:keep_hint="true"
                     android:gravity="center_horizontal"
                     />

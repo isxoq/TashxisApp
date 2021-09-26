@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation_graph"
+    app:startDestination="@id/boshFragment">
+
+    <fragment
+        android:id="@+id/boshFragment"
+        android:name="com.example.tashxis.presentation.ui.bottom_nav.bosh_oyna.BoshFragment"
+        android:label="fragment_bosh"
+        tools:layout="@layout/fragment_bosh" />
+    <fragment
+        android:id="@+id/navbatFragment"
+        android:name="com.example.tashxis.presentation.ui.bottom_nav.navbat_oyna.NavbatFragment"
+        android:label="fragment_navbat"
+        tools:layout="@layout/fragment_navbat" />
+    <fragment
+        android:id="@+id/shifokorFragment"
+        android:name="com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ShifokorFragment"
+        android:label="fragment_shifokor"
+        tools:layout="@layout/fragment_shifokor" />
+    <fragment
+        android:id="@+id/tashxisFragment"
+        android:name="com.example.tashxis.presentation.ui.bottom_nav.tashxis_oyna.TashxisFragment"
+        android:label="fragment_tashxis"
+        tools:layout="@layout/fragment_tashxis" />
+
+</navigation>

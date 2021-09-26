@@ -8,6 +8,15 @@
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/_9sdp</item>
     </style>
+
+    <style name="ToolbarStyle">
+        <item name="titleTextColor">@color/white</item>
+        <item name="subtitleTextColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+    </style>
+
     <declare-styleable name="MaskedEditText">
         <attr name="mask" format="string" />
         <attr name="allowed_chars" format="string" />

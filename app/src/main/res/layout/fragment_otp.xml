@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".ui.auth.ui.OtpFragment">
+    tools:context=".presentation.ui.auth.ui.OtpFragment">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -25,14 +25,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Biz +998 99 793 96 96 telefon raqamingizga
+                    tools:text="Biz +998 99 793 96 96 telefon raqamingizga
 sms orqali faollashtirish kodini yubordik."
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/_20sdp"
                     android:textSize="@dimen/_14sdp"
                     android:gravity="center_horizontal"
                     />
-<com.example.tashxis.util.maskeditText.MaskedEditText
+<com.example.tashxis.business.util.maskeditText.MaskedEditText
     android:id="@+id/sms_kod"
     android:maxLength="10"
     android:layout_width="match_parent"
@@ -45,7 +45,7 @@ sms orqali faollashtirish kodini yubordik."
     android:typeface="monospace"
     app:allowed_chars="1234567890"
     app:keep_hint="false"
-    android:hint="12345"
+
     android:gravity="center_horizontal"
     />
 

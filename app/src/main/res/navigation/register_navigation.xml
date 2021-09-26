@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tashxis.ui.auth.ui.LoginFragment"
+        android:name="com.example.tashxis.presentation.ui.auth.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/otpFragment"
-        android:name="com.example.tashxis.ui.auth.ui.OtpFragment"
+        android:name="com.example.tashxis.presentation.ui.auth.ui.OtpFragment"
         android:label="fragment_otp"
         tools:layout="@layout/fragment_otp" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/royxatdanOtishFragment"
-        android:name="com.example.tashxis.ui.auth.ui.RoyxatdanOtishFragment"
+        android:name="com.example.tashxis.presentation.ui.auth.ui.RoyxatdanOtishFragment"
         android:label="fragment_royxatdan_otish"
         tools:layout="@layout/fragment_royxatdan_otish" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.tashxis.ui.auth.ui.RegisterFragment"
+        android:name="com.example.tashxis.presentation.ui.auth.ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -50,5 +50,7 @@
             android:id="@+id/action_registerFragment_to_otpFragment"
             app:destination="@id/otpFragment" />
     </fragment>
+
     <include app:graph="@navigation/nav_graph" />
+
 </navigation>

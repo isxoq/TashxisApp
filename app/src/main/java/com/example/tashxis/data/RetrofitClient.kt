@@ -1,9 +1,8 @@
-package info.texnoman.texnomart.api
+package com.example.tashxis.data
 
 import com.example.tashxis.BuildConfig
-import com.example.tashxis.data.Api
-import com.example.tashxis.util.Constants
-import com.example.tashxis.util.Language
+import com.example.tashxis.business.util.Constants
+import com.example.tashxis.business.util.Language
 import io.paperdb.Paper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

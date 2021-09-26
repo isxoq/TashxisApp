@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/bosh_menu_2">
+    app:startDestination="@id/bottom_nav_fragment">
 
     <fragment
-        android:id="@+id/bosh_menu_2"
-        android:name="com.example.tashxis.ui.bosh_oyna.BoshFragment"
-        android:label="fragment_bosh"
-        tools:layout="@layout/fragment_bosh" />
+        android:id="@+id/bottom_nav_fragment"
+        android:name="com.example.tashxis.presentation.ui.bottom_nav.BottomNavFragment"
+        android:label="BottomNavFragment"
+        tools:layout="@layout/fragment_bottom_nav" />
     <fragment
         android:id="@+id/id_profil_fragment"
-        android:name="com.example.tashxis.ui.yondagi_oyna.ProfilFragment"
+        android:name="com.example.tashxis.presentation.ui.nav_drawer.profile.ProfilFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/id_settings_fragment"
-        android:name="com.example.tashxis.ui.yondagi_oyna.SettigFragment"
+        android:name="com.example.tashxis.presentation.ui.nav_drawer.settings.SettingsFragment"
         android:label="fragment_settig"
         tools:layout="@layout/fragment_settig" />
     <fragment
         android:id="@+id/id_share_fragment"
-        android:name="com.example.tashxis.ui.yondagi_oyna.ShareFragment"
+        android:name="com.example.tashxis.presentation.ui.nav_drawer.share.ShareFragment"
         android:label="fragment_share"
         tools:layout="@layout/fragment_share" />
     <fragment
         android:id="@+id/id_aloqa_fragment"
-        android:name="com.example.tashxis.ui.yondagi_oyna.AloqaFragment"
+        android:name="com.example.tashxis.presentation.ui.nav_drawer.aloqa.AloqaFragment"
         android:label="fragment_aloqa"
         tools:layout="@layout/fragment_aloqa" />
 </navigation>
