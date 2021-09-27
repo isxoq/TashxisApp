@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_speciality"
-    android:layout_width="@dimen/_176sdp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
     app:cardCornerRadius="@dimen/_15sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_speciality"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-android:paddingStart="@dimen/_16sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_24sdp"
-        >
+        android:paddingBottom="@dimen/_10sdp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_speciality"
@@ -24,34 +25,35 @@ android:paddingStart="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_speciality_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Kardiolog"
-            android:textStyle="bold"
             android:paddingTop="@dimen/_18sdp"
             android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/iv_speciality"
-            app:layout_constraintTop_toBottomOf="@id/iv_speciality" />
+            app:layout_constraintTop_toBottomOf="@id/iv_speciality"
+            tools:text="Kardiolog" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_speciality_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_16sdp"
             android:paddingTop="@dimen/_6sdp"
+            android:textSize="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="@id/tv_speciality_name"
             app:layout_constraintTop_toBottomOf="@id/tv_speciality_name"
             tools:text="Yurak qon tomir kasalliklari" />
-        <TextView
-            app:layout_constraintTop_toBottomOf="@id/tv_speciality_desc"
-            app:layout_constraintStart_toStartOf="@id/tv_speciality_desc"
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_count"
             android:layout_width="wrap_content"
-            android:textAlignment="textStart"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/_6sdp"
-            android:text="@string/spec_count_string"
-            />
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toStartOf="@id/tv_speciality_desc"
+            app:layout_constraintTop_toBottomOf="@id/tv_speciality_desc"
+            tools:text="@string/spec_count_string" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,9 +1,12 @@
 package com.example.tashxis.presentation.ui.auth.model.main
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-data class Data(
+@Parcelize
+data class SpecialityData(
     @SerializedName("description")
     val description: String?, // null
     @SerializedName("doctorsCount")
@@ -16,4 +19,4 @@ data class Data(
     val name: String?, // Kardilog
     @SerializedName("status")
     val status: Int? // 1
-)
+):Parcelable

@@ -65,7 +65,6 @@ interface Api {
         @Query("region_id") region_id: Int
     ): Response<DistrictResponse>
 
-    @FormUrlEncoded
     @GET("/api/client/speciality/index")
     suspend fun getSpecialty(
 
