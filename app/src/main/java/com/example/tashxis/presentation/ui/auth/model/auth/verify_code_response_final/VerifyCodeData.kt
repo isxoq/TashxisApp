@@ -3,9 +3,9 @@ package com.example.tashxis.presentation.ui.auth.model.auth.verify_code_response
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class VerifyCodeData(
     @SerializedName("auth_key")
-    val authKey: String?, // _JB8QNrOO35iTajHY0ZDY8p0iyRg5ipg
+    val authKey: String, // _JB8QNrOO35iTajHY0ZDY8p0iyRg5ipg
     @SerializedName("created_at")
     val createdAt: Int?, // 1632631645
     @SerializedName("email")

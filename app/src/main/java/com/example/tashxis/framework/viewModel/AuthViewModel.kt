@@ -7,11 +7,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tashxis.Application
-import com.example.tashxis.business.util.*
+import com.example.tashxis.business.util.Constants
+import com.example.tashxis.business.util.NetworkStatus
+import com.example.tashxis.business.util.SingleLiveEvent
+import com.example.tashxis.business.util.Status
 import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
+import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.ProfileInFoData
 import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.RegionData
-import info.texnoman.texnomart.auth.preference.PreferenceManagerImp
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefsImpl
 import kotlinx.coroutines.launch
 
 interface IAuthViewModel {
@@ -52,15 +57,20 @@ class AuthViewModel(
     private val authRepository: AuthRepository,
     application: Application
 ) : AndroidViewModel(application), IAuthViewModel {
+
     val TAG = "TAG"
-    val preferences by lazyFast {
-        PreferenceManagerImp(
-            Application.context!!.getSharedPreferences(
+    private var preferences: TashxisPrefs? = null
+
+    init {
+        if (Application.context != null) {
+            val prefs = Application.context!!.getSharedPreferences(
                 Constants.PREF_NAME,
                 Context.MODE_PRIVATE
             )
-        )
+            preferences = TashxisPrefsImpl(prefs)
+        }
     }
+
 
     override val liveState = SingleLiveEvent<Status>()
     override val regionList
@@ -179,7 +189,55 @@ class AuthViewModel(
             } catch (e: Exception) {
                 _liveDistrictState.postValue(NetworkStatus.ERROR(e.message ?: ""))
                 toast.postValue(e.message)
-                Log.d(TAG, "gedtDistrict: catch working ${e.message}")
+                Log.d(TAG, "getDistrict: catch working ${e.message}")
+            }
+        }
+    }
+
+    // Add profile info
+    private val _liveProfileInfoState = MutableLiveData<NetworkStatus<ProfileInFoData>>()
+    val liveProfileInfoState: LiveData<NetworkStatus<ProfileInFoData>> = _liveProfileInfoState
+    override fun add_profile_info(
+        auth_key: String,
+        first_name: String,
+        last_name: String,
+        father_name: String,
+        gender: Int,
+        province_id: Int,
+        region_id: Int,
+        birth_date: String
+    ) {
+        viewModelScope.launch {
+            try {
+                val result = authRepository.add_profile_info_response(
+                    auth_key,
+                    first_name,
+                    last_name,
+                    father_name,
+                    gender,
+                    province_id,
+                    region_id,
+                    birth_date
+                )
+                _liveProfileInfoState.postValue(NetworkStatus.LOADING())
+                if (result.isSuccessful) {
+                    if (result.body()!!.message == "") {
+                        if (result.body() != null) {
+                            _liveProfileInfoState.postValue(NetworkStatus.SUCCESS(result.body()!!.data))
+                        } else {
+                            _liveProfileInfoState.postValue(NetworkStatus.ERROR("Body is null"))
+                        }
+
+                    }
+                } else {
+                    _liveProfileInfoState.postValue(NetworkStatus.ERROR("Result is not successful"))
+                    Log.d(TAG, "add_profile_info: Result is not successful $result")
+
+                }
+
+            } catch (e: Exception) {
+                _liveProfileInfoState.postValue(NetworkStatus.ERROR("Tapping exception ${e.message}"))
+                toast.postValue(e.message)
             }
         }
     }
@@ -219,91 +277,39 @@ class AuthViewModel(
         }
     }
 
-    // Add profile info
-    override fun add_profile_info(
-        auth_key: String,
-        first_name: String,
-        last_name: String,
-        father_name: String,
-        gender: Int,
-        province_id: Int,
-        region_id: Int,
-        birth_date: String
-    ) {
-        viewModelScope.launch {
-            try {
-                val result = authRepository.add_profile_info_response(
-                    auth_key,
-                    first_name,
-                    last_name,
-                    father_name,
-                    gender,
-                    province_id,
-                    region_id,
-                    birth_date
-                )
-
-                if (result.isSuccessful) {
-                    if (result.isSuccessful) {
-                        if (result.body()!!.message == "") {
-                            liveState.postValue(Status.SUCCESS)
-                            val data = result.body()!!.data
-                            // storePreference()
-                            Log.d(TAG, "Profile ma'lumotlari muvaffaqiyatli qo'shildi")
-                        } else if (result.body()!!.message == "Not found") {
-                            liveState.postValue(Status.ERROR)
-                            Log.d(TAG, "login: Not found")
-                            toast.postValue("Bazada bunday raqam topilmadi")
-                        } else {
-                            Log.d(
-                                TAG,
-                                " ${result.body()!!.message} login: Message not equals Sms code sent"
-                            )
-                        }
-                    } else {
-                        Log.d(TAG, "login: Register Result is not successful")
-                        liveState.postValue(Status.ERROR)
-                    }
-                }
-
-            } catch (e: Exception) {
-                liveState.postValue(Status.ERROR)
-                toast.postValue(e.message)
-            }
-        }
-    }
 
     //verify_code
+
     override fun verify_code(phone: String, code: String) {
         viewModelScope.launch {
             try {
                 Log.d(TAG, "verify_code: start try $phone  $code")
                 val result = authRepository.verify_code(phone, code)
                 if (result.isSuccessful) {
-                    if (result.isSuccessful) {
-                        if (result.body()!!.message == "") {
-//                            PasscodeCredentials.setRegisterCredentials(result.body()!!.data)
-                            //preferences.authToken = result.body()!!.data.auth_key
-                            liveState.postValue(Status.SUCCESS)
-                            logReg.postValue(Constants.REG)
-                            Log.d(TAG, "register: SMS code permitted")
-                        } else if (result.body()!!.message == "Not found") {
-                            liveState.postValue(Status.ERROR)
-                            Log.d(TAG, "login: Not found")
-                            toast.postValue("Bazada bunday raqam topilmadi")
-                        } else {
-                            Log.d(
-                                TAG,
-                                " ${result.body()!!.message} login: Message not equals Sms code sent"
-                            )
-                            liveState.postValue(Status.ERROR)
-                            toast.postValue(result.body()!!.message)
+                    if (result.body() != null && result.body()!!.message == "") {
+                        val body = result.body()!!
+                        liveState.postValue(Status.SUCCESS)
+                        if (body.data != null) {
+                            Log.d(TAG, "verify:${body.data} ")
+                            Log.d(TAG, "verify:${body.data.authKey} ")
+                            Log.d(TAG, "verify pref:${preferences} ")
+                            preferences?.token = body.data.authKey
                         }
+                        logReg.postValue(Constants.REG)
+                        Log.d(TAG, "register: SMS code permitted")
+                    } else if (result.body()!!.message == "Not found") {
+                        liveState.postValue(Status.ERROR)
+                        Log.d(TAG, "login: Not found")
+                        toast.postValue("Bazada bunday raqam topilmadi")
                     } else {
-                        Log.d(TAG, "login: Register Result is not successful")
+                        Log.d(
+                            TAG,
+                            " ${result.body()!!.message} login: Message not equals Sms code sent"
+                        )
                         liveState.postValue(Status.ERROR)
                         toast.postValue(result.body()!!.message)
                     }
+
                 } else {
 
                     Log.d(TAG, "verify_code: Response is not sucessfull  ${result}")
@@ -312,7 +318,7 @@ class AuthViewModel(
             } catch (e: Exception) {
                 liveState.postValue(Status.ERROR)
                 toast.postValue(e.message)
-                Log.d(TAG, "verify_code: Chota xatoda shu")
+                Log.d(TAG, "verify_code: Chota xatoda shu ${e.message}")
             }
 
         }

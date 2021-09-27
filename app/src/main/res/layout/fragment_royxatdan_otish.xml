@@ -180,6 +180,7 @@
                         android:layout_height="@dimen/_28sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="Erkak"
+
                         android:textSize="@dimen/_16sdp" />
 
                     <RadioButton

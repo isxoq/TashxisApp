@@ -20,7 +20,6 @@ import com.example.tashxis.business.util.Constants
 import com.example.tashxis.business.util.Status
 import com.example.tashxis.business.util.lazyFast
 import com.example.tashxis.data.RetrofitClient
-import info.texnoman.texnomart.auth.preference.PreferenceManagerImp
 
 
 class LoginFragment : Fragment() {

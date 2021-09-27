@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AddProfileInfoResponse(
     @SerializedName("data")
-    val `data`: Data,
+    val data: ProfileInFoData,
     @SerializedName("message")
     val message: String,
     @SerializedName("success")

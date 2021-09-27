@@ -2,9 +2,9 @@ package com.example.tashxis.data
 
 import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictResponse
 import com.example.tashxis.presentation.ui.auth.model.auth.LoginResponse.LoginResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.AddProfileInfoResponse
 import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.RegionResponse
 import com.example.tashxis.presentation.ui.auth.model.auth.RegisterResponse
-import com.example.tashxis.presentation.ui.auth.model.auth.VerifyCodeResponse.VerifyCodeResponse
 import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyResponse
 import com.example.tashxis.presentation.ui.auth.model.auth.verify_code_response_final.VerifyCodeResponseFinal
 import com.example.tashxis.presentation.ui.auth.model.main.SpecialityResponse
@@ -39,7 +39,7 @@ interface Api {
         @Field("province_id") province_id: Int,
         @Field("region_id") region_id: Int,
         @Field("birth_date") birth_date: String,
-    ): Response<VerifyCodeResponse>
+    ): Response<AddProfileInfoResponse>
 
     // login
     @FormUrlEncoded
