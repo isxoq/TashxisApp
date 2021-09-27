@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tashxis.Application
+import com.example.tashxis.App
 import com.example.tashxis.business.util.Constants
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.hideKeyboard
@@ -45,8 +45,8 @@ class RoyxatdanOtishFragment : Fragment(),
     private var preferences: TashxisPrefs? = null
 
     init {
-        if (Application.context != null) {
-            val prefs = Application.context!!.getSharedPreferences(
+        if (App.context != null) {
+            val prefs = App.context!!.getSharedPreferences(
                 Constants.PREF_NAME,
                 Context.MODE_PRIVATE
             )
@@ -65,7 +65,7 @@ class RoyxatdanOtishFragment : Fragment(),
         authViewModel = ViewModelProvider(
             requireActivity(),
             AuthViewModelFactory(
-                Application(),
+                requireActivity().application,
                 AuthRepository(api)
             )
         )[AuthViewModel::class.java]

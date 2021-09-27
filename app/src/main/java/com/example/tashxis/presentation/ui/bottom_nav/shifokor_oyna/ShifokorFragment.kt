@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.tashxis.Application
 import com.example.tashxis.R
 import com.example.tashxis.business.util.GridSpacingItemDecoration
 import com.example.tashxis.business.util.NetworkStatus
@@ -38,7 +37,7 @@ class ShifokorFragment : Fragment(R.layout.fragment_shifokor), SpecialityClickLi
         viewModel = ViewModelProvider(
             requireActivity(),
             MainViewModelFactory(
-                Application(),
+                requireActivity().application,
                 MainRepository(api)
             )
         )[MainViewModel::class.java]

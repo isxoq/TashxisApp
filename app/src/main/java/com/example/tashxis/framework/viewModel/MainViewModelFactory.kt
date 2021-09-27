@@ -1,8 +1,8 @@
 package com.example.tashxis.framework.viewModel
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.tashxis.Application
 import com.example.tashxis.framework.repo.MainRepository
 
 class MainViewModelFactory(val app: Application, private val repository: MainRepository) :

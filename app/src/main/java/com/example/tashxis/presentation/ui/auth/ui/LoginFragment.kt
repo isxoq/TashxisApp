@@ -1,6 +1,5 @@
 package com.example.tashxis.presentation.ui.auth.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,16 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.tashxis.Application
 import com.example.tashxis.R
+import com.example.tashxis.business.util.Status
+import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentLoginBinding
 import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.framework.viewModel.AuthViewModel
 import com.example.tashxis.framework.viewModel.AuthViewModelFactory
-import com.example.tashxis.business.util.Constants
-import com.example.tashxis.business.util.Status
-import com.example.tashxis.business.util.lazyFast
-import com.example.tashxis.data.RetrofitClient
 
 
 class LoginFragment : Fragment() {
@@ -34,7 +30,7 @@ class LoginFragment : Fragment() {
         authViewModel = ViewModelProvider(
             requireActivity(),
             AuthViewModelFactory(
-                Application(),
+                requireActivity().application,
                 AuthRepository(api)
             )
         ).get(AuthViewModel::class.java)

@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.tashxis.Application
 import com.example.tashxis.R
 import com.example.tashxis.databinding.FragmentRegisterBinding
 import com.example.tashxis.framework.repo.AuthRepository
@@ -32,7 +31,7 @@ class RegisterFragment : Fragment() {
         authViewModel = ViewModelProvider(
             requireActivity(),
             AuthViewModelFactory(
-                Application(),
+                requireActivity().application,
                 AuthRepository(api)
             )
         )[AuthViewModel::class.java]

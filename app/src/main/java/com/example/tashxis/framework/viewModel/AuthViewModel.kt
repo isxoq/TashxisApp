@@ -1,12 +1,12 @@
 package com.example.tashxis.framework.viewModel
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tashxis.Application
 import com.example.tashxis.business.util.Constants
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.SingleLiveEvent
@@ -55,20 +55,20 @@ interface IAuthViewModel {
 
 class AuthViewModel(
     private val authRepository: AuthRepository,
-    application: Application
-) : AndroidViewModel(application), IAuthViewModel {
+    app: Application
+) : AndroidViewModel(app), IAuthViewModel {
 
     val TAG = "TAG"
     private var preferences: TashxisPrefs? = null
 
     init {
-        if (Application.context != null) {
-            val prefs = Application.context!!.getSharedPreferences(
-                Constants.PREF_NAME,
-                Context.MODE_PRIVATE
-            )
-            preferences = TashxisPrefsImpl(prefs)
-        }
+//        if (App.context != null) {
+        val prefs = app.getSharedPreferences(
+            Constants.PREF_NAME,
+            Context.MODE_PRIVATE
+        )
+        preferences = TashxisPrefsImpl(prefs)
+//        }
     }
 
 
