@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.textView3.postDelayed({
-            startActivity(Intent(this , SlideActivity::class.java))
+            startActivity(Intent(this , MainActivity::class.java))
             finish()
         },50)
 

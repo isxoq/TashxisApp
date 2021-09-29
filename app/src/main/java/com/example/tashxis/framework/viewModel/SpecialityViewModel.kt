@@ -8,13 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.SingleLiveEvent
 import com.example.tashxis.framework.repo.MainRepository
-import com.example.tashxis.presentation.ui.auth.model.main.SpecialityData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class SpecialityViewModel(
     private val authRepository: MainRepository,
     app: Application
-
 ) : AndroidViewModel(app) {
 
     private val _liveSpecialityState = MediatorLiveData<NetworkStatus<List<SpecialityData>>>()

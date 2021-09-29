@@ -7,7 +7,10 @@ import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.Region
 import com.example.tashxis.presentation.ui.auth.model.auth.RegisterResponse
 import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyResponse
 import com.example.tashxis.presentation.ui.auth.model.auth.verify_code_response_final.VerifyCodeResponseFinal
-import com.example.tashxis.presentation.ui.auth.model.main.SpecialityResponse
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponse
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponse
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -69,4 +72,16 @@ interface Api {
     suspend fun getSpecialty(
 
     ): Response<SpecialityResponse>
+
+    @GET("/api/client/speciality/doctors?")
+    suspend fun getDoctors(
+        @Query("speciality_id") speciality_id: Int
+    ): Response<DoctorResponse>
+
+    @GET("/api/client/doctor/view?")
+    suspend fun getAboutDoctor(
+        @Query("id") id: Int
+    ): Response<AboutDoctorResponse>
+
+
 }

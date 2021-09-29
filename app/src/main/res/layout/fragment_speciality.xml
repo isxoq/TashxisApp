@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
-    tools:context=".presentation.ui.bottom_nav.shifokor_oyna.ShifokorFragment">
+    tools:context=".presentation.ui.bottom_nav.shifokor_oyna.ui.SpecialityFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/toolbar_mutaxassis"

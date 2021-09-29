@@ -1,32 +1,37 @@
-package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna
+package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.tashxis.R
 import com.example.tashxis.business.util.GridSpacingItemDecoration
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.progressDialog
 import com.example.tashxis.data.RetrofitClient
-import com.example.tashxis.databinding.FragmentShifokorBinding
+import com.example.tashxis.databinding.FragmentSpecialityBinding
 import com.example.tashxis.framework.repo.MainRepository
-import com.example.tashxis.framework.viewModel.MainViewModel
-import com.example.tashxis.framework.viewModel.MainViewModelFactory
+import com.example.tashxis.framework.viewModel.SpecialityViewModel
+import com.example.tashxis.framework.viewModel.SpecialityViewModelFactory
 import com.example.tashxis.presentation.adapters.SpecialityAdapter
 import com.example.tashxis.presentation.adapters.SpecialityClickListener
-import com.example.tashxis.presentation.ui.auth.model.main.SpecialityData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
 
 
-class ShifokorFragment : Fragment(R.layout.fragment_shifokor), SpecialityClickListener {
-    private var _binding: FragmentShifokorBinding? = null
+class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityClickListener {
+    private var _binding: FragmentSpecialityBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: SpecialityViewModel
     private val sAdapter: SpecialityAdapter by lazy { SpecialityAdapter() }
 
 
@@ -36,11 +41,11 @@ class ShifokorFragment : Fragment(R.layout.fragment_shifokor), SpecialityClickLi
         val api = RetrofitClient.instance
         viewModel = ViewModelProvider(
             requireActivity(),
-            MainViewModelFactory(
+            SpecialityViewModelFactory(
                 requireActivity().application,
                 MainRepository(api)
             )
-        )[MainViewModel::class.java]
+        )[SpecialityViewModel::class.java]
 
         viewModel.getSpeciality()
     }
@@ -49,7 +54,7 @@ class ShifokorFragment : Fragment(R.layout.fragment_shifokor), SpecialityClickLi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentShifokorBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSpecialityBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -101,6 +106,8 @@ class ShifokorFragment : Fragment(R.layout.fragment_shifokor), SpecialityClickLi
     }
 
     override fun onClicked(model: SpecialityData) {
-        //
+//        Toast.makeText(requireActivity(), "${model.description}", Toast.LENGTH_SHORT).show()
+        val bundle = bundleOf("id" to model.id)
+        findNavController().navigate(R.id.action_shifokorFragment_to_doctorsFragment, bundle)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.tashxis.presentation.ui.auth.model.main
+package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response
 
 
 import android.os.Parcelable

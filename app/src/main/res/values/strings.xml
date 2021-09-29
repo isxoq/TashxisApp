@@ -11,5 +11,9 @@
     <string name="bildirishnomalar">Bildirishnomalar</string>
     <string name="sms_string">Biz %s telefon raqamingizga sms orqali faollashtirish kodini yubordik.</string>
     <string name="spec_count_string">%s ta mutaxxasis bor</string>
+    <string name="string_comment">(%s xulosa)</string>
+    <string name="price">%s so\'m</string>
+    <string name="distance">Oraliq masofa: %s km</string>
+    <string name="toolbar">$s</string>
 
 </resources>

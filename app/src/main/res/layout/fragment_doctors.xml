@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    tools:context=".presentation.ui.bottom_nav.shifokor_oyna.ui.DoctorsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_doctors"
+        app:title="@string/toolbar"
+        app:titleTextColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00DDCB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/spinner_kasallik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:enabled="false"
+        android:fontFamily="@font/product_sans_regular"
+        android:shadowColor="#707070"
+        android:layout_marginStart="20dp"
+        android:text="Kasallik nomini kiriting"
+        android:textAllCaps="false"
+        android:layout_marginTop="15sp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_doctors" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_filtr_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:enabled="false"
+        android:fontFamily="@font/product_sans_regular"
+        android:text="Saralash"
+        android:layout_marginEnd="20dp"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginTop="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_doctors" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:id="@+id/rv_doctors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_kasallik"
+        tools:listitem="@layout/item_doctors_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
