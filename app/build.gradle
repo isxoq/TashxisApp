@@ -102,4 +102,6 @@ dependencies {
     //html text view
     implementation 'org.sufficientlysecure:html-textview:4.0'
 
+
+
 }

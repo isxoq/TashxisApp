@@ -40,10 +40,10 @@ class DoctorsAdapter :
 
             binding.tvDoctorName.text = "DR. ${model.firstName}"
             binding.tvDoctorSpeciality.text = model.speciality.name
-            binding.tvPrice.text = itemView.context.getString(R.string.price,model.acceptanceAmount.toString())
-            binding.tvOraliqMasofa.text = itemView.context.getString(R.string.distance,model.distance.toString())
+            binding.tvQabulPrice.text = itemView.context.getString(R.string.price,model.acceptanceAmount.toString())
+            binding.tvDistanceDoctor.text = itemView.context.getString(R.string.distance,model.distance.toString())
             binding.tvStarCount.text = model.rate.toString()
-            binding.tvComment.text = itemView.context.getString(R.string.string_comment,model.id.toString())
+            binding.tvCommentDoctor.text = itemView.context.getString(R.string.string_comment,model.id.toString())
             // binding.tvCount.text =
             // itemView.context.getString(R.string.spec_count_string, model.doctorsCount)
         }

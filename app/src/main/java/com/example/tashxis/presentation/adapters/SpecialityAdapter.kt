@@ -6,7 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.tashxis.App
 import com.example.tashxis.R
+import com.example.tashxis.business.util.Constants
 import com.example.tashxis.databinding.ItemSpecialityBinding
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
 
@@ -26,6 +29,12 @@ class SpecialityAdapter :
         fun onBind(model: SpecialityData) {
             binding.root.setOnClickListener(this)
             this.model = model
+            Glide
+                .with(App.context!!)
+                .load(Constants.BASE_URL+model.logoUrl)
+                .placeholder(R.drawable.ic_spec)
+                .centerCrop()
+                .into(binding.ivSpeciality)
             binding.tvSpecialityName.text = model.name
             binding.tvSpecialityDesc.text = model.description
             binding.tvCount.text =

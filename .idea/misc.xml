@@ -43,9 +43,12 @@
         <entry key="..\:/Android projects/Tashxis/app/src/main/res/menu/menu_navigation.xml" value="0.153125" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_calendar.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_doctor_image.xml" value="0.15364583333333334" />
+        <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_group_755.xml" value="0.16018518518518518" />
+        <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_icon_material_location_on.xml" value="0.20092592592592592" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_image_heart.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_image_kardiog.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_previous.xml" value="0.20277777777777778" />
+        <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/ic_spec.xml" value="0.20092592592592592" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/image_kardio.xml" value="0.21481481481481482" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/item_doctors_layout.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/drawable/shape_bacground.xml" value="0.25625" />
@@ -73,10 +76,11 @@
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/fragment_shifokor.xml" value="0.22" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/fragment_speciality.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/fragment_tashxis.xml" value="0.24010416666666667" />
-        <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/item_doctors_layout.xml" value="0.2" />
+        <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/item_doctors_layout.xml" value="0.22" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/item_shifokor_fragment.xml" value="0.25" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/item_speciality.xml" value="0.25" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/navigation_header.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/layout/test_layout.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/admin/StudioProjects/Tashxis/app/src/main/res/menu/menu_navigation.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/drawable/shape_edt_text.xml" value="0.24444444444444444" />
@@ -100,7 +104,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.33" />
+        <option name="scale" value="0.22" />
       </ProjectState>
     </option>
   </component>

@@ -27,6 +27,9 @@
             android:name="idSpeciality"
             app:argType="integer"
             android:defaultValue="0"/>
+        <action
+            android:id="@+id/action_shifokorFragment_to_aboutDoctorFragment"
+            app:destination="@id/aboutDoctorFragment" />
     </fragment>
     <fragment
         android:id="@+id/tashxisFragment"
@@ -37,6 +40,15 @@
         android:id="@+id/doctorsFragment"
         android:name="com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui.DoctorsFragment"
         android:label="fragment_doctors"
-        tools:layout="@layout/fragment_doctors" />
+        tools:layout="@layout/fragment_doctors" >
+        <action
+            android:id="@+id/action_doctorsFragment_to_aboutDoctorFragment"
+            app:destination="@id/aboutDoctorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutDoctorFragment"
+        android:name="com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui.AboutDoctorFragment"
+        android:label="fragment_about_doctor"
+        tools:layout="@layout/fragment_about_doctor" />
 
 </navigation>

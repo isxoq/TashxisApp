@@ -14,6 +14,20 @@
     <string name="string_comment">(%s xulosa)</string>
     <string name="price">%s so\'m</string>
     <string name="distance">Oraliq masofa: %s km</string>
-    <string name="toolbar">$s</string>
+    <string name="toolbar">%s</string>
+    <string name="doctor_age">Yoshi %s da</string>
+    <string name="doctor_fio">%s %s %s</string>
+    <string name="univetsity">Tamomlagan bilim yurtlari: %s</string>
+    <string name="qualification"> Ish staji: %s yil</string>
+    <string name="language">Til ko\'nikmalari:  %s</string>
+    <string name="yutuqlari">Erishgan yutuqlari:  %s</string>
+    <string name="hospital_name">Ish joyi: %s</string>
+    <string name="qabul_price">Qabul summasi: %s so\'m</string>
+    <string name="hospital_address_text">%s</string>
+    <string name="davolay_oladigan_kasallik_nomlari">Davolay oladigan kasallik nomlari: %s</string>
+    <string name="work_hour_text">$s</string>
+    <string name="dr_name">DR %s</string>
+    <string name="speciality">%s</string>
+    <string name="shifokor_xaqida">Shifokor xaqida</string>
 
 </resources>
