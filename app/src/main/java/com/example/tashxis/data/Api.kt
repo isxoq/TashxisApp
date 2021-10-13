@@ -1,16 +1,15 @@
 package com.example.tashxis.data
 
-import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictResponse
-import com.example.tashxis.presentation.ui.auth.model.auth.LoginResponse.LoginResponse
-import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.AddProfileInfoResponse
-import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.RegionResponse
-import com.example.tashxis.presentation.ui.auth.model.auth.RegisterResponse
-import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyResponse
-import com.example.tashxis.presentation.ui.auth.model.auth.verify_code_response_final.VerifyCodeResponseFinal
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponse
+import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
+import com.example.tashxis.presentation.ui.auth.model.auth.LoginResponseData
+import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.ProfileInFoData
+import com.example.tashxis.presentation.ui.auth.model.auth.RegionData
+import com.example.tashxis.presentation.ui.auth.model.auth.RegisterResponseData
+import com.example.tashxis.presentation.ui.auth.model.auth.VerifyCodeData
+import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyData
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponse
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityResponse
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponseData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -20,7 +19,7 @@ interface Api {
     @POST("api/client/user/register")
     suspend fun register(
         @Field("phone") number: String
-    ): Response<RegisterResponse>
+    ): Response<BaseDomen<RegisterResponseData>>
 
     //verify_code
     @FormUrlEncoded
@@ -28,7 +27,7 @@ interface Api {
     suspend fun verify_code(
         @Field("phone") phone: String,
         @Field("code") code: String
-    ): Response<VerifyCodeResponseFinal>
+    ): Response<BaseDomen<VerifyCodeData>>
 
     //add_profile_info
     @FormUrlEncoded
@@ -42,14 +41,14 @@ interface Api {
         @Field("province_id") province_id: Int,
         @Field("region_id") region_id: Int,
         @Field("birth_date") birth_date: String,
-    ): Response<AddProfileInfoResponse>
+    ): Response<BaseDomen<ProfileInFoData>>
 
     // login
     @FormUrlEncoded
     @POST("/api/client/user/login")
     suspend fun login(
         @Field("phone") number: String
-    ): Response<LoginResponse>
+    ): Response<BaseDomen<LoginResponseData>>
 
     //login_verify
     @FormUrlEncoded
@@ -57,31 +56,32 @@ interface Api {
     suspend fun login_verify(
         @Field("phone") phone: String,
         @Field("code") code: String
-    ): Response<LoginVerifyResponse>
+    ): Response<BaseDomen<LoginVerifyData>>
 
     @GET("/api/client/user/regions")
     suspend fun getRegions(
-    ): Response<RegionResponse>
+    ): Response<BaseDomen<List<RegionData>>>
 
     @GET("/api/client/user/districts?region_id")
     suspend fun getDistrict(
         @Query("region_id") region_id: Int
-    ): Response<DistrictResponse>
+    ): Response<BaseDomen<List<DistrictData>>>
+
+
 
     @GET("/api/client/speciality/index")
     suspend fun getSpecialty(
-
-    ): Response<SpecialityResponse>
+    ): Response<BaseDomen<List<SpecialityData>>>
 
     @GET("/api/client/speciality/doctors?")
     suspend fun getDoctors(
         @Query("speciality_id") speciality_id: Int
-    ): Response<DoctorResponse>
+    ): Response<BaseDomen<List<DoctorResponseData>>>
 
     @GET("/api/client/doctor/view?")
     suspend fun getAboutDoctor(
         @Query("id") id: Int
-    ): Response<AboutDoctorResponse>
+    ): Response<BaseDomen<AboutDoctorResponseData>>
 
 
 }

@@ -1,40 +1,39 @@
 package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response
 
-import android.os.Parcelable
+
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 data class Hospital(
     @SerializedName("address")
-    val address: String, // Qayirma MFY Boyto'pi ko'chasi 9-uy
+    val address: String, // Andijon viloyati A.Yo'ldoshev ko'chasi 41a uy
     @SerializedName("deleted")
-    val deleted: Any?, // null
+    val deleted: Any, // null
     @SerializedName("email")
-    val email: String, // isxoqjon_7710@mail.ru
+    val email: String,
     @SerializedName("fax")
-    val fax: String, // +998993657710
+    val fax: String,
     @SerializedName("id")
-    val id: Int, // 1
+    val id: Int, // 3
     @SerializedName("image")
-    val image: String, // 613070fb3ae81.jpg
+    val image: String, // 6152e969d21e0.jpg
     @SerializedName("imageUrl")
-    val imageUrl: String, // /uploads/images/hospital/1/preview-613070fb3ae81.jpg
+    val imageUrl: String, // /uploads/images/hospital/3/preview-6152e969d21e0.jpg
     @SerializedName("lat")
-    val lat: String, // 40.9186904
+    val lat: String, // 40.8153684957179
     @SerializedName("logo")
-    val logo: String, // 6151282b69f68.png
+    val logo: String, // 6152e853bd8b2.png
     @SerializedName("logoUrl")
-    val logoUrl: String, // /uploads/images/hospital/1/preview-6151282b69f68.png
+    val logoUrl: String, // /uploads/images/hospital/3/preview-6152e853bd8b2.png
     @SerializedName("long")
-    val long: String, // 68.5784621
+    val long: String, // 72.28378066236714
     @SerializedName("name")
-    val name: String, // Andijon ko'p tarmoqli tibbiyot markazi	
+    val name: String, // "Diyor" klinikasi
     @SerializedName("password")
-    val password: String?, // null
+    val password: Any, // null
     @SerializedName("phone")
-    val phone: String, // +998993657710
+    val phone: String, // +998742240303
     @SerializedName("status")
     val status: Int, // 1
     @SerializedName("username")
-    val username: String? // null
+    val username: Any // null
 )

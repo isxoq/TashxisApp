@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Region(
     @SerializedName("id")
-    val id: Int, // 127
+    val id: Int, // 30
     @SerializedName("name")
-    val name: String, // Denov tumani
+    val name: String, // Andijon shahri
     @SerializedName("region_id")
-    val regionId: Int // 9
+    val regionId: Int // 2
 )

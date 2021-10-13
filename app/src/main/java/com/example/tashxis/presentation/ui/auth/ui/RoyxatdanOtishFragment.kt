@@ -27,7 +27,7 @@ import com.example.tashxis.framework.viewModel.AuthViewModelFactory
 import com.example.tashxis.presentation.ui.activity.MainActivity
 import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
 import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.ProfileEditModel
-import com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse.RegionData
+import com.example.tashxis.presentation.ui.auth.model.auth.RegionData
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefsImpl
 import java.text.SimpleDateFormat
@@ -239,7 +239,6 @@ class RoyxatdanOtishFragment : Fragment(),
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
-
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myCalendar.set(Calendar.YEAR, year)
         myCalendar.set(Calendar.MONTH, month)

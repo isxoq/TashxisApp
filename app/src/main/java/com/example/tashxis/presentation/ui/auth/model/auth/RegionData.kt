@@ -1,4 +1,4 @@
-package com.example.tashxis.presentation.ui.auth.model.auth.RegionResponse
+package com.example.tashxis.presentation.ui.auth.model.auth
 
 
 import com.google.gson.annotations.SerializedName

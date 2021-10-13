@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
 
 @Keep
-data class Data(
+data class LoginVerifyData(
     @SerializedName("auth_key")
     val authKey: String?, // oBA8f0mLEf3zaPjE_1630749883
     @SerializedName("birth_date")

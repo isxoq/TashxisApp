@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Province(
     @SerializedName("id")
-    val id: Int, // 14
+    val id: Int, // 2
     @SerializedName("name")
-    val name: String // Toshkent shahri
+    val name: String // Andijon viloyati
 )

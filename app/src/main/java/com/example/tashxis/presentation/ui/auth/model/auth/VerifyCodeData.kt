@@ -1,4 +1,4 @@
-package com.example.tashxis.presentation.ui.auth.model.auth.verify_code_response_final
+package com.example.tashxis.presentation.ui.auth.model.auth
 
 
 import com.google.gson.annotations.SerializedName
