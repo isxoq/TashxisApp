@@ -10,6 +10,8 @@ import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVer
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponseData
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality.SpecialData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.AddQueueRequest
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.AddQueueResponse
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.StackDaysData
 import retrofit2.Response
 import retrofit2.http.*
@@ -69,7 +71,6 @@ interface Api {
     ): Response<BaseDomen<List<DistrictData>>>
 
 
-
     @GET("/api/client/speciality/index")
     suspend fun getSpecialty(
     ): Response<BaseDomen<List<SpecialData>>>
@@ -93,4 +94,10 @@ interface Api {
     suspend fun getAcceptTimes(
         @Query("id") id: Int
     ): Response<BaseDomen<List<String>>>
+
+    @POST("api/client/queue/add")
+    suspend fun putStackCommit(
+        @Header("X-Api-Key") token: String,
+        @Body addQueueRequest: AddQueueRequest
+    ): Response<BaseDomen<AddQueueResponse>>
 }

@@ -2,7 +2,6 @@ package com.example.tashxis.presentation.ui.auth.ui
 
 import android.R
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +14,6 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tashxis.business.util.Constants
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.hideKeyboard
 import com.example.tashxis.business.util.lazyFast
@@ -28,7 +26,7 @@ import com.example.tashxis.presentation.ui.activity.MainActivity
 import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
 import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.ProfileEditModel
 import com.example.tashxis.presentation.ui.auth.model.auth.RegionData
-import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefsImpl
+import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -45,14 +43,7 @@ class RoyxatdanOtishFragment : Fragment(),
     private val editModel by lazyFast { ProfileEditModel() }
     private val TAG = "TAG"
     private val cd = CompositeDisposable()
-    private val pref by lazyFast {
-        TashxisPrefsImpl(
-            requireContext().getSharedPreferences(
-                Constants.PREF_NAME,
-                Context.MODE_PRIVATE
-            )
-        )
-    }
+    private val pref by lazyFast { PrefHelper.getPref(requireContext()) }
     private var regions: List<RegionData>? = null
     private var districts: List<DistrictData>? = null
     private var myCalendar: Calendar = Calendar.getInstance()
@@ -146,21 +137,17 @@ class RoyxatdanOtishFragment : Fragment(),
 
     private fun setUpListener() {
         binding.btnTasdiqlash.setOnClickListener {
-            if(binding.etName.text==null)
-            {
-            binding.etName.setError("Bu maydon to'ldirilishi shart")
+            if (binding.etName.text == null) {
+                binding.etName.error = "Bu maydon to'ldirilishi shart"
             }
-            if(binding.etSureName.text==null)
-            {
-            binding.etSureName.setError("Bu maydon to'ldirilishi shart")
+            if (binding.etSureName.text == null) {
+                binding.etSureName.error = "Bu maydon to'ldirilishi shart"
             }
-            if(binding.etThirdName.text==null)
-            {
-            binding.etThirdName.setError("Bu maydon to'ldirilishi shart")
+            if (binding.etThirdName.text == null) {
+                binding.etThirdName.error = "Bu maydon to'ldirilishi shart"
             }
-            if(binding.etBirthDate.text==null)
-            {
-            binding.etBirthDate.setError("Bu maydon to'ldirilishi shart")
+            if (binding.etBirthDate.text == null) {
+                binding.etBirthDate.error = "Bu maydon to'ldirilishi shart"
             }
 
 

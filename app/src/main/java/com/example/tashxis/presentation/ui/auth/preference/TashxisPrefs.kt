@@ -22,7 +22,8 @@ interface TashxisPrefs {
     fun clearAll()
 
     companion object {
-        const val ISM ="ISM"
+        const val PREF_NAME = "tashxis.db"
+        const val ISM = "ISM"
         const val SURENAME = "SURENAME"
         const val FATHERNAME = "FATHERNAME"
         const val ID = "ID"
@@ -37,17 +38,17 @@ class TashxisPrefsImpl(
     private val prefs: SharedPreferences
 ) : TashxisPrefs {
     override var id: Int
-        get() = prefs.getInt(ID,12121)
-        set(value) = prefs.edit().putInt(ID,value).apply()
+        get() = prefs.getInt(ID, 12121)
+        set(value) = prefs.edit().putInt(ID, value).apply()
     override var name: String?
         get() = prefs.getString(ISM, null)
-        set(value)  = prefs.edit().putString(ISM,value).apply()
+        set(value) = prefs.edit().putString(ISM, value).apply()
     override var surename: String?
         get() = prefs.getString(SURENAME, null)
-        set(value) = prefs.edit().putString(SURENAME,value).apply()
+        set(value) = prefs.edit().putString(SURENAME, value).apply()
     override var fathername: String?
         get() = prefs.getString(FATHERNAME, null)
-        set(value) = prefs.edit().putString(FATHERNAME,value).apply()
+        set(value) = prefs.edit().putString(FATHERNAME, value).apply()
     override var token: String?
         get() = prefs.getString(TOKEN, null)
         set(value) {
@@ -76,4 +77,5 @@ class TashxisPrefsImpl(
         prefs.edit().clear().apply()
         language = lang
     }
+
 }

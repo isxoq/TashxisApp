@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tashxis.databinding.ActivitySplashBinding
 import com.example.tashxis.presentation.ui.auth.RegisterActivity
+import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs
 
 @SuppressLint("CustomSplashScreen")
@@ -18,6 +19,8 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        preferences = PrefHelper.getPref(this)
 
         binding.textView3.postDelayed({
             if (preferences?.token == "") {

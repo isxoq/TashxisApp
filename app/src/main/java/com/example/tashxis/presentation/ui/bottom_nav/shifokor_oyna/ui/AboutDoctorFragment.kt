@@ -28,7 +28,8 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
     private var _binding: FragmentAboutDoctorBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: AboutDoctorViewModel
-    private var doctor_id: Int = 0
+    private var doctorId: Int = 0
+    private var price: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,7 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
         super.onViewCreated(view, savedInstanceState)
         setupObserver()
         binding.btnSetMeeting.setOnClickListener {
-            val bundle = bundleOf("id" to doctor_id)
+            val bundle = bundleOf("id" to doctorId, "price" to price)
             findNavController().navigate(R.id.action_aboutDoctorFragment_to_stackFragment, bundle)
         }
     }
@@ -74,7 +75,7 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
                 progressDialog?.hide()
                 Log.d("NetworkStatus", "Succes: ${it.data}")
                 setUpViewSuccess(it)
-                doctor_id = it.data.id
+                doctorId = it.data.id
 
             }
             is NetworkStatus.ERROR -> {
@@ -102,6 +103,7 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
             .centerCrop()
             .into(binding.ivHospital)
         val model = it.data
+        price = it.data.acceptanceAmount
         binding.tvDoctorName.text = "DR. ${model.firstName}"
         binding.tvDoctorSpeciality.text = model.speciality.name
         binding.tvQabulPrice.text = getString(R.string.price, model.acceptanceAmount.toString())
