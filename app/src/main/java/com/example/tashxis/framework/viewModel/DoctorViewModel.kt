@@ -8,6 +8,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.SingleLiveEvent
+import com.example.tashxis.data.BaseDomen
 import com.example.tashxis.framework.repo.MainRepository
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponseData
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ class DoctorViewModel(
     val liveDoctorsState: LiveData<NetworkStatus<List<DoctorResponseData>>> =
         _liveDoctorsState
     val toast = SingleLiveEvent<String>()
-    val TAG ="TAG"
+    val TAG = "TAG"
 
     fun getDoctors(id: Int) {
         viewModelScope.launch {
@@ -32,30 +33,32 @@ class DoctorViewModel(
                 val result = authRepository.getDoctors(id)
                 if (result.isSuccessful && result.body() != null) {
                     val body = result.body()!!
-                    if (result.body()!!.message == "") {
-                        val data = body.data
-                        if (data != null) {
-                            _liveDoctorsState.postValue(NetworkStatus.SUCCESS(data))
-                            Log.d(TAG, "getDoctors: Success")
-                        } else {
-                            _liveDoctorsState.postValue(NetworkStatus.ERROR("data = null"))
-
+                    val data = body.data
+                    when (result.body()!!.code) {
+                        BaseDomen.SUCCESS -> {
+                            if (data != null) {
+                                _liveDoctorsState.postValue(NetworkStatus.SUCCESS(data))
+                                Log.d(TAG, "getDoctors: Success")
+                            } else {
+                                _liveDoctorsState.postValue(NetworkStatus.ERROR("data = null"))
+                                toast.postValue("Data is null")
+                            }
                         }
-                    } else if (body.message == "Not found") {
-                        _liveDoctorsState.postValue(NetworkStatus.ERROR("Not found"))
-                        Log.d(TAG, "getDoctors: NotFound")
-                    } else {
-                        _liveDoctorsState.postValue(NetworkStatus.ERROR(body.message ?: ""))
-                        toast.postValue(body.message ?: "")
+                        BaseDomen.UNKNOWN_ERROR -> {
+                            _liveDoctorsState.postValue(NetworkStatus.ERROR("UnknownError"))
+                            toast.postValue("Unknown Error")
+                        }
 
                     }
                 } else {
                     _liveDoctorsState.postValue(NetworkStatus.ERROR(" Result is not successful"))
                     Log.d(TAG, "getDoctors: Result is not succesfull ${result}")
+                    toast.postValue("Result is not succesfull")
                 }
 
             } catch (e: Exception) {
                 _liveDoctorsState.postValue(NetworkStatus.ERROR(e.message ?: ""))
+                toast.postValue(e.message)
                 Log.d(TAG, "getDoctors: Exception tashavatti")
             }
 

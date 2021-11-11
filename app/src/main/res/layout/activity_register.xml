@@ -17,4 +17,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/register_navigation"
         />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/authToolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#00DDCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

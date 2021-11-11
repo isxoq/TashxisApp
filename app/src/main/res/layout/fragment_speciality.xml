@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,34 +8,13 @@
     android:background="#EEEEEE"
     tools:context=".presentation.ui.bottom_nav.shifokor_oyna.ui.SpecialityFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/toolbar_mutaxassis"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/mutahassis_shape"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:text="Mutaxassisliklar"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_22sdp"
-            android:textStyle="bold" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_speciality"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_mutaxassis"
+        app:layout_constraintTop_toTopOf="parent"
         app:spanCount="2"
         tools:listitem="@layout/item_speciality" />
 </androidx.constraintlayout.widget.ConstraintLayout>

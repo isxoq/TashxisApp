@@ -6,6 +6,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#336FEE</color>
+    <color name ="checkColor">#F2A517</color>
 
 
     <color name="progressDialogBack">#66000000</color>

@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.tashxis.App
 import com.example.tashxis.R
@@ -26,6 +28,7 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
     private var _binding: FragmentAboutDoctorBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: AboutDoctorViewModel
+    private var doctor_id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +49,20 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       //  Inflate the layout for this fragment
-        _binding = FragmentAboutDoctorBinding.inflate(layoutInflater,container,false)
+        //  Inflate the layout for this fragment
+        _binding = FragmentAboutDoctorBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupObserver()
+        binding.btnSetMeeting.setOnClickListener {
+            val bundle = bundleOf("id" to doctor_id)
+            findNavController().navigate(R.id.action_aboutDoctorFragment_to_stackFragment, bundle)
+        }
     }
+
     private val aboutDoctorsObserver = Observer<NetworkStatus<AboutDoctorResponseData>> {
         when (it) {
             is NetworkStatus.LOADING -> {
@@ -67,6 +74,7 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
                 progressDialog?.hide()
                 Log.d("NetworkStatus", "Succes: ${it.data}")
                 setUpViewSuccess(it)
+                doctor_id = it.data.id
 
             }
             is NetworkStatus.ERROR -> {
@@ -77,28 +85,29 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
     }
 
     private fun setUpViewSuccess(it: NetworkStatus.SUCCESS<AboutDoctorResponseData>) {
-        binding.tvFio.text = getString(R.string.doctor_fio,
+        binding.tvFio.text = getString(
+            R.string.doctor_fio,
             it.data.firstName, it.data.fatherName, it.data.lastName
         )
         Glide
             .with(App.context!!)
-            .load(Constants.BASE_URL+it.data.imageUrl)
+            .load(Constants.BASE_URL + it.data.imageUrl)
             .placeholder(R.drawable.ic_doctor)
             .centerCrop()
             .into(binding.ivDoctor)
         Glide
             .with(App.context!!)
-            .load(Constants.BASE_URL+it.data.hospital.imageUrl)
+            .load(Constants.BASE_URL + it.data.hospital.imageUrl)
             .placeholder(R.drawable.ic_doctor)
             .centerCrop()
             .into(binding.ivHospital)
         val model = it.data
         binding.tvDoctorName.text = "DR. ${model.firstName}"
         binding.tvDoctorSpeciality.text = model.speciality.name
-        binding.tvQabulPrice.text = getString(R.string.price,model.acceptanceAmount.toString())
-        binding.tvDistanceDoctor.text = getString(R.string.distance,model.distance.toString())
+        binding.tvQabulPrice.text = getString(R.string.price, model.acceptanceAmount.toString())
+        binding.tvDistanceDoctor.text = getString(R.string.distance, model.distance.toString())
         binding.tvStarCount.text = model.rate.toString()
-        binding.tvCommentDoctor.text = getString(R.string.string_comment,model.id.toString())
+        binding.tvCommentDoctor.text = getString(R.string.string_comment, model.id.toString())
         binding.tvStarCount.text = model.rate.toString()
         binding.tvUniversity.text = getString(R.string.univetsity, model.study)
         binding.tvQualification.text = getString(R.string.qualification, model.workYear.toString())
@@ -109,9 +118,7 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
 //        binding.tvAge.text = model.age
 //        binding.tvLanguage.text = model.
         binding.tvManzilText.text = model.hospital.address
-       // binding.tvWorkHour.text = model.hospital.
-
-
+        // binding.tvWorkHour.text = model.hospital.
 
 
     }

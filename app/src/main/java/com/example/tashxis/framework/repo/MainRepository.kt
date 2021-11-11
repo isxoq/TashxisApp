@@ -7,5 +7,7 @@ class MainRepository(val service: Api) {
     suspend fun getSpeciality() = service.getSpecialty()
     suspend fun getDoctors(id_speciality: Int) = service.getDoctors(id_speciality)
     suspend fun getAboutDoctor(id: Int) = service.getAboutDoctor(id)
+    suspend fun getAcceptDays(doctorId: Int) = service.getAcceptDays(doctorId)
+    suspend fun getAcceptTimes(doctorId: Int)  = service.getAcceptTimes(doctorId)
 
 }

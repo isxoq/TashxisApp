@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tashxis.R
@@ -47,7 +46,7 @@ class DoctorsFragment : Fragment(R.layout.fragment_doctors), DoctorsClickListene
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDoctorsBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -62,6 +61,7 @@ class DoctorsFragment : Fragment(R.layout.fragment_doctors), DoctorsClickListene
     private val doctorsObserver = Observer<NetworkStatus<List<DoctorResponseData>>> {
         when (it) {
             is NetworkStatus.LOADING -> {
+                //doctorsAdapter.submitList(null)
                 progressDialog?.show()
                 Log.d("NetworkStatus", "Loading: ${it}")
             }
@@ -69,7 +69,7 @@ class DoctorsFragment : Fragment(R.layout.fragment_doctors), DoctorsClickListene
                 progressDialog?.hide()
                 Log.d("NetworkStatus", "Succes: ${it.data}")
                 doctorsAdapter.submitList(it.data)
-                binding.toolbarDoctors.title = it.data[0].speciality.name.toString()
+
 
             }
             is NetworkStatus.ERROR -> {
@@ -89,13 +89,20 @@ class DoctorsFragment : Fragment(R.layout.fragment_doctors), DoctorsClickListene
         binding.rvDoctors.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        // doctorsAdapter.submitList(null)
         binding.rvDoctors.adapter = doctorsAdapter
     }
 
     override fun onClicked(model: DoctorResponseData) {
-        val bundle = bundleOf("id" to model.id)
-findNavController().navigate(R.id.action_doctorsFragment_to_aboutDoctorFragment, bundle)
+        val bundle = bundleOf("id" to model.id, "title" to "DR ${model.firstName}")
+        findNavController().navigate(R.id.action_doctorsFragment_to_aboutDoctorFragment, bundle)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }
 
 

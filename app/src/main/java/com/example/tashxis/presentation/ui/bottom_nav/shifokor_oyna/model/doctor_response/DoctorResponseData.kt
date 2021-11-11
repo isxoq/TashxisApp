@@ -5,37 +5,37 @@ import com.google.gson.annotations.SerializedName
 
 data class DoctorResponseData(
     @SerializedName("acceptance_amount")
-    val acceptanceAmount: Int, // 30000
+    val acceptanceAmount: Int?, // 30000
     @SerializedName("achievements")
-    val achievements: String, // КвалификацияВрач высшей категории
+    val achievements: String?, // КвалификацияВрач высшей категории
     @SerializedName("distance")
-    val distance: Double, // 2.3
+    val distance: Double?, // 2.3
     @SerializedName("father_name")
-    val fatherName: String, // Kamilevna
+    val fatherName: String?, // Kamilevna
     @SerializedName("first_name")
-    val firstName: String, // Nailya
+    val firstName: String?, // Nailya
     @SerializedName("hospital")
-    val hospital: Hospital,
+    val hospital: Hospital?,
     @SerializedName("id")
-    val id: Int, // 70
+    val id: Int?, // 70
     @SerializedName("imageUrl")
-    val imageUrl: String, // https://globalgo.uz/uploads/images/doctor/70/preview-61512b3737917.png
+    val imageUrl: String?, // /uploads/images/doctor/70/preview-61512b3737917.png
     @SerializedName("last_name")
-    val lastName: String, // O'zbekova
+    val lastName: String?, // O'zbekova
     @SerializedName("patients")
-    val patients: Int, // 10
+    val patients: Int?, // 10
     @SerializedName("province")
-    val province: Province,
+    val province: Province?,
     @SerializedName("quarter")
-    val quarter: Any, // null
+    val quarter: Any?, // null
     @SerializedName("rate")
-    val rate: Int, // 4
+    val rate: Int?, // 4
     @SerializedName("region")
-    val region: Region,
+    val region: Region?,
     @SerializedName("speciality")
-    val speciality: Speciality,
+    val speciality: Speciality?,
     @SerializedName("study")
-    val study: String, // Тип обучения: Высшее учебное заведениеФакультет/Направление/Отделение: Кардиология и терапияСпециализация: Терапевт-кардиологУчебное заведение: Алма-Атинский государственный медицинский институтПериод обучения: 1983 - 1986
+    val study: String?, // Тип обучения: Высшее учебное заведениеФакультет/Направление/Отделение: Кардиология и терапияСпециализация: Терапевт-кардиологУчебное заведение: Алма-Атинский государственный медицинский институтПериод обучения: 1983 - 1986
     @SerializedName("work_year")
-    val workYear: Int // 6
+    val workYear: Int? // 15
 )

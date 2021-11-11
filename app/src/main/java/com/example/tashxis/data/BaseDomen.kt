@@ -7,7 +7,7 @@ data class BaseDomen<T>(
     @SerializedName("code")
     val code: Int, // 200
     @SerializedName("data")
-    val data: T,
+    val data: T?,
     @SerializedName("message")
     val message: String // Success
 ) {

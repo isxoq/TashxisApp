@@ -9,7 +9,8 @@ import com.example.tashxis.presentation.ui.auth.model.auth.VerifyCodeData
 import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyData
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponseData
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality.SpecialData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.StackDaysData
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -71,7 +72,7 @@ interface Api {
 
     @GET("/api/client/speciality/index")
     suspend fun getSpecialty(
-    ): Response<BaseDomen<List<SpecialityData>>>
+    ): Response<BaseDomen<List<SpecialData>>>
 
     @GET("/api/client/speciality/doctors?")
     suspend fun getDoctors(
@@ -83,5 +84,13 @@ interface Api {
         @Query("id") id: Int
     ): Response<BaseDomen<AboutDoctorResponseData>>
 
+    @GET("/api/client/doctor/accept-days?")
+    suspend fun getAcceptDays(
+        @Query("id") id: Int
+    ): Response<BaseDomen<List<StackDaysData>>>
 
+    @GET("/api/client/doctor/accept-times?")
+    suspend fun getAcceptTimes(
+        @Query("id") id: Int
+    ): Response<BaseDomen<List<String>>>
 }

@@ -12,16 +12,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F3F3F3">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_doctors"
-        app:title="@string/toolbar"
-        app:titleTextColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00DDCB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/spinner_kasallik"
@@ -39,7 +29,7 @@
         android:textSize="14sp"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_doctors" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_filtr_doctor"
@@ -55,8 +45,7 @@
         android:textSize="14sp"
         android:layout_marginTop="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_doctors" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
         android:paddingStart="20dp"
         android:paddingEnd="20dp"

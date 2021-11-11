@@ -12,9 +12,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.tashxis.App
 import com.example.tashxis.business.util.Constants
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.hideKeyboard
@@ -28,8 +28,10 @@ import com.example.tashxis.presentation.ui.activity.MainActivity
 import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
 import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.ProfileEditModel
 import com.example.tashxis.presentation.ui.auth.model.auth.RegionData
-import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefsImpl
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,18 +44,15 @@ class RoyxatdanOtishFragment : Fragment(),
     private val binding get() = _binding!!
     private val editModel by lazyFast { ProfileEditModel() }
     private val TAG = "TAG"
-    private var preferences: TashxisPrefs? = null
-
-    init {
-        if (App.context != null) {
-            val prefs = App.context!!.getSharedPreferences(
+    private val cd = CompositeDisposable()
+    private val pref by lazyFast {
+        TashxisPrefsImpl(
+            requireContext().getSharedPreferences(
                 Constants.PREF_NAME,
                 Context.MODE_PRIVATE
             )
-            preferences = TashxisPrefsImpl(prefs)
-        }
+        )
     }
-
     private var regions: List<RegionData>? = null
     private var districts: List<DistrictData>? = null
     private var myCalendar: Calendar = Calendar.getInstance()
@@ -85,29 +84,89 @@ class RoyxatdanOtishFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         setupView()
         observer()
+        setUpValidate()
         setUpListener()
     }
 
-    private fun collectModel() {
-        editModel.auth_key = preferences?.token ?: ""
-        editModel.birth_date = binding.etBirthDate.text.toString()
-        editModel.father_name = binding.etThirdName.text.toString()
-        editModel.last_name = binding.etSureName.text.toString()
-        if (binding.rbMale.isChecked) {
-            editModel.gender = 1
+    private fun isValidate(
+        birthDate: CharSequence,
+        etName: CharSequence,
+        etSureName: CharSequence,
+        etThirdName: CharSequence
+    ): Boolean {
+        if (birthDate.isEmpty()) {
+            binding.etBirthDate.error = "Ushbu maydon to'ldirilishi shart"
         } else {
-            editModel.gender = 0
+            binding.etBirthDate.error = null
         }
-        editModel.father_name = binding.etThirdName.text.toString()
+        if (etName.isEmpty()) {
+            binding.etName.error = "Ushbu maydon to'ldirilishi shart"
+        } else {
+            binding.etName.error = null
+        }
+        if (etSureName.isEmpty()) {
+            binding.etSureName.error = "Ushbu maydon to'ldirilishi shart"
+        } else {
+            binding.etSureName.error = null
+        }
+        if (etThirdName.isEmpty()) {
+            binding.etThirdName.error = "Ushbu maydon to'ldirilishi shart"
+        } else {
+            binding.etThirdName.error = null
+        }
+        return etName.isNotEmpty() &&
+                etSureName.isNotEmpty() &&
+                etThirdName.isNotEmpty() &&
+                birthDate.isNotEmpty()
 
+    }
+
+    private fun setUpValidate() {
+        val d = Observable.combineLatest(
+            mutableListOf(
+                binding.etBirthDate.textChanges().skipInitialValue(),
+                binding.etName.textChanges().skipInitialValue(),
+                binding.etSureName.textChanges().skipInitialValue(),
+                binding.etThirdName.textChanges().skipInitialValue()
+            )
+        ) {
+            isValidate(
+                it[0] as CharSequence,
+                it[1] as CharSequence,
+                it[2] as CharSequence,
+                it[3] as CharSequence
+            )
+        }.doOnNext {
+            binding.btnTasdiqlash.isEnabled = it
+        }
+            .subscribe()
+        cd.add(d)
     }
 
 
     private fun setUpListener() {
-        binding.btnRegisterCommit.setOnClickListener {
-            //collectModel()
+        binding.btnTasdiqlash.setOnClickListener {
+            if(binding.etName.text==null)
+            {
+            binding.etName.setError("Bu maydon to'ldirilishi shart")
+            }
+            if(binding.etSureName.text==null)
+            {
+            binding.etSureName.setError("Bu maydon to'ldirilishi shart")
+            }
+            if(binding.etThirdName.text==null)
+            {
+            binding.etThirdName.setError("Bu maydon to'ldirilishi shart")
+            }
+            if(binding.etBirthDate.text==null)
+            {
+            binding.etBirthDate.setError("Bu maydon to'ldirilishi shart")
+            }
+
+
+            Toast.makeText(requireContext(), "${pref.token}", Toast.LENGTH_SHORT).show()
             authViewModel.add_profile_info(
-                "e_Zb1oAe_i6BiTu7gO4T_2LfMeQTUig0",
+                pref.token.toString(),
                 "sffsdffsd",
                 "editModel.last_name",
                 "editModel.father_name",
@@ -116,19 +175,6 @@ class RoyxatdanOtishFragment : Fragment(),
                 2,
                 "editModel.birth_date"
             )
-/*
-            authViewModel.add_profile_info(
-                editModel.auth_key,
-                editModel.first_name,
-                editModel.last_name,
-                editModel.father_name,
-                editModel.gender,
-                editModel.province_id,
-                editModel.region_id,
-                editModel.birth_date
-            )
-*/
-
         }
     }
 
@@ -152,9 +198,10 @@ class RoyxatdanOtishFragment : Fragment(),
 
 
     private fun observer() {
-        authViewModel.liveRegionState.observe(viewLifecycleOwner, {
+        authViewModel.liveRegionState.observe(viewLifecycleOwner, { it ->
             when (it) {
                 is NetworkStatus.LOADING -> {
+                    //TODO()
                 }
                 is NetworkStatus.SUCCESS -> {
                     Log.i(TAG, "observer: ${it.data}")
@@ -168,10 +215,11 @@ class RoyxatdanOtishFragment : Fragment(),
                             R.layout.simple_spinner_item,
                             list.toList()
                         )
-                    binding.spinnerRegion.adapter = regionAdapter
-                    binding.spinnerRegion.onItemSelectedListener = this
+                    binding.spinnerVil.adapter = regionAdapter
+                    binding.spinnerTum.onItemSelectedListener = this
                 }
                 is NetworkStatus.ERROR -> {
+                    //TODO()
                 }
             }
         })
@@ -190,10 +238,11 @@ class RoyxatdanOtishFragment : Fragment(),
                             R.layout.simple_spinner_item,
                             list.toList()
                         )
-                    binding.spinnerDistrict.adapter = regionAdapter
-                    binding.spinnerDistrict.onItemSelectedListener = this
+                    binding.spinnerTum.adapter = regionAdapter
+                    binding.spinnerTum.onItemSelectedListener = this
                 }
                 is NetworkStatus.ERROR -> {
+                    //TODO
                 }
             }
         })
@@ -206,9 +255,11 @@ class RoyxatdanOtishFragment : Fragment(),
                     activity?.startActivity(intent)
                 }
                 is NetworkStatus.LOADING -> {
+                    //TODO
 
                 }
                 is NetworkStatus.ERROR -> {
+                    //TODO
 
                 }
             }
@@ -224,12 +275,12 @@ class RoyxatdanOtishFragment : Fragment(),
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (parent?.id) {
-            binding.spinnerRegion.id -> {
+            binding.spinnerVil.id -> {
                 if (regions != null)
                     authViewModel.getDistrict(regions!![position].id)
                 editModel.region_id = regions!![position].id
             }
-            binding.spinnerDistrict.id -> {
+            binding.spinnerTum.id -> {
                 if (districts != null) {
                     editModel.province_id = districts!![position].id
                 }
@@ -239,6 +290,7 @@ class RoyxatdanOtishFragment : Fragment(),
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
+
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         myCalendar.set(Calendar.YEAR, year)
         myCalendar.set(Calendar.MONTH, month)
@@ -247,5 +299,13 @@ class RoyxatdanOtishFragment : Fragment(),
         editModel.birth_date = sdf.format(myCalendar.time)
     }
 
+    override fun onPause() {
+        hideKeyboard()
+        super.onPause()
+    }
 
+    override fun onDestroyView() {
+        cd.clear()
+        super.onDestroyView()
+    }
 }

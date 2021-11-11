@@ -11,14 +11,12 @@ import com.example.tashxis.App
 import com.example.tashxis.R
 import com.example.tashxis.business.util.Constants
 import com.example.tashxis.databinding.ItemDoctorsLayoutBinding
-import com.example.tashxis.presentation.ui.activity.MainActivity
-
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponseData
 
 class DoctorsAdapter :
     ListAdapter<DoctorResponseData, DoctorsAdapter.DoctorsVH>(ItemDifference()) {
     private var clickListener: DoctorsClickListener? = null
-    fun itemClickListener(clickListener: DoctorsClickListener) {
+        fun itemClickListener(clickListener: DoctorsClickListener) {
         this.clickListener = clickListener
     }
 
@@ -39,7 +37,7 @@ class DoctorsAdapter :
                 .into(binding.ivDoctor)
 
             binding.tvDoctorName.text = "DR. ${model.firstName}"
-            binding.tvDoctorSpeciality.text = model.speciality.name
+            binding.tvDoctorSpeciality.text = model.speciality!!.name
             binding.tvQabulPrice.text = itemView.context.getString(R.string.price,model.acceptanceAmount.toString())
             binding.tvDistanceDoctor.text = itemView.context.getString(R.string.distance,model.distance.toString())
             binding.tvStarCount.text = model.rate.toString()

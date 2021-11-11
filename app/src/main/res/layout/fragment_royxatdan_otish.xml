@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F3F3F3"
     android:orientation="vertical"
-    tools:context=".presentation.ui.auth.ui.RoyxatdanOtishFragment">
+    tools:context="com.example.tashxis.presentation.ui.auth.ui.RoyxatdanOtishFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,16 +19,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
-            android:text="Ro'yxatdan o'tish"
+            android:text="Royhatdan o'tish"
             android:textColor="@color/white"
             android:textSize="@dimen/_22sdp"
             android:textStyle="bold" />
 
 
     </LinearLayout>
-
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/register_iv_avatar"
+        android:id="@+id/iv_client"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
         android:layout_gravity="center_horizontal"
@@ -38,7 +37,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,7 +44,6 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,7 +64,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_sure_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +83,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_third_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,7 +107,7 @@
                 android:layout_marginTop="@dimen/_12sdp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_birth_date"
+                    android:id="@+id/textInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,23 +122,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/shape_edt_text"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="  Tug'ilgan kun / oy / yil"
                         android:inputType="textPersonName"
                         android:textSize="@dimen/_16sdp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/iv_birth_date"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:src="@drawable/ic_calendar"
-                    app:layout_constraintBottom_toBottomOf="@+id/til_birth_date"
-                    app:layout_constraintEnd_toEndOf="@+id/til_birth_date"
-                    app:layout_constraintTop_toTopOf="@+id/til_birth_date"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout"
                     tools:ignore="ContentDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -169,6 +162,7 @@
                     android:textStyle="bold" />
 
                 <RadioGroup
+                    android:id="@+id/rg_group"
                     android:layout_width="@dimen/_200sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -180,7 +174,7 @@
                         android:layout_height="@dimen/_28sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="Erkak"
-
+                        android:checked="true"
                         android:textSize="@dimen/_16sdp" />
 
                     <RadioButton
@@ -218,7 +212,7 @@
                     app:cardCornerRadius="@dimen/_16sdp">
 
                     <Spinner
-                        android:id="@+id/spinner_region"
+                        android:id="@+id/spinner_vil"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginStart="@dimen/_16sdp" />
@@ -226,7 +220,6 @@
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -249,7 +242,7 @@
                     app:cardCornerRadius="@dimen/_16sdp">
 
                     <Spinner
-                        android:id="@+id/spinner_district"
+                        android:id="@+id/spinner_tum"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginStart="@dimen/_16sdp" />
@@ -257,15 +250,21 @@
                 </androidx.cardview.widget.CardView>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_register_commit"
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:id="@+id/btn_tasdiqlash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#1998CF"
                     android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    android:layout_marginBottom="@dimen/_45sdp"
+                    android:paddingHorizontal="55dp"
+                    android:paddingVertical="12dp"
+                    android:fontFamily="@font/product_sans_regular"
                     android:text="Tasdiqlash"
-                    app:cornerRadius="@dimen/_20sdp" />
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="45dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="26dp"
+                    app:cornerRadius="20dp" />
 
             </LinearLayout>
 

@@ -8,47 +8,81 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.tashxis.presentation.ui.auth.ui.LoginFragment"
-        android:label="fragment_login"
+        android:label="Login"
+
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_otpFragment"
-            app:destination="@id/otpFragment" />
+            app:destination="@id/otpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/otpFragment"
         android:name="com.example.tashxis.presentation.ui.auth.ui.OtpFragment"
-        android:label="fragment_otp"
+        android:label="Kod kiritish"
         tools:layout="@layout/fragment_otp" >
         <action
             android:id="@+id/action_otpFragment_to_royxatdanOtishFragment"
-            app:destination="@id/royxatdanOtishFragment" />
+            app:destination="@id/royxatdanOtishFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_otpFragment_to_nav_graph2"
-            app:destination="@id/nav_graph" />
+            app:destination="@id/nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/royxatdanOtishFragment"
         android:name="com.example.tashxis.presentation.ui.auth.ui.RoyxatdanOtishFragment"
-        android:label="fragment_royxatdan_otish"
+        android:label="Ro'yxatdan o'tish"
         tools:layout="@layout/fragment_royxatdan_otish" >
         <action
             android:id="@+id/action_royxatdanOtishFragment_to_nav_graph2"
-            app:destination="@id/nav_graph" />
+            app:destination="@id/nav_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.tashxis.presentation.ui.auth.ui.RegisterFragment"
-        android:label="fragment_register"
+        android:label="Ro'yxatdan o'tish"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_royxatdanOtishFragment"
-            app:destination="@id/royxatdanOtishFragment" />
+            app:destination="@id/royxatdanOtishFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
         <action
             android:id="@+id/action_registerFragment_to_otpFragment"
-            app:destination="@id/otpFragment" />
+            app:destination="@id/otpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <include app:graph="@navigation/nav_graph" />

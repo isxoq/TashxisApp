@@ -5,13 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.tashxis.R
@@ -25,12 +22,13 @@ import com.example.tashxis.framework.viewModel.SpecialityViewModel
 import com.example.tashxis.framework.viewModel.SpecialityViewModelFactory
 import com.example.tashxis.presentation.adapters.SpecialityAdapter
 import com.example.tashxis.presentation.adapters.SpecialityClickListener
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality.SpecialData
 
 
 class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityClickListener {
     private var _binding: FragmentSpecialityBinding? = null
     private val binding get() = _binding!!
+    private var name: String? = ""
     private lateinit var viewModel: SpecialityViewModel
     private val sAdapter: SpecialityAdapter by lazy { SpecialityAdapter() }
 
@@ -64,7 +62,7 @@ class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityCli
         setupObserver()
     }
 
-    private val specialityObserver = Observer<NetworkStatus<List<SpecialityData>>> {
+    private val specialityObserver = Observer<NetworkStatus<List<SpecialData>>> {
         when (it) {
             is NetworkStatus.LOADING -> {
                 progressDialog?.show()
@@ -89,7 +87,7 @@ class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityCli
     private fun setupView() {
 
         sAdapter.itemClickListener(this)
-
+        binding.rvSpeciality.adapter = sAdapter
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.rvSpeciality.layoutManager = layoutManager
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen._8sdp)
@@ -101,13 +99,19 @@ class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityCli
                 0
             )
         )
-        binding.rvSpeciality.adapter = sAdapter
+
 
     }
 
-    override fun onClicked(model: SpecialityData) {
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    override fun onClicked(model: SpecialData) {
 //        Toast.makeText(requireActivity(), "${model.description}", Toast.LENGTH_SHORT).show()
-        val bundle = bundleOf("id" to model.id)
+        val bundle = bundleOf("id" to model.id, "title" to model.name)
         findNavController().navigate(R.id.action_shifokorFragment_to_doctorsFragment, bundle)
     }
+
 }

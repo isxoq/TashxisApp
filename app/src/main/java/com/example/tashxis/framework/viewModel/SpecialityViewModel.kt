@@ -7,8 +7,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.SingleLiveEvent
+import com.example.tashxis.data.BaseDomen
 import com.example.tashxis.framework.repo.MainRepository
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality.SpecialData
 import kotlinx.coroutines.launch
 
 class SpecialityViewModel(
@@ -16,9 +17,8 @@ class SpecialityViewModel(
     app: Application
 ) : AndroidViewModel(app) {
 
-    private val _liveSpecialityState = MediatorLiveData<NetworkStatus<List<SpecialityData>>>()
-    val liveSpecialityState: LiveData<NetworkStatus<List<SpecialityData>>> =
-        _liveSpecialityState
+    private val _liveSpecialityState = MediatorLiveData<NetworkStatus<List<SpecialData>>>()
+    val liveSpecialityState: LiveData<NetworkStatus<List<SpecialData>>> = _liveSpecialityState
     val toast = SingleLiveEvent<String>()
 
     fun getSpeciality() {
@@ -26,26 +26,28 @@ class SpecialityViewModel(
             try {
                 _liveSpecialityState.postValue(NetworkStatus.LOADING())
                 val result = authRepository.getSpeciality()
-                if (result.isSuccessful && result.body() != null) {
-                    val body = result.body()!!
-                    if (result.body()!!.message == "") {
-                        val data = body.data
-                        if (data != null) {
-                            _liveSpecialityState.postValue(NetworkStatus.SUCCESS(data))
-                        } else {
-                            _liveSpecialityState.postValue(NetworkStatus.ERROR("data = null"))
-                        }
-                    } else if (body.message == "Not found") {
-                        _liveSpecialityState.postValue(NetworkStatus.ERROR("Not found"))
-                        toast.postValue("Bazada bunday raqam topilmadi")
-                    } else {
-                        _liveSpecialityState.postValue(NetworkStatus.ERROR(body.message ?: ""))
-                        toast.postValue(body.message ?: "")
+                if (result.isSuccessful) {
+                    val body = result.body()
+                    val data = body?.data
+                    if (data != null) {
+                        when (body.code) {
+                            BaseDomen.SUCCESS -> {
+                                _liveSpecialityState.postValue(NetworkStatus.SUCCESS(data))
+                            }
+                            BaseDomen.UNKNOWN_ERROR -> {
+                                _liveSpecialityState.postValue(NetworkStatus.ERROR("Unknown Error"))
+                                toast.postValue("Unknown error")
+                            }
 
+                        }
+
+                    } else {
+                        _liveSpecialityState.postValue(NetworkStatus.ERROR("data is null"))
+                        toast.postValue(body?.message)
                     }
                 } else {
                     _liveSpecialityState.postValue(NetworkStatus.ERROR(" Result is not successful"))
-                    toast.postValue(result.body()!!.message ?: "")
+                    toast.postValue(result.body()?.message)
                 }
 
             } catch (e: Exception) {

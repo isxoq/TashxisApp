@@ -1,5 +1,6 @@
 package com.example.tashxis.presentation.ui.bottom_nav
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,10 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.tashxis.R
 import com.example.tashxis.databinding.FragmentBottomNavBinding
+import com.example.tashxis.presentation.ui.activity.IFullScreen
 
 
-
-class BottomNavFragment : Fragment() {
+class BottomNavFragment : Fragment(), IFullScreen {
 
     private var _binding: FragmentBottomNavBinding? = null
     private val binding get() = _binding!!
@@ -26,7 +27,8 @@ class BottomNavFragment : Fragment() {
         R.id.boshFragment,
         R.id.navbatFragment,
         R.id.shifokorFragment,
-        R.id.tashxisFragment
+        R.id.tashxisFragment,
+        R.id.fragment
     )
 
     override fun onCreateView(
@@ -47,7 +49,36 @@ class BottomNavFragment : Fragment() {
         navController =
             (childFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment).navController
         binding.bottomNavView.setupWithNavController(navController)
-//        appBarConfiguration = AppBarConfiguration(menuItems)
+
+        appBarConfiguration = AppBarConfiguration(menuItems)
+        navController.addOnDestinationChangedListener { _, destination, arguments ->
+            if (destination.id == R.id.boshFragment || destination.id == R.id.tashxisFragment
+                || destination.id == R.id.navbatFragment
+            ) {
+                binding.toolbar.visibility = View.GONE
+            } else {
+                binding.toolbar.visibility = View.VISIBLE
+            }
+
+            when (destination.id) {
+                R.id.boshFragment -> {
+                }
+                R.id.tashxisFragment -> {
+                }
+                R.id.shifokorFragment -> {
+                }
+                R.id.navbatFragment -> {
+                }
+                R.id.doctorsFragment -> {
+                    destination.label = arguments?.getString("title")
+                }
+                R.id.aboutDoctorFragment -> {
+                    destination.label = arguments?.getString("title")
+                }
+                R.id.stackFragment -> {
+                }
+            }
+        }
         binding.bottomNavView.setOnItemSelectedListener {
             if (NavigationUI.onNavDestinationSelected(it, navController)) {
                 true
@@ -61,6 +92,7 @@ class BottomNavFragment : Fragment() {
                 }
             }
         }
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
 
@@ -76,6 +108,10 @@ class BottomNavFragment : Fragment() {
 
     companion object {
         var listener: NavigationOpenListener? = null
+    }
+
+    override fun setToolbarTitle(name: String?) {
+        binding.toolbar.title = name
     }
 }
 

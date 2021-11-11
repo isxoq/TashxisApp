@@ -28,8 +28,10 @@ private var dialog: AlertDialog? = null
 val Fragment.progressDialog: AlertDialog?
     get() {
         if (dialog == null)
-            dialog = AlertDialog.Builder(requireContext(), R.style.WrapContentDialog)
-                .setView(R.layout.progress_dialog)
-                .create()
+            context?.let {
+                dialog = AlertDialog.Builder(it, R.style.WrapContentDialog)
+                    .setView(R.layout.progress_dialog)
+                    .create()
+            }
         return dialog
     }

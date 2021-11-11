@@ -8,9 +8,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.tashxis.business.util.NetworkStatus
 import com.example.tashxis.business.util.SingleLiveEvent
+import com.example.tashxis.data.BaseDomen
 import com.example.tashxis.framework.repo.MainRepository
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponseData
 import kotlinx.coroutines.launch
 
 class AboutDoctorViewModel(
@@ -23,7 +23,7 @@ class AboutDoctorViewModel(
     val liveAboutDoctorsState: LiveData<NetworkStatus<AboutDoctorResponseData>> =
         _liveAboutDoctorsState
     val toast = SingleLiveEvent<String>()
-    val TAG ="TAG"
+    val TAG = "TAG"
 
     fun getAboutDoctors(id: Int) {
         viewModelScope.launch {
@@ -33,33 +33,43 @@ class AboutDoctorViewModel(
                 val result = authRepository.getAboutDoctor(id)
                 if (result.isSuccessful && result.body() != null) {
                     val body = result.body()!!
-                    if (result.body()!!.message == "") {
-                        val data = body.data
-                        if (data != null) {
-                            _liveAboutDoctorsState.postValue(NetworkStatus.SUCCESS(data))
-                            Log.d(TAG, "getAboutDoctors: Success")
-                        } else {
-                            _liveAboutDoctorsState.postValue(NetworkStatus.ERROR("data = null"))
+                    val data = body.data
+                    when (body.code) {
+                        BaseDomen.SUCCESS -> {
+                            if (data!=null){
+                                _liveAboutDoctorsState.postValue(NetworkStatus.SUCCESS(data))
+                                toast.postValue(body.message)
+                                Log.d(TAG, "getAboutDoctors: Success")
+                            }
+                            else{
+                                _liveAboutDoctorsState.postValue(NetworkStatus.ERROR("Data is null"))
+                                toast.postValue(body.message
+                                )
+                            }
 
                         }
-                    } else if (body.message == "Not found") {
-                        _liveAboutDoctorsState.postValue(NetworkStatus.ERROR("Not found"))
-                        Log.d(TAG, "getAboutDoctors: NotFound")
-                    } else {
-                        _liveAboutDoctorsState.postValue(NetworkStatus.ERROR(body.message ?: ""))
-                        toast.postValue(body.message ?: "")
+                        BaseDomen.UNKNOWN_ERROR -> {
+                            _liveAboutDoctorsState.postValue(NetworkStatus.ERROR("Unknown Error"))
+                            toast.postValue("Unknown Error")
+                        }
+                        BaseDomen.FILE_DOES_NOT_EXIST -> {
+                            _liveAboutDoctorsState.postValue(NetworkStatus.ERROR("File Does Not Excist"))
+                            toast.postValue(body.message)
+                        }
 
                     }
-                } else {
-                    _liveAboutDoctorsState.postValue(NetworkStatus.ERROR(" Result is not successful"))
-                    Log.d(TAG, "getAboutDoctors: Result is not succesfull ${result}")
-                }
 
-            } catch (e: Exception) {
-                _liveAboutDoctorsState.postValue(NetworkStatus.ERROR(e.message ?: ""))
-                Log.d(TAG, "getAboutDoctors: Exception tashavatti")
-            }
 
+            } else {
+            _liveAboutDoctorsState.postValue(NetworkStatus.ERROR(" Result is not successful"))
+            Log.d(TAG, "getAboutDoctors: Result is not succesfull ${result}")
         }
+
+        } catch (e: Exception) {
+            _liveAboutDoctorsState.postValue(NetworkStatus.ERROR(e.message ?: ""))
+            Log.d(TAG, "getAboutDoctors: Exception tashavatti")
+        }
+
     }
+}
 }

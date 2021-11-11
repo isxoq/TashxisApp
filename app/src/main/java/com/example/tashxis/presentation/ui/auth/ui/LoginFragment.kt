@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tashxis.R
 import com.example.tashxis.business.util.Status
+import com.example.tashxis.business.util.progressDialog
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentLoginBinding
 import com.example.tashxis.framework.repo.AuthRepository
@@ -64,8 +65,10 @@ class LoginFragment : Fragment() {
             when (it) {
                 Status.LOADING -> {
                     Log.d(TAG, "Login onViewCreated: Loading")
+                    progressDialog?.show()
                 }
                 Status.ERROR -> {
+                    progressDialog?.hide()
                     Log.d(TAG, "Login onViewCreated: Error")
                 }
                 Status.SUCCESS -> {

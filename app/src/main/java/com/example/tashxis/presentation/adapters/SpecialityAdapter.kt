@@ -11,10 +11,11 @@ import com.example.tashxis.App
 import com.example.tashxis.R
 import com.example.tashxis.business.util.Constants
 import com.example.tashxis.databinding.ItemSpecialityBinding
-import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality_response.SpecialityData
+import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality.SpecialData
 
 class SpecialityAdapter :
-    ListAdapter<SpecialityData, SpecialityAdapter.SpecialityVH>(ItemDiffer()) {
+    ListAdapter<SpecialData, SpecialityAdapter.SpecialityVH>(ItemDiffer()) {
+    private val TAG = "TAG"
     private var clickListener: SpecialityClickListener? = null
     fun itemClickListener(clickListener: SpecialityClickListener) {
         this.clickListener = clickListener
@@ -25,13 +26,13 @@ class SpecialityAdapter :
         private val clickListener: SpecialityClickListener?
     ) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-        private var model: SpecialityData? = null
-        fun onBind(model: SpecialityData) {
+        private var model: SpecialData? = null
+        fun onBind(model: SpecialData) {
             binding.root.setOnClickListener(this)
             this.model = model
             Glide
                 .with(App.context!!)
-                .load(Constants.BASE_URL+model.logoUrl)
+                .load(Constants.BASE_URL + model.logoUrl)
                 .placeholder(R.drawable.ic_spec)
                 .centerCrop()
                 .into(binding.ivSpeciality)
@@ -57,17 +58,17 @@ class SpecialityAdapter :
     }
 }
 
-class ItemDiffer : DiffUtil.ItemCallback<SpecialityData>() {
-    override fun areItemsTheSame(oldItem: SpecialityData, newItem: SpecialityData): Boolean {
+class ItemDiffer : DiffUtil.ItemCallback<SpecialData>() {
+    override fun areItemsTheSame(oldItem: SpecialData, newItem: SpecialData): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: SpecialityData, newItem: SpecialityData): Boolean {
+    override fun areContentsTheSame(oldItem: SpecialData, newItem: SpecialData): Boolean {
         return oldItem.id == newItem.id
     }
 
 }
 
 interface SpecialityClickListener {
-    fun onClicked(model: SpecialityData)
+    fun onClicked(model: SpecialData)
 }

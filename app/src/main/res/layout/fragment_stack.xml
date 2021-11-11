@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    tools:context=".presentation.ui.bottom_nav.shifokor_oyna.ui.StackFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="24dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_stack_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_stack_date" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_stack_time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_stack_date"
+            app:spanCount="3"
+            tools:itemCount="20"
+            tools:listitem="@layout/item_stack_time" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_bemor_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_navbat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_stack_time">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_fio_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Bemor F.I.O"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/product_sans_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_fio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Hoshimxon Mamaqo'ziyov Teshaboyevich"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/product_sans_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fio_index" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_yosh_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Yoshi"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/product_sans_regular"
+                    app:layout_constraintEnd_toStartOf="@id/tv_yosh"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fio" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_yosh"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:paddingStart="5dp"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/product_sans_bold"
+                    app:layout_constraintEnd_toStartOf="@id/tv_sex_index"
+                    app:layout_constraintStart_toEndOf="@id/tv_yosh_index"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fio"
+                    tools:text="25" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_sex_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Jinsi"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/product_sans_regular"
+                    app:layout_constraintEnd_toStartOf="@id/tv_sex"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fio" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="131dp"
+                    android:paddingStart="5dp"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/product_sans_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_fio"
+                    tools:text="Erkak" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_number_index"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="11dp"
+                    android:text="Bemor telefon raqami"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/product_sans_regular"
+                    app:layout_constraintEnd_toStartOf="@id/tv_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_yosh" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="17dp"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/product_sans_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_yosh"
+                    tools:text="+9821390128013" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_navbat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="62dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:padding="10dp"
+            android:text="Navbatga yozilish"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            app:cornerRadius="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_bemor_details" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
