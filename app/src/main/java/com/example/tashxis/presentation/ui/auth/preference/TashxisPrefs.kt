@@ -1,16 +1,24 @@
 package com.example.tashxis.presentation.ui.auth.preference
 
 import android.content.SharedPreferences
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.BIRTH_DATE
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.FATHERNAME
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.FIREBASE_TOKEN
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.ID
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.ISM
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.IS_ON_BOARD
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.LANGUAGE
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.PHONE
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.PROVINCE_ID
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.REGION_ID
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.SURENAME
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.TOKEN
 
 interface TashxisPrefs {
+    var birthDate: String?
+    var regionId: Int?
+    var provinceId: Int?
+    var phone: String?
     var id: Int
     var name: String?
     var surename: String?
@@ -22,6 +30,10 @@ interface TashxisPrefs {
     fun clearAll()
 
     companion object {
+        const val BIRTH_DATE = "BIRTHDATE"
+        const val REGION_ID = "REGIONID"
+        const val PROVINCE_ID = "PROVINCEID"
+        const val PHONE = "PHONE"
         const val PREF_NAME = "tashxis.db"
         const val ISM = "ISM"
         const val SURENAME = "SURENAME"
@@ -37,6 +49,18 @@ interface TashxisPrefs {
 class TashxisPrefsImpl(
     private val prefs: SharedPreferences
 ) : TashxisPrefs {
+    override var birthDate: String?
+        get() = prefs.getString(BIRTH_DATE, null)
+        set(value) = prefs.edit().putString(BIRTH_DATE, value).apply()
+    override var regionId: Int?
+        get() = prefs.getInt(REGION_ID, 12121)
+        set(value) = prefs.edit().putInt(REGION_ID, value!!).apply()
+    override var provinceId: Int?
+        get() = prefs.getInt(PROVINCE_ID, 2)
+        set(value) = prefs.edit().putInt(PROVINCE_ID, value!!).apply()
+    override var phone: String?
+        get() = prefs.getString(PHONE, "")
+        set(value) = prefs.edit().putString(PHONE, value).apply()
     override var id: Int
         get() = prefs.getInt(ID, 12121)
         set(value) = prefs.edit().putInt(ID, value).apply()

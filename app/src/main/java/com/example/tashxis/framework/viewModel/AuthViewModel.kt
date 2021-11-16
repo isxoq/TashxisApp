@@ -1,7 +1,6 @@
 package com.example.tashxis.framework.viewModel
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -16,11 +15,13 @@ import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
 import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.ProfileInFoData
 import com.example.tashxis.presentation.ui.auth.model.auth.RegionData
-import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefsImpl
+import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
 import kotlinx.coroutines.launch
 
 interface IAuthViewModel {
     val liveState: LiveData<Status>
+    val liveLoginState: LiveData<Status>
+    val liveLoginVerifyState: LiveData<Status>
     val regionList: LiveData<Any>
     val districtList: LiveData<Any>
     val toast: LiveData<String>
@@ -35,8 +36,8 @@ interface IAuthViewModel {
     fun getRegion()
     fun getDistrict(region_id: Int)
 
-    fun verify_code(phone: String, code: String)
-    fun add_profile_info(
+    fun verifyCode(phone: String, code: String)
+    fun addProfileInfo(
         auth_key: String,
         first_name: String,
         last_name: String,
@@ -48,7 +49,7 @@ interface IAuthViewModel {
     )
 
     fun login(phone: String)
-    fun login_verify(phone: String, code: String)
+    fun loginVerify(phone: String, code: String)
 //    fun storeLoginPreference(data: Data)
 
 }
@@ -60,13 +61,11 @@ class AuthViewModel(
 
     val TAG = "TAG"
 
-    //        if (App.context != null) {
-    val preferences =
-        TashxisPrefsImpl(app.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE))
-//        }
-
+    private val preferences = PrefHelper.getPref(app)
 
     override val liveState = SingleLiveEvent<Status>()
+    override val liveLoginState = SingleLiveEvent<Status>()
+    override val liveLoginVerifyState = SingleLiveEvent<Status>()
     override val regionList
         get() = MutableLiveData<Any>()
     override val districtList
@@ -126,25 +125,25 @@ class AuthViewModel(
                         BaseDomen.SUCCESS -> {
                             if (data != null) {
                                 _liveRegionState.postValue(NetworkStatus.SUCCESS(data))
+                                Log.d(TAG, "getRegion: Success")
                             } else {
                                 _liveRegionState.postValue(NetworkStatus.ERROR("null"))
+                                Log.d(TAG, "getRegion: Success")
                                 toast.postValue("Null")
                             }
                         }
 
-
                     }
 
                 } else {
-                    Log.d(TAG, "login: Register Result is not successful")
                     _liveRegionState.postValue(NetworkStatus.ERROR(" Result is not successful"))
                     toast.postValue(result.body()!!.message)
                 }
 
             } catch (e: Exception) {
-                Log.d(TAG, "login: Register Result is not error ${e.message}")
                 _liveRegionState.postValue(NetworkStatus.ERROR(e.message ?: ""))
                 toast.postValue(e.message)
+                Log.d(TAG, "getRegion: ${e.message}")
             }
 
         }
@@ -159,22 +158,25 @@ class AuthViewModel(
         viewModelScope.launch {
             try {
                 _liveDistrictState.postValue(NetworkStatus.LOADING())
-                val result = authRepository.getDistrict(region_id)
                 Log.d(TAG, "getDistrict: Loading")
+                val result = authRepository.getDistrict(region_id)
                 val body = result.body()!!
                 when (body.code) {
                     BaseDomen.SUCCESS -> {
-                        if (body.data != null)
+                        if (body.data != null) {
                             _liveDistrictState.postValue(NetworkStatus.SUCCESS(body.data))
-                        else
+                            Log.d(TAG, "getDistrict: Success")
+                        } else {
                             _liveDistrictState.postValue(NetworkStatus.ERROR("data = null"))
+                            Log.d(TAG, "getDistrict: Error")
+                        }
                     }
                 }
 
             } catch (e: Exception) {
                 _liveDistrictState.postValue(NetworkStatus.ERROR(e.message ?: ""))
+                Log.d(TAG, "getDistrict: ${e.message}")
                 toast.postValue(e.message)
-                Log.d(TAG, "getDistrict: catch working ${e.message}")
             }
         }
     }
@@ -183,7 +185,7 @@ class AuthViewModel(
     private val _liveProfileInfoState = MutableLiveData<NetworkStatus<ProfileInFoData>>()
     val liveProfileInfoState: LiveData<NetworkStatus<ProfileInFoData>> = _liveProfileInfoState
 
-    override fun add_profile_info(
+    override fun addProfileInfo(
         auth_key: String,
         first_name: String,
         last_name: String,
@@ -220,24 +222,18 @@ class AuthViewModel(
                                     saveCredentials()
                                 } else {
                                     _liveProfileInfoState.postValue(NetworkStatus.ERROR("Null"))
-                                    toast.postValue("Null")
                                 }
                             }
                         }
                     } else {
                         _liveProfileInfoState.postValue(NetworkStatus.ERROR("Body is null"))
-                        Log.d(TAG, "add_profile_info: body is null")
-                        toast.postValue("data is null")
                     }
                 } else {
                     _liveProfileInfoState.postValue(NetworkStatus.ERROR("Result is not successful"))
-                    Log.d(TAG, "add_profile_info: Result is not successful $result")
-                    toast.postValue("Result is not successful")
 
                 }
             } catch (e: Exception) {
                 _liveProfileInfoState.postValue(NetworkStatus.ERROR("Tapping exception ${e.message}"))
-                toast.postValue(e.message)
             }
         }
     }
@@ -250,91 +246,77 @@ class AuthViewModel(
     override fun login(phone: String) {
         viewModelScope.launch {
             try {
+                liveLoginState.postValue(Status.LOADING)
                 val result = authRepository.login(phone)
-                liveState.postValue(Status.LOADING)
                 if (result.isSuccessful) {
                     when (result.body()!!.code) {
                         BaseDomen.SUCCESS -> {
-                            toast.postValue(result.body()!!.message)
-                            liveState.postValue(Status.SUCCESS)
-                            Log.d(TAG, "login: SMS code sent")
+                            liveLoginState.postValue(Status.SUCCESS)
                             phoneNumber.postValue(phone)
                             logReg.postValue(Constants.LOG)
                         }
                         BaseDomen.CLIENT_NOT_FOUND -> {
-                            toast.postValue(result.body()!!.message)
-                            liveState.postValue(Status.ERROR)
-                            Log.d(TAG, "login: Not found")
+                            liveLoginState.postValue(Status.ERROR)
                         }
                         BaseDomen.SMS_ALREADY_SENT -> {
-                            toast.postValue(result.body()!!.message)
-                            liveState.postValue(Status.SUCCESS)
-                            Log.d(TAG, "login: SMS ALReady Sent")
+                            liveLoginState.postValue(Status.SUCCESS)
                         }
                     }
                 } else {
-                    Log.d(TAG, "login: Register Result is not successful")
-                    liveState.postValue(Status.ERROR)
-                    toast.postValue("ulanish bilan bog'liq xatolik yuz berdi")
+                    liveLoginState.postValue(Status.ERROR)
                 }
             } catch (e: Exception) {
-                Log.d(TAG, "login: ${e.message}")
-                liveState.postValue(Status.ERROR)
-                toast.postValue(e.message)
+                liveLoginState.postValue(Status.ERROR)
             }
         }
     }
 
 
     //verify_code
-    override fun verify_code(phone: String, code: String) {
+    override fun verifyCode(phone: String, code: String) {
         viewModelScope.launch {
             try {
-                Log.d(TAG, "verify_code: start try $phone  $code")
+                liveLoginVerifyState.postValue(Status.LOADING)
                 val result = authRepository.verify_code(phone, code)
                 if (result.isSuccessful) {
                     val body = result.body()!!
                     when (result.body()!!.code) {
                         BaseDomen.SUCCESS -> {
-                            toast.postValue(result.body()!!.message)
-                            liveState.postValue(Status.SUCCESS)
+                            liveLoginVerifyState.postValue(Status.SUCCESS)
                             Log.d(TAG, "login: SMS code sent")
                             phoneNumber.postValue(phone)
                             logReg.postValue(Constants.LOG)
                             if (body.data != null) {
-                                preferences?.token = body.data.authKey
-                                Log.d("TAGTAG", "verify_code: ${preferences?.token}")
+                                preferences.token = body.data.authKey
+                                Log.d("TAGTAG", "verify_code: ${preferences.token}")
                             } else {
                                 toast.postValue("Data is null")
                             }
                         }
                         BaseDomen.CLIENT_NOT_FOUND -> {
                             toast.postValue(result.body()!!.message)
-                            liveState.postValue(Status.ERROR)
+                            liveLoginVerifyState.postValue(Status.ERROR)
                             Log.d(TAG, "login: Not found")
                         }
                     }
 
                 } else {
-                    Log.d(TAG, "verify_code: Response is not sucessfull  ${result}")
                     toast.postValue(result.message())
                 }
             } catch (e: Exception) {
-                liveState.postValue(Status.ERROR)
+                liveLoginVerifyState.postValue(Status.ERROR)
                 toast.postValue(e.message)
-                Log.d(TAG, "verify_code: Chota xatoda shu ${e.message}")
             }
 
         }
     }
 
     // login_verify
-    override fun login_verify(phone: String, code: String) {
+    override fun loginVerify(phone: String, code: String) {
         viewModelScope.launch {
             try {
+                liveLoginVerifyState.postValue(Status.LOADING)
                 val result = authRepository.login_verify(phone, code)
-                Log.d(TAG, "result login: $result")
-
                 if (result.isSuccessful) {
                     val body = result.body()
                     Log.d(TAG, "result body: $body")
@@ -343,52 +325,35 @@ class AuthViewModel(
                         Log.d(TAG, "body data: $data")
                         when (result.body()!!.code) {
                             BaseDomen.SUCCESS -> {
-                                preferences?.token = data?.authKey
-                                preferences?.name = data?.firstName
-                                preferences?.fathername = data?.fatherName
-                                preferences?.surename = data?.lastName
-//                                preferences?.phone = data?.phone
-//                                preferences?.province_id = data?.provinceId
-//                                preferences?.region_id = data?.regionId
-//                                preferences.birth_date = data?.birthDate
-
-                                liveState.postValue(Status.SUCCESS)
-                                Log.d(TAG, "login: Nomer tasdiqlandi")
+                                liveLoginVerifyState.postValue(Status.SUCCESS)
+                                Log.d(TAG, "login_verify: Working After pref")
                             }
                             BaseDomen.CLIENT_NOT_FOUND -> {
-                                liveState.postValue(Status.ERROR)
-                                Log.d(TAG, "login: Not found")
+                                liveLoginVerifyState.postValue(Status.ERROR)
                                 toast.postValue("Bazada bunday raqam topilmadi")
                             }
                             BaseDomen.INVALID_OTP -> {
-                                liveState.postValue(Status.ERROR)
-                                Log.d(TAG, "login: Invalid OTP")
+                                liveLoginVerifyState.postValue(Status.ERROR)
                                 toast.postValue("Noto'g'ri parol kiritildi")
                             }
                             BaseDomen.OTP_EXPIRED -> {
-                                liveState.postValue(Status.ERROR)
-                                Log.d(TAG, "login_verify: Otp Expired")
+                                liveLoginVerifyState.postValue(Status.ERROR)
                                 toast.postValue("Parol Muddati o'tgan")
                             }
                         }
 
                     } else {
-                        Log.d(
-                            TAG,
-                            " ${result.body()!!.message} login: Message not equals Sms code sent"
-                        )
+
                         liveState.postValue(Status.ERROR)
                         toast.postValue(result.body()!!.message)
 
                     }
                 } else {
-                    Log.d(TAG, "login: Login Result is not successful")
                     liveState.postValue(Status.ERROR)
                     toast.postValue(result.body()!!.message)
                 }
 
             } catch (e: Exception) {
-                Log.d(TAG, "login: error exception ${e.message}")
                 liveState.postValue(Status.ERROR)
                 toast.postValue(e.message)
             }

@@ -2,11 +2,8 @@ package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,9 +11,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.tashxis.R
 import com.example.tashxis.business.util.GridSpacingItemDecoration
 import com.example.tashxis.business.util.NetworkStatus
-import com.example.tashxis.business.util.progressDialog
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentSpecialityBinding
+import com.example.tashxis.framework.base.BaseFragment
 import com.example.tashxis.framework.repo.MainRepository
 import com.example.tashxis.framework.viewModel.SpecialityViewModel
 import com.example.tashxis.framework.viewModel.SpecialityViewModelFactory
@@ -25,9 +22,9 @@ import com.example.tashxis.presentation.adapters.SpecialityClickListener
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality.SpecialData
 
 
-class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityClickListener {
-    private var _binding: FragmentSpecialityBinding? = null
-    private val binding get() = _binding!!
+class SpecialityFragment :
+    BaseFragment<FragmentSpecialityBinding>(FragmentSpecialityBinding::inflate),
+    SpecialityClickListener {
     private var name: String? = ""
     private lateinit var viewModel: SpecialityViewModel
     private val sAdapter: SpecialityAdapter by lazy { SpecialityAdapter() }
@@ -48,13 +45,6 @@ class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityCli
         viewModel.getSpeciality()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentSpecialityBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,16 +55,16 @@ class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityCli
     private val specialityObserver = Observer<NetworkStatus<List<SpecialData>>> {
         when (it) {
             is NetworkStatus.LOADING -> {
-                progressDialog?.show()
+                showProgress()
                 Log.i("NetworkStatus", "Loading: ${it}")
             }
             is NetworkStatus.SUCCESS -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.i("NetworkStatus", "Succes: ${it.data}")
                 sAdapter.submitList(it.data)
             }
             is NetworkStatus.ERROR -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.i("NetworkStatus", "Error: ${it.error}")
             }
         }
@@ -101,11 +91,6 @@ class SpecialityFragment : Fragment(R.layout.fragment_speciality), SpecialityCli
         )
 
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     override fun onClicked(model: SpecialData) {

@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tashxis.R
 import com.example.tashxis.business.util.NetworkStatus
-import com.example.tashxis.business.util.progressDialog
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentDoctorsBinding
 import com.example.tashxis.framework.repo.MainRepository
@@ -62,18 +61,18 @@ class DoctorsFragment : Fragment(R.layout.fragment_doctors), DoctorsClickListene
         when (it) {
             is NetworkStatus.LOADING -> {
                 //doctorsAdapter.submitList(null)
-                progressDialog?.show()
+//                progressDialog?.show()
                 Log.d("NetworkStatus", "Loading: ${it}")
             }
             is NetworkStatus.SUCCESS -> {
-                progressDialog?.hide()
+                //               progressDialog?.hide()
                 Log.d("NetworkStatus", "Succes: ${it.data}")
                 doctorsAdapter.submitList(it.data)
 
 
             }
             is NetworkStatus.ERROR -> {
-                progressDialog?.hide()
+//                progressDialog?.hide()
                 Log.d("NetworkStatus", "Error: ${it.error}")
             }
         }

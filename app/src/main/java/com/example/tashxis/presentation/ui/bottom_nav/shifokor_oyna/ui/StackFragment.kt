@@ -2,21 +2,16 @@ package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.tashxis.R
 import com.example.tashxis.business.util.NetworkStatus
-import com.example.tashxis.business.util.progressDialog
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentStackBinding
+import com.example.tashxis.framework.base.BaseFragment
 import com.example.tashxis.framework.repo.MainRepository
+import com.example.tashxis.framework.viewModel.StackViewModel
 import com.example.tashxis.framework.viewModel.StackViewModelFactory
-import com.example.tashxis.framework.viewmodel.StackViewModel
 import com.example.tashxis.presentation.adapters.StackDaysAdapter
 import com.example.tashxis.presentation.adapters.StackDaysClickListener
 import com.example.tashxis.presentation.adapters.StackTimesAdapter
@@ -25,10 +20,9 @@ import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.StackDaysData
 
 
-class StackFragment : Fragment(R.layout.fragment_stack), StackDaysClickListener,
+class StackFragment : BaseFragment<FragmentStackBinding>(FragmentStackBinding::inflate),
+    StackDaysClickListener,
     StackTimesClickListener {
-    private var _binding: FragmentStackBinding? = null
-    private val binding get() = _binding!!
     private lateinit var viewModel: StackViewModel
     private val stackDaysAdapter: StackDaysAdapter by lazy { StackDaysAdapter() }
     private val stackTimesAdapter: StackTimesAdapter by lazy { StackTimesAdapter() }
@@ -50,17 +44,8 @@ class StackFragment : Fragment(R.layout.fragment_stack), StackDaysClickListener,
         viewModel.getStackTimes(doctorId)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentStackBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun viewCreated() {
+        super.viewCreated()
         setUpViews()
         setupObserver()
     }
@@ -68,17 +53,17 @@ class StackFragment : Fragment(R.layout.fragment_stack), StackDaysClickListener,
     private val stackDaysObserver = Observer<NetworkStatus<List<StackDaysData>>> {
         when (it) {
             is NetworkStatus.LOADING -> {
-                progressDialog?.show()
+                showProgress()
                 Log.d("NetworkStatus", "Loading: ${it}")
             }
             is NetworkStatus.SUCCESS -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.d("NetworkStatus", "Succes: ${it.data}")
                 stackDaysAdapter.submitList(it.data)
                 //binding.toolbarDoctors.title = it.data[0].speciality!!.name.toString()
             }
             is NetworkStatus.ERROR -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.d("NetworkStatus", "Error: ${it.error}")
             }
         }
@@ -86,16 +71,16 @@ class StackFragment : Fragment(R.layout.fragment_stack), StackDaysClickListener,
     private val stackTimesObserver = Observer<NetworkStatus<List<String>>> {
         when (it) {
             is NetworkStatus.LOADING -> {
-                progressDialog?.show()
+                showProgress()
                 Log.d("NetworkStatus", "Loading: ${it}")
             }
             is NetworkStatus.SUCCESS -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.d("NetworkStatus", "Succes: ${it.data}")
                 stackTimesAdapter.submitList(it.data)
             }
             is NetworkStatus.ERROR -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.d("NetworkStatus", "Error: ${it.error}")
 
             }
@@ -104,14 +89,14 @@ class StackFragment : Fragment(R.layout.fragment_stack), StackDaysClickListener,
     private val stackCommitObserver = Observer<NetworkStatus<AddQueueResLocal>> {
         when (it) {
             is NetworkStatus.LOADING -> {
-                progressDialog?.show()
+                showProgress()
             }
             is NetworkStatus.SUCCESS -> {
-                progressDialog?.hide()
+                hideProgress()
             }
             is NetworkStatus.ERROR -> {
                 Log.d("TAG", "stackcommitfragment: ${it.error}")
-                progressDialog?.hide()
+                hideProgress()
             }
         }
     }
@@ -124,7 +109,8 @@ class StackFragment : Fragment(R.layout.fragment_stack), StackDaysClickListener,
 
         binding.btnNavbat.setOnClickListener {
             stackCommit()
-            Toast.makeText(requireContext(), "salom", Toast.LENGTH_SHORT).show()}
+            Toast.makeText(requireContext(), "salom", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupObserver() {
@@ -152,7 +138,7 @@ class StackFragment : Fragment(R.layout.fragment_stack), StackDaysClickListener,
     }
 
     private fun stackCommit() {
-        viewModel.stackCommit(id = doctorId,price = price)
+        viewModel.stackCommit(id = doctorId, price = price)
     }
 
 }

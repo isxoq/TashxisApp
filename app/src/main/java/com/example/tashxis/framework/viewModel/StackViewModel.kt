@@ -1,4 +1,4 @@
-package com.example.tashxis.framework.viewmodel
+package com.example.tashxis.framework.viewModel
 
 import android.app.Application
 import android.util.Log

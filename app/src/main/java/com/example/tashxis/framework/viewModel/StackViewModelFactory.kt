@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.tashxis.framework.repo.MainRepository
-import com.example.tashxis.framework.viewmodel.StackViewModel
 
 class StackViewModelFactory(val app: Application, private val repository: MainRepository) :
     ViewModelProvider.Factory {

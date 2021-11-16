@@ -2,11 +2,8 @@ package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,18 +12,17 @@ import com.example.tashxis.App
 import com.example.tashxis.R
 import com.example.tashxis.business.util.Constants
 import com.example.tashxis.business.util.NetworkStatus
-import com.example.tashxis.business.util.progressDialog
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentAboutDoctorBinding
+import com.example.tashxis.framework.base.BaseFragment
 import com.example.tashxis.framework.repo.MainRepository
 import com.example.tashxis.framework.viewModel.AboutDoctorViewModel
 import com.example.tashxis.framework.viewModel.AboutDoctorViewModelFactory
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
 
 
-class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
-    private var _binding: FragmentAboutDoctorBinding? = null
-    private val binding get() = _binding!!
+class AboutDoctorFragment :
+    BaseFragment<FragmentAboutDoctorBinding>(FragmentAboutDoctorBinding::inflate) {
     private lateinit var viewModel: AboutDoctorViewModel
     private var doctorId: Int = 0
     private var price: Int = 0
@@ -46,15 +42,6 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        //  Inflate the layout for this fragment
-        _binding = FragmentAboutDoctorBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObserver()
@@ -67,19 +54,19 @@ class AboutDoctorFragment : Fragment(R.layout.fragment_about_doctor) {
     private val aboutDoctorsObserver = Observer<NetworkStatus<AboutDoctorResponseData>> {
         when (it) {
             is NetworkStatus.LOADING -> {
-                progressDialog?.show()
+                showProgress()
                 Log.d("NetworkStatus", "Loading: ${it}")
 
             }
             is NetworkStatus.SUCCESS -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.d("NetworkStatus", "Succes: ${it.data}")
                 setUpViewSuccess(it)
                 doctorId = it.data.id
 
             }
             is NetworkStatus.ERROR -> {
-                progressDialog?.hide()
+                hideProgress()
                 Log.d("NetworkStatus", "Error: ${it.error}")
             }
         }
