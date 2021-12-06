@@ -26,6 +26,12 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_otpFragment2"
+            app:destination="@id/otpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_royxatdanOtishFragment"
+            app:destination="@id/royxatdanOtishFragment" />
     </fragment>
     <fragment
         android:id="@+id/otpFragment"
@@ -61,6 +67,9 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
+        <action
+            android:id="@+id/action_royxatdanOtishFragment_to_captureImageFragment"
+            app:destination="@id/captureImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -86,5 +95,10 @@
     </fragment>
 
     <include app:graph="@navigation/nav_graph" />
+    <fragment
+        tools:layout="@layout/fragment_image_capture"
+        android:id="@+id/captureImageFragment"
+        android:name="com.example.tashxis.presentation.ui.auth.ui.CaptureImageFragment"
+        android:label="CaptureImageFragment" />
 
 </navigation>

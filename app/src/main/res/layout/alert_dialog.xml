@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="25dp"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingBottom="22dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="19dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="Tashxis"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:minLines="2"
+            android:text="Tasdiqlash jarayonini to'xtatishni xohlaysizmi?"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="53dp"
+            android:fontFamily="@font/product_sans_regular"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="8dp"
+            android:text="Yo`q"
+            android:textAllCaps="false"
+            android:textColor="#189BCA"
+            android:textSize="20sp"
+            app:backgroundTint="#FFFFFF"
+            android:maxLines="1"
+            app:cornerRadius="30dp"
+            app:layout_constraintEnd_toStartOf="@id/btn_ok"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_message"
+            app:strokeColor="#189BCA"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="53dp"
+            android:maxLines="1"
+            android:fontFamily="@font/product_sans_regular"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="8dp"
+            android:text="Ha"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:backgroundTint="#189BCA"
+            app:cornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel"
+            app:layout_constraintTop_toBottomOf="@id/tv_message"
+            app:strokeColor="#189BCA"
+            app:strokeWidth="1dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

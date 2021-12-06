@@ -2,19 +2,19 @@ package com.example.tashxis.framework.viewModel
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.tashxis.business.util.Constants
-import com.example.tashxis.business.util.NetworkStatus
-import com.example.tashxis.business.util.SingleLiveEvent
-import com.example.tashxis.business.util.Status
+import com.example.tashxis.App
+import com.example.tashxis.business.util.*
 import com.example.tashxis.data.BaseDomen
 import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.presentation.ui.auth.model.auth.DistrictResponse.DistrictData
 import com.example.tashxis.presentation.ui.auth.model.auth.ProfileInfoResponse.ProfileInFoData
 import com.example.tashxis.presentation.ui.auth.model.auth.RegionData
+import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyData
 import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
 import kotlinx.coroutines.launch
 
@@ -22,6 +22,9 @@ interface IAuthViewModel {
     val liveState: LiveData<Status>
     val liveLoginState: LiveData<Status>
     val liveLoginVerifyState: LiveData<Status>
+    val liveRegionState: LiveData<NetworkStatus<List<RegionData>>>
+    val liveDistrictState: LiveData<NetworkStatus<List<DistrictData>>>
+    val liveProfileInfoState: LiveData<NetworkStatus<ProfileInFoData>>
     val regionList: LiveData<Any>
     val districtList: LiveData<Any>
     val toast: LiveData<String>
@@ -29,6 +32,8 @@ interface IAuthViewModel {
     val logReg: LiveData<Int>
     val token: LiveData<String>
     val _timer: LiveData<String>
+    val imageUri: LiveData<String>
+    fun setImageUri(uri: String)
     fun register(
         phone: String
     )
@@ -50,6 +55,7 @@ interface IAuthViewModel {
 
     fun login(phone: String)
     fun loginVerify(phone: String, code: String)
+    fun setPreferences(data: Any)
 //    fun storeLoginPreference(data: Data)
 
 }
@@ -58,25 +64,30 @@ class AuthViewModel(
     private val authRepository: AuthRepository,
     app: Application
 ) : AndroidViewModel(app), IAuthViewModel {
-
     val TAG = "TAG"
 
-    private val preferences = PrefHelper.getPref(app)
+    private val preferences by lazyFast { PrefHelper.getPref(app) }
 
     override val liveState = SingleLiveEvent<Status>()
     override val liveLoginState = SingleLiveEvent<Status>()
     override val liveLoginVerifyState = SingleLiveEvent<Status>()
-    override val regionList
-        get() = MutableLiveData<Any>()
-    override val districtList
-        get() = MutableLiveData<Any>()
+    override val liveRegionState = MutableLiveData<NetworkStatus<List<RegionData>>>()
+    override val liveDistrictState = MutableLiveData<NetworkStatus<List<DistrictData>>>()
+    override val liveProfileInfoState = MutableLiveData<NetworkStatus<ProfileInFoData>>()
+    override val regionList = MutableLiveData<Any>()
+    override val districtList = MutableLiveData<Any>()
     override val toast = SingleLiveEvent<String>()
 
     override val phoneNumber = MutableLiveData<String>()
     override val logReg = MutableLiveData<Int>()
-    override val token: MutableLiveData<String>
-        get() = MutableLiveData()
+    override val token = MutableLiveData<String>()
     override val _timer = MutableLiveData<String>()
+    override val imageUri = MutableLiveData<String>()
+
+    override fun setImageUri(uri: String) {
+        imageUri.postValue(uri)
+        Toast.makeText(App.context!!, "AuthViewModelda ishlavatti $uri", Toast.LENGTH_SHORT).show()
+    }
 
     //registratsiya so'rovi
     override fun register(phone: String) {
@@ -109,14 +120,12 @@ class AuthViewModel(
         }
     }
 
-    private val _liveRegionState = MutableLiveData<NetworkStatus<List<RegionData>>>()
-    val liveRegionState: LiveData<NetworkStatus<List<RegionData>>> = _liveRegionState
 
     //GetRegion
     override fun getRegion() {
         viewModelScope.launch {
             try {
-                _liveRegionState.postValue(NetworkStatus.LOADING())
+                liveRegionState.postValue(NetworkStatus.LOADING())
                 val result = authRepository.getRegions()
                 if (result.isSuccessful && result.body() != null) {
                     val body = result.body()!!
@@ -124,10 +133,10 @@ class AuthViewModel(
                     when (body.code) {
                         BaseDomen.SUCCESS -> {
                             if (data != null) {
-                                _liveRegionState.postValue(NetworkStatus.SUCCESS(data))
+                                liveRegionState.postValue(NetworkStatus.SUCCESS(data))
                                 Log.d(TAG, "getRegion: Success")
                             } else {
-                                _liveRegionState.postValue(NetworkStatus.ERROR("null"))
+                                liveRegionState.postValue(NetworkStatus.ERROR("null"))
                                 Log.d(TAG, "getRegion: Success")
                                 toast.postValue("Null")
                             }
@@ -136,12 +145,12 @@ class AuthViewModel(
                     }
 
                 } else {
-                    _liveRegionState.postValue(NetworkStatus.ERROR(" Result is not successful"))
+                    liveRegionState.postValue(NetworkStatus.ERROR(" Result is not successful"))
                     toast.postValue(result.body()!!.message)
                 }
 
             } catch (e: Exception) {
-                _liveRegionState.postValue(NetworkStatus.ERROR(e.message ?: ""))
+                liveRegionState.postValue(NetworkStatus.ERROR(e.message ?: ""))
                 toast.postValue(e.message)
                 Log.d(TAG, "getRegion: ${e.message}")
             }
@@ -152,29 +161,27 @@ class AuthViewModel(
     }
 
     //getDistrict
-    private val _liveDistrictState = MutableLiveData<NetworkStatus<List<DistrictData>>>()
-    val liveDistrictState: LiveData<NetworkStatus<List<DistrictData>>> = _liveDistrictState
     override fun getDistrict(region_id: Int) {
         viewModelScope.launch {
             try {
-                _liveDistrictState.postValue(NetworkStatus.LOADING())
+                liveDistrictState.postValue(NetworkStatus.LOADING())
                 Log.d(TAG, "getDistrict: Loading")
                 val result = authRepository.getDistrict(region_id)
                 val body = result.body()!!
                 when (body.code) {
                     BaseDomen.SUCCESS -> {
                         if (body.data != null) {
-                            _liveDistrictState.postValue(NetworkStatus.SUCCESS(body.data))
+                            liveDistrictState.postValue(NetworkStatus.SUCCESS(body.data))
                             Log.d(TAG, "getDistrict: Success")
                         } else {
-                            _liveDistrictState.postValue(NetworkStatus.ERROR("data = null"))
+                            liveDistrictState.postValue(NetworkStatus.ERROR("data = null"))
                             Log.d(TAG, "getDistrict: Error")
                         }
                     }
                 }
 
             } catch (e: Exception) {
-                _liveDistrictState.postValue(NetworkStatus.ERROR(e.message ?: ""))
+                liveDistrictState.postValue(NetworkStatus.ERROR(e.message ?: ""))
                 Log.d(TAG, "getDistrict: ${e.message}")
                 toast.postValue(e.message)
             }
@@ -182,9 +189,6 @@ class AuthViewModel(
     }
 
     // Add profile info
-    private val _liveProfileInfoState = MutableLiveData<NetworkStatus<ProfileInFoData>>()
-    val liveProfileInfoState: LiveData<NetworkStatus<ProfileInFoData>> = _liveProfileInfoState
-
     override fun addProfileInfo(
         auth_key: String,
         first_name: String,
@@ -207,39 +211,34 @@ class AuthViewModel(
                     region_id,
                     birth_date
                 )
-                _liveProfileInfoState.postValue(NetworkStatus.LOADING())
+                liveProfileInfoState.postValue(NetworkStatus.LOADING())
                 if (result.isSuccessful) {
                     val body = result.body()
-
                     if (body != null) {
                         val data = body.data
                         when (body.code) {
                             BaseDomen.SUCCESS -> {
                                 if (data != null) {
-                                    _liveProfileInfoState.postValue(NetworkStatus.SUCCESS(body.data))
+                                    liveProfileInfoState.postValue(NetworkStatus.SUCCESS(body.data))
                                     //TODO
+                                    setPreferences(data)
 //                                preference ga mashetta saqlab qo'ya qolamiz'
-                                    saveCredentials()
                                 } else {
-                                    _liveProfileInfoState.postValue(NetworkStatus.ERROR("Null"))
+                                    liveProfileInfoState.postValue(NetworkStatus.ERROR("Null"))
                                 }
                             }
                         }
                     } else {
-                        _liveProfileInfoState.postValue(NetworkStatus.ERROR("Body is null"))
+                        liveProfileInfoState.postValue(NetworkStatus.ERROR("Body is null"))
                     }
                 } else {
-                    _liveProfileInfoState.postValue(NetworkStatus.ERROR("Result is not successful"))
+                    liveProfileInfoState.postValue(NetworkStatus.ERROR("Result is not successful"))
 
                 }
             } catch (e: Exception) {
-                _liveProfileInfoState.postValue(NetworkStatus.ERROR("Tapping exception ${e.message}"))
+                liveProfileInfoState.postValue(NetworkStatus.ERROR("Tapping exception ${e.message}"))
             }
         }
-    }
-
-    private fun saveCredentials() {
-
     }
 
     //login
@@ -254,6 +253,7 @@ class AuthViewModel(
                             liveLoginState.postValue(Status.SUCCESS)
                             phoneNumber.postValue(phone)
                             logReg.postValue(Constants.LOG)
+
                         }
                         BaseDomen.CLIENT_NOT_FOUND -> {
                             liveLoginState.postValue(Status.ERROR)
@@ -288,6 +288,7 @@ class AuthViewModel(
                             logReg.postValue(Constants.LOG)
                             if (body.data != null) {
                                 preferences.token = body.data.authKey
+                                preferences.phone = body.data.phone
                                 Log.d("TAGTAG", "verify_code: ${preferences.token}")
                             } else {
                                 toast.postValue("Data is null")
@@ -326,7 +327,7 @@ class AuthViewModel(
                         when (result.body()!!.code) {
                             BaseDomen.SUCCESS -> {
                                 liveLoginVerifyState.postValue(Status.SUCCESS)
-                                Log.d(TAG, "login_verify: Working After pref")
+                                setPreferences(data!!)
                             }
                             BaseDomen.CLIENT_NOT_FOUND -> {
                                 liveLoginVerifyState.postValue(Status.ERROR)
@@ -361,6 +362,54 @@ class AuthViewModel(
         }
 
     }
+
+    override fun setPreferences(data: Any) {
+        if (data is LoginVerifyData) {
+            preferences.token = data.authKey
+            preferences.phone = data.phone
+            preferences.name = data.firstName
+            preferences.surename = data.lastName
+            preferences.fathername = data.fatherName
+            preferences.birthDate = data.birthDate
+            preferences.provinceId = data.provinceId
+            preferences.regionId = data.regionId
+            preferences.id = data.id ?: 1029209
+            preferences.gender.let {
+                if (data.gender == 1) {
+                    "Erkak"
+                } else {
+                    "Ayol"
+                }
+            }
+            Log.d(TAG, "login_verify: Working After pref")
+        }
+        if (data is ProfileInFoData) {
+            preferences.token = data.authKey
+            preferences.phone = data.phone
+            preferences.name = data.firstName
+            preferences.surename = data.lastName
+            preferences.fathername = data.fatherName
+            preferences.birthDate = data.birthDate
+            preferences.provinceId = data.provinceId?.toInt()
+            preferences.regionId = data.regionId?.toInt()
+            preferences.gender = data.gender.toString()
+            Log.d(TAG, "login_verify: Working After pref")
+        }
+
+    }
+
+/*
+    private fun setPreferences(data: LoginVerifyData?) {
+        preferences.phone = data?.phone
+        preferences.name = data?.firstName
+        preferences.surename = data?.lastName
+        preferences.fathername = data?.fatherName
+        preferences.birthDate = data?.birthDate
+        preferences.provinceId = data?.provinceId
+        preferences.regionId = data?.regionId
+        Log.d(TAG, "login_verify: Working After pref")
+    }
+*/
 
 
 //    override fun storeLoginPreference(data: Data) {

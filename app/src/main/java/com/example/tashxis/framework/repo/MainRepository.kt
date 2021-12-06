@@ -1,9 +1,10 @@
 package com.example.tashxis.framework.repo
 
 import com.example.tashxis.data.Api
+import com.example.tashxis.presentation.ui.bottom_nav.bosh_oyna.model.GetNearDoctorsRequest
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.AddQueueRequest
 
-class MainRepository(val service: Api) {
+class MainRepository(private val service: Api) {
 
     suspend fun getSpeciality() = service.getSpecialty()
 
@@ -18,4 +19,6 @@ class MainRepository(val service: Api) {
     suspend fun stackCommit(token: String, addQueueRequest: AddQueueRequest) =
         service.putStackCommit(token, addQueueRequest)
 
+    suspend fun getNearDoctors(getNearDoctorsRequest: GetNearDoctorsRequest) =
+        service.getNearDoctors(getNearDoctorsRequest)
 }

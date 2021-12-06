@@ -8,6 +8,9 @@
     <color name="blue">#336FEE</color>
     <color name ="checkColor">#F2A517</color>
 
+    <color name="window_background">#FFFFFF</color>//#E5E5E5
+
+    <color name="text_hint_color">#AEAFB4</color>
 
     <color name="progressDialogBack">#66000000</color>
 </resources>

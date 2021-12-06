@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.tashxis.App
 import com.example.tashxis.R
 import com.example.tashxis.business.util.Status
 import com.example.tashxis.data.RetrofitClient
@@ -14,12 +15,13 @@ import com.example.tashxis.framework.base.BaseFragment
 import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.framework.viewModel.AuthViewModel
 import com.example.tashxis.framework.viewModel.AuthViewModelFactory
+import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
     private val TAG = "TAG"
     private lateinit var authViewModel: AuthViewModel
-
+    private val pref by lazy { PrefHelper.getPref(App.context!!) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val api = RetrofitClient.instance
@@ -29,12 +31,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 requireActivity().application,
                 AuthRepository(api)
             )
-        ).get(AuthViewModel::class.java)
+        )[AuthViewModel::class.java]
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(pref.phone!=""&&pref.name==null&&pref.fathername==null){
+            findNavController().navigate(R.id.action_loginFragment_to_royxatdanOtishFragment)
+        }
         binding.tvLoginReg.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }

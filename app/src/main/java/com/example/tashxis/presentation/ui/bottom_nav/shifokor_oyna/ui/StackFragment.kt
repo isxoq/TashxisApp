@@ -1,11 +1,14 @@
 package com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.tashxis.App
 import com.example.tashxis.business.util.NetworkStatus
+import com.example.tashxis.business.util.lazyFast
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentStackBinding
 import com.example.tashxis.framework.base.BaseFragment
@@ -16,6 +19,7 @@ import com.example.tashxis.presentation.adapters.StackDaysAdapter
 import com.example.tashxis.presentation.adapters.StackDaysClickListener
 import com.example.tashxis.presentation.adapters.StackTimesAdapter
 import com.example.tashxis.presentation.adapters.StackTimesClickListener
+import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.AddQueueResLocal
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.StackDaysData
 
@@ -23,6 +27,7 @@ import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.stack.
 class StackFragment : BaseFragment<FragmentStackBinding>(FragmentStackBinding::inflate),
     StackDaysClickListener,
     StackTimesClickListener {
+    private val preferences by lazyFast { PrefHelper.getPref(App.context!!) }
     private lateinit var viewModel: StackViewModel
     private val stackDaysAdapter: StackDaysAdapter by lazy { StackDaysAdapter() }
     private val stackTimesAdapter: StackTimesAdapter by lazy { StackTimesAdapter() }
@@ -101,7 +106,19 @@ class StackFragment : BaseFragment<FragmentStackBinding>(FragmentStackBinding::i
         }
     }
 
+    private fun setupObserver() {
+        viewModel.liveStackDayState.observe(viewLifecycleOwner, stackDaysObserver)
+        viewModel.livestackTimeState.observe(viewLifecycleOwner, stackTimesObserver)
+        viewModel.liveStackCommit.observe(viewLifecycleOwner, stackCommitObserver)
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun setUpViews() {
+        binding.tvFio.text =
+            """ ${preferences.surename.toString()}  ${preferences.name.toString()}  ${preferences.fathername.toString()}"""
+        binding.tvNumber.text = preferences.phone
+        binding.tvSex.text = preferences.gender
+        binding.tvAge.text = "22"
         stackTimesAdapter.itemClickListener(this)
         stackDaysAdapter.itemClickListener(this)
         binding.rvStackDate.adapter = stackDaysAdapter
@@ -111,12 +128,6 @@ class StackFragment : BaseFragment<FragmentStackBinding>(FragmentStackBinding::i
             stackCommit()
             Toast.makeText(requireContext(), "salom", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun setupObserver() {
-        viewModel.liveStackDayState.observe(viewLifecycleOwner, stackDaysObserver)
-        viewModel.livestackTimeState.observe(viewLifecycleOwner, stackTimesObserver)
-        viewModel.liveStackCommit.observe(viewLifecycleOwner, stackCommitObserver)
     }
 
     private var selectedDatePos = -1

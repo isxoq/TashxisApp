@@ -1,39 +1,48 @@
 package com.example.tashxis.presentation.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tashxis.databinding.ActivitySplashBinding
-import com.example.tashxis.presentation.ui.auth.RegisterActivity
 import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
-import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
-    private var preferences: TashxisPrefs? = null
+    private val preferences by lazy { PrefHelper.getPref(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        preferences = PrefHelper.getPref(this)
+        Handler(mainLooper).postDelayed({
+            if (preferences.token == "" || preferences.name == null) {
+                if (isFirstTimeAppStart()) {
+                    startActivity(Intent(this, SlideActivity::class.java))
 
-        binding.textView3.postDelayed({
-            if (preferences?.token == "") {
-                startActivity(Intent(this, RegisterActivity::class.java))
-            }
-            if (preferences?.token != "") {
-                //startActivity(Intent(this, MainActivity::class.java))
-                startActivity(Intent(this, RegisterActivity::class.java))
+                } else {
+                    startActivity(Intent(this, RegisterActivity::class.java))
+                }
+
+            } else {
+                startActivity(Intent(this, MainActivity::class.java))
                 //TODO
             }
-
             finish()
-        }, 60)
+        }, 200)
 
     }
+
+    private fun isFirstTimeAppStart(): Boolean {
+        val pref = applicationContext.getSharedPreferences("SLIDER_APP", Context.MODE_PRIVATE)
+        Log.d("TAG", "isFirstTimeAppStart: ${pref.getBoolean("APP_START", true)} ")
+        return pref.getBoolean("APP_START", true)
+    }
+
 }

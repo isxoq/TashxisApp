@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/boshFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.bosh_oyna.BoshFragment"
+        android:name="com.example.tashxis.presentation.ui.bottom_nav.bosh_oyna.ui.BoshFragment"
         android:label="fragment_bosh"
         tools:layout="@layout/fragment_bosh" />
     <fragment

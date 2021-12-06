@@ -7,6 +7,8 @@ import com.example.tashxis.presentation.ui.auth.model.auth.RegionData
 import com.example.tashxis.presentation.ui.auth.model.auth.RegisterResponseData
 import com.example.tashxis.presentation.ui.auth.model.auth.VerifyCodeData
 import com.example.tashxis.presentation.ui.auth.model.auth.login_verify.LoginVerifyData
+import com.example.tashxis.presentation.ui.bottom_nav.bosh_oyna.model.GetNearDoctorsRequest
+import com.example.tashxis.presentation.ui.bottom_nav.bosh_oyna.model.GetNearDoctorsRes
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.doctor_response.DoctorResponseData
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.speciality.SpecialData
@@ -100,4 +102,9 @@ interface Api {
         @Header("X-Api-Key") token: String,
         @Body addQueueRequest: AddQueueRequest
     ): Response<BaseDomen<AddQueueResponse>>
+
+    @GET("/api/client/doctor/nearest-doctors")
+    suspend fun getNearDoctors(
+       @Body getNearDoctorsRequest: GetNearDoctorsRequest
+    ): Response<BaseDomen<GetNearDoctorsRes>>
 }

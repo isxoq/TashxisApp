@@ -7,11 +7,14 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         style="@style/ToolbarStyle"
+        app:navigationIconTint="@color/white"
+        app:navigationIcon="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/mutahassis_shape"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Toolbar" />
+        app:title="Toolbar"
+        app:titleTextColor="@color/white" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"

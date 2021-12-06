@@ -21,7 +21,7 @@ data class ProfileInFoData(
     @SerializedName("first_name")
     val firstName: String?, // Isxoqjon
     @SerializedName("gender")
-    val gender: String?, // 1
+    val gender: Int, // 1
     @SerializedName("hospital_id")
     val hospitalId: Any?, // null
     @SerializedName("id")

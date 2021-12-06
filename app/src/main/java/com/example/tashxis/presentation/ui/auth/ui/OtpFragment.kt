@@ -11,10 +11,12 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.tashxis.App
 import com.example.tashxis.R
 import com.example.tashxis.business.util.Constants
 import com.example.tashxis.business.util.Status
 import com.example.tashxis.business.util.hideKeyboard
+import com.example.tashxis.business.util.lazyFast
 import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentOtpBinding
 import com.example.tashxis.framework.base.BaseFragment
@@ -22,12 +24,14 @@ import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.framework.viewModel.AuthViewModel
 import com.example.tashxis.framework.viewModel.AuthViewModelFactory
 import com.example.tashxis.presentation.ui.activity.MainActivity
+import com.example.tashxis.presentation.ui.auth.preference.PrefHelper
 
 class OtpFragment : BaseFragment<FragmentOtpBinding>(FragmentOtpBinding::inflate) {
     var logReg = 0
     lateinit var phoneNumber: String
     private val TAG = "TAG"
     private lateinit var authViewModel: AuthViewModel
+    private val preference by lazyFast { PrefHelper.getPref(App.context!!) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +46,10 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(FragmentOtpBinding::inflate
         )[AuthViewModel::class.java]
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
         setTimer()
-
 
         authViewModel.logReg.observe(viewLifecycleOwner, {
             logReg = it
@@ -55,7 +57,6 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(FragmentOtpBinding::inflate
         authViewModel.phoneNumber.observe(viewLifecycleOwner, {
             binding.tvSmsKod.text = getString(R.string.sms_string, it)
             phoneNumber = it
-
         })
         //test
         //binding/
@@ -67,7 +68,12 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(FragmentOtpBinding::inflate
         if (countDownTimer == null) {
             countDownTimer = object : CountDownTimer(12000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
-//                binding.resendSms.isVisible = true
+                    try {
+                        binding.resendSms.isVisible = true
+                    } catch (e: Exception) {
+                        Log.d(TAG, "onTick: ${e.message}")
+                    }
+                    //
                     val sec = (millisUntilFinished / 1000) % 60
                     val min = (millisUntilFinished / (1000 * 60)) % 60
                     val formattedTimeStr = if (sec <= 9) {
@@ -126,23 +132,26 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(FragmentOtpBinding::inflate
         authViewModel.liveLoginVerifyState.observe(viewLifecycleOwner, {
             when (it) {
                 Status.LOADING -> {
-                    Log.d(TAG, "OTP LOG-REG onViewCreated:LOADING ")
-                    //TODO
+                    showProgress()
                 }
                 Status.ERROR -> {
-                    //TODO
-                    Log.d(TAG, "OTP Log onViewCreated: Error")
+                    hideProgress()
                 }
                 Status.SUCCESS -> {
+                    hideProgress()
+                    countDownTimer?.cancel()
                     if (logReg == Constants.REG) {
                         findNavController().navigate(R.id.action_otpFragment_to_royxatdanOtishFragment)
                     }
                     if (logReg == Constants.LOG) {
-                        Log.d(TAG, "OTP LOG onViewCreated: Success")
-                        val intent = Intent(requireActivity(), MainActivity::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        activity?.startActivity(intent)
+                        if (preference.name == null) {
+                            navigation()
+                        } else {
+                            val intent = Intent(requireActivity(), MainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            activity?.startActivity(intent)
+                        }
                     }
 
                 }
@@ -163,20 +172,13 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(FragmentOtpBinding::inflate
         super.onPause()
     }
 
+    fun navigation() {
+        findNavController().navigate(R.id.action_otpFragment_to_royxatdanOtishFragment)
+    }
+
     override fun onDestroy() {
         hideKeyboard()
         countDownTimer?.cancel()
         super.onDestroy()
     }
 }
-/*
-                                preferences.token = data?.authKey
-                                preferences.name = data?.firstName
-                                preferences.fathername = data?.fatherName
-                                preferences.surename = data?.lastName
-                                preferences.phone = data?.phone
-                                preferences.provinceId = data?.provinceId
-                                preferences.regionId = data?.regionId
-                                preferences.birthDate = data?.birthDate
-
-* */

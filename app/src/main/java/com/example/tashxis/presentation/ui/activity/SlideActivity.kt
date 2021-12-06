@@ -1,21 +1,24 @@
 package com.example.tashxis.presentation.ui.activity
 
-import android.content.Context
+import android.Manifest
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.text.Html
+import android.provider.Settings
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.viewpager.widget.ViewPager
 import com.example.tashxis.R
 import com.example.tashxis.databinding.ActivitySlideBinding
 import com.example.tashxis.presentation.adapters.MyAdapter
-import com.example.tashxis.presentation.ui.auth.RegisterActivity
 
 class SlideActivity : AppCompatActivity() {
 
@@ -28,25 +31,16 @@ class SlideActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySlideBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (!isFirstTimeAppStart()) {
-            setAppStartStatus(true)
-            startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
-        }
-
         statusBarTransparent()
 
         binding.btnNext.setOnClickListener {
+            requestLocationPermissions.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             val currentPage: Int = binding.viewPager.currentItem + 1
 
             if (currentPage < layouts.size) {
                 binding.viewPager.currentItem = currentPage
             } else {
                 binding.btnNext.isEnabled = false
-                setAppStartStatus(true)
-                startActivity(Intent(this, RegisterActivity::class.java))
-                finish()
             }
         }
 
@@ -64,7 +58,7 @@ class SlideActivity : AppCompatActivity() {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-                    binding.btnNext.isVisible = position == 1
+                binding.btnNext.isVisible = position == 1
             }
 
             override fun onPageSelected(position: Int) {
@@ -73,18 +67,6 @@ class SlideActivity : AppCompatActivity() {
 
         })
         setDots(0)
-    }
-
-    private fun isFirstTimeAppStart(): Boolean {
-        val pref = applicationContext.getSharedPreferences("SLIDER_APP", Context.MODE_PRIVATE)
-        return pref.getBoolean("APP_START", true)
-    }
-
-    private fun setAppStartStatus(status: Boolean) {
-        val pref = applicationContext.getSharedPreferences("SLIDER_APP", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = pref.edit()
-        editor.putBoolean("APP_START", status)
-        editor.apply()
     }
 
     private fun statusBarTransparent() {
@@ -101,15 +83,38 @@ class SlideActivity : AppCompatActivity() {
 
         for (i in dotsTv.indices) {
             dotsTv[i] = TextView(this)
-            dotsTv[i]!!.text = Html.fromHtml("&#8226;")
-            dotsTv[i]!!.textSize = 30f
-            dotsTv[i]!!.setTextColor(Color.parseColor("#a9b4bb"))
-            binding.dotsLayout.addView(dotsTv[i])
+            dotsTv[i]?.let {
+                it.text = HtmlCompat.fromHtml("&#8226;", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                it.textSize = 30f
+                it.setTextColor(Color.parseColor("#a9b4bb"))
+                binding.dotsLayout.addView(it)
+            }
         }
 
         if (dotsTv.isNotEmpty()) {
-            dotsTv[page]!!.setTextColor(Color.parseColor("#ffffff"))
+            dotsTv[page]?.setTextColor(Color.parseColor("#ffffff"))
         }
     }
+
+    private val requestLocationPermissions =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                Toast.makeText(this, "You gave that fucking permission", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, RegisterActivity::class.java))
+                finish()
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (this.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri = Uri.fromParts("package", this.packageName, null)
+                        intent.data = uri
+                        startActivity(intent)
+                    }
+                }
+                Toast.makeText(this, "You must give permission on something", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
 
 }

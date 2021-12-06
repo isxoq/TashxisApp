@@ -19,13 +19,23 @@ import com.example.tashxis.framework.repo.MainRepository
 import com.example.tashxis.framework.viewModel.AboutDoctorViewModel
 import com.example.tashxis.framework.viewModel.AboutDoctorViewModelFactory
 import com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.model.about_doctor.AboutDoctorResponseData
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 
 class AboutDoctorFragment :
-    BaseFragment<FragmentAboutDoctorBinding>(FragmentAboutDoctorBinding::inflate) {
+    BaseFragment<FragmentAboutDoctorBinding>(FragmentAboutDoctorBinding::inflate),
+    OnMapReadyCallback {
+
     private lateinit var viewModel: AboutDoctorViewModel
     private var doctorId: Int = 0
     private var price: Int = 0
+    private lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +54,7 @@ class AboutDoctorFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpViews()
         setupObserver()
         binding.btnSetMeeting.setOnClickListener {
             val bundle = bundleOf("id" to doctorId, "price" to price)
@@ -51,12 +62,17 @@ class AboutDoctorFragment :
         }
     }
 
+    private fun setUpViews() {
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
     private val aboutDoctorsObserver = Observer<NetworkStatus<AboutDoctorResponseData>> {
         when (it) {
             is NetworkStatus.LOADING -> {
                 showProgress()
                 Log.d("NetworkStatus", "Loading: ${it}")
-
             }
             is NetworkStatus.SUCCESS -> {
                 hideProgress()
@@ -116,5 +132,20 @@ class AboutDoctorFragment :
         viewModel.liveAboutDoctorsState.observe(viewLifecycleOwner, aboutDoctorsObserver)
     }
 
-
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        map.mapType = GoogleMap.MAP_TYPE_NORMAL
+        map.uiSettings.isCompassEnabled = true
+        map.uiSettings.isRotateGesturesEnabled = true
+        val tashkent = LatLng(41.31235512450395, 69.269813)
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(tashkent, 15f))
+        map.addMarker(
+            MarkerOptions()
+                .position(tashkent)
+                .title("balnisa")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+        )
+    }
 }
+
+

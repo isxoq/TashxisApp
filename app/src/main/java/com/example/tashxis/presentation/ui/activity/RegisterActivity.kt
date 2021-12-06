@@ -1,4 +1,4 @@
-package com.example.tashxis.presentation.ui.auth
+package com.example.tashxis.presentation.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

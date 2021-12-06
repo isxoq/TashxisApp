@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="#F3F3F3"
+    android:fillViewport="true"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="parent"
@@ -13,9 +13,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_about_main"
-        android:layout_margin="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
 
 
         <com.google.android.material.card.MaterialCardView
@@ -36,14 +36,16 @@
                 android:paddingBottom="15dp">
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_doctor"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/Corner50Percent"
                     tools:src="@drawable/doctor_image" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -338,9 +340,8 @@
                     android:textSize="20sp"
                     app:fontFamily="@font/product_sans_bold"
                     app:layout_constraintBottom_toBottomOf="@id/iv_location_icon"
-                    app:layout_constraintStart_toEndOf="@id/iv_location_icon"
-                    app:layout_constraintEnd_toStartOf="@id/iv_map_image"
-                    />
+                    app:layout_constraintEnd_toStartOf="@id/ll_map"
+                    app:layout_constraintStart_toEndOf="@id/iv_location_icon" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_manzil_text"
@@ -352,7 +353,7 @@
                     android:text="@string/hospital_address_text"
                     android:textSize="20sp"
                     app:fontFamily="@font/product_sans_bold"
-                    app:layout_constraintEnd_toStartOf="@id/iv_map_image"
+                    app:layout_constraintEnd_toStartOf="@id/ll_map"
                     app:layout_constraintStart_toEndOf="@id/iv_location_icon"
                     app:layout_constraintTop_toBottomOf="@id/tv_manzil" />
 
@@ -376,8 +377,8 @@
                     android:text="Ish vaqti"
                     android:textSize="20sp"
                     app:fontFamily="@font/product_sans_bold"
-                    app:layout_constraintEnd_toStartOf="@id/iv_map_image"
                     app:layout_constraintBottom_toBottomOf="@id/iv_work_hour"
+                    app:layout_constraintEnd_toStartOf="@id/ll_map"
                     app:layout_constraintStart_toEndOf="@id/iv_work_hour" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -390,18 +391,26 @@
                     android:text="@string/work_hour_text"
                     android:textSize="20sp"
                     app:fontFamily="@font/product_sans_bold"
-                    app:layout_constraintEnd_toStartOf="@id/iv_map_image"
+                    app:layout_constraintEnd_toStartOf="@id/ll_map"
                     app:layout_constraintStart_toEndOf="@id/iv_work_hour"
                     app:layout_constraintTop_toBottomOf="@id/tv_work_hour" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_map_image"
+                <LinearLayout
+                    android:id="@+id/ll_map"
                     android:layout_width="100dp"
-                    android:layout_height="175dp"
-                    android:src="@drawable/google_map"
+                    android:layout_height="170dp"
                     app:layout_constraintBottom_toBottomOf="@id/tv_work_hour_text"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_manzil" />
+                    app:layout_constraintTop_toTopOf="@id/tv_manzil">
+
+                    <fragment
+                        android:id="@+id/mapFragment"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_treat_ill_title"
@@ -413,7 +422,7 @@
                     app:fontFamily="@font/product_sans_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_map_image" />
+                    app:layout_constraintTop_toBottomOf="@id/ll_map" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_treat_ill_text"
@@ -434,10 +443,10 @@
                     android:layout_marginStart="35dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="35dp"
-                    android:textSize="16sp"
                     android:fontFamily="@font/product_sans_bold"
                     android:text="Shifokor bilan uchrashuv belgilash"
                     android:textAllCaps="false"
+                    android:textSize="16sp"
                     app:cornerRadius="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

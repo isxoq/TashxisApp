@@ -8,35 +8,40 @@
     android:orientation="vertical"
     tools:context="com.example.tashxis.presentation.ui.auth.ui.RoyxatdanOtishFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/mutahassis_shape"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp">
 
-        <TextView
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_client"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_man"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:shapeAppearanceOverlay="@style/Corner50Percent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_photograph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:text="Royhatdan o'tish"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_22sdp"
-            android:textStyle="bold" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_photograph"
+            app:layout_constraintBottom_toBottomOf="@id/iv_client"
+            app:layout_constraintEnd_toEndOf="@id/iv_client" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </LinearLayout>
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_client"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:src="@drawable/ic_man" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -173,8 +178,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_28sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="Erkak"
                         android:checked="true"
+                        android:text="Erkak"
                         android:textSize="@dimen/_16sdp" />
 
                     <RadioButton
@@ -184,8 +189,6 @@
                         android:layout_marginStart="@dimen/_20sdp"
                         android:text="Ayol"
                         android:textSize="@dimen/_16sdp" />
-
-
                 </RadioGroup>
 
             </LinearLayout>
@@ -220,6 +223,7 @@
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -253,18 +257,19 @@
                     android:id="@+id/btn_tasdiqlash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#1998CF"
                     android:layout_gravity="end"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="45dp"
+                    android:backgroundTint="#1998CF"
+                    android:fontFamily="@font/product_sans_regular"
                     android:paddingHorizontal="55dp"
                     android:paddingVertical="12dp"
-                    android:fontFamily="@font/product_sans_regular"
                     android:text="Tasdiqlash"
                     android:textAllCaps="false"
                     android:textSize="20sp"
-                    android:layout_marginBottom="45dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="26dp"
                     app:cornerRadius="20dp" />
+
 
             </LinearLayout>
 

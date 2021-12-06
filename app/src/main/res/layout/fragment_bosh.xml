@@ -1,230 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EEEEEE"
-    tools:context=".presentation.ui.bottom_nav.bosh_oyna.BoshFragment">
+    tools:context=".presentation.ui.bottom_nav.bosh_oyna.ui.BoshFragment">
 
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@drawable/yuqoridagi_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="22dp"
+            android:fontFamily="sans-serif"
+            android:text="Xush kelibsiz!"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_ism"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/iv_qongiroq"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Azizbek" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_qongiroq"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imd_view"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="11dp"
+            android:src="@drawable/qongiroq_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imd_view"
+            app:layout_constraintEnd_toEndOf="@+id/imd_view"
+            app:layout_constraintStart_toStartOf="@+id/imd_view"
+            app:layout_constraintTop_toTopOf="@+id/imd_view" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16sp"
+            android:layout_marginLeft="8dp"
+            android:elevation="3dp"
+            android:fontFamily="sans-serif"
+            android:text="Shifokor ismini yozing"
+            android:textColor="#707070"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/yuqoridagi_shape">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_ism">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="22dp"
-                android:fontFamily="sans-serif"
-                android:text="Xush kelibsiz!"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_ism"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="18dp"
-                android:text="Azizbek"
-                android:textColor="@color/white"
-                android:fontFamily="sans-serif"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/iv_qongiroq"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_qongiroq"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_notification"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imd_view"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="11dp"
-                android:src="@drawable/qongiroq_shape"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3"
-                android:textColor="@color/white"
-                android:textSize="8dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imd_view"
-                app:layout_constraintEnd_toEndOf="@+id/imd_view"
-                app:layout_constraintStart_toStartOf="@+id/imd_view"
-                app:layout_constraintTop_toTopOf="@+id/imd_view" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shifokor ismini yozing"
-                android:textColor="#707070"
-                android:textSize="16dp"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
                 android:elevation="3dp"
-                android:layout_marginLeft="8dp"
-                android:fontFamily="sans-serif"
-                android:layout_marginStart="16sp"
-                app:layout_constraintLeft_toLeftOf="@+id/linearLayout"
-                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-                app:layout_constraintTop_toTopOf="@+id/linearLayout" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@+id/btnSearch"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_ism">
+                app:layout_constraintStart_toStartOf="@+id/btnSearch"
+                app:layout_constraintTop_toTopOf="@+id/btnSearch" />
 
-                <ImageView
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:elevation="3dp"
-                    android:src="@drawable/ic_search"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnSearch"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/btnSearch"
-                    app:layout_constraintTop_toTopOf="@+id/btnSearch" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/materialButton"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_50sdp"
+                android:backgroundTint="@color/white"
+                app:cornerRadius="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btnSearch"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/materialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:backgroundTint="@color/white"
-                    app:cornerRadius="15dp"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/btnSearch"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSearch"
-                    android:layout_width="64dp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:backgroundTint="@color/white"
-                    app:cornerRadius="15dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSearch"
+                android:layout_width="64dp"
+                android:layout_height="@dimen/_50sdp"
+                android:backgroundTint="@color/white"
+                app:cornerRadius="15dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/clTopBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="10dp">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvMeeting"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif"
                 android:text="Kutilayotgan uchrashuvlar"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:text="Barchasi"
                 android:textColor="#14AFA4"
                 android:textSize="@dimen/_14sdp"
-
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textView2" />
+                app:layout_constraintTop_toTopOf="@id/tvMeeting" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvWaiting"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMeeting"
+                tools:itemCount="20" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvNearDoctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="sans-serif"
+                android:text="Yaqindagi shifokorlar"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvWaiting" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNearDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tvNearDoctor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:spanCount="2"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_layout_near_doctor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="@dimen/_12sdp"/>
-
-        </ScrollView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="sans-serif"
-            android:text="Yaqindagi shifokorlar"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_margin="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="@dimen/_12sdp"/>
-
-        </ScrollView>
-
-
-
-    </LinearLayout>
-
-</FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

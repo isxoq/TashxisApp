@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_bottom_nav" />
     <fragment
         android:id="@+id/id_profil_fragment"
-        android:name="com.example.tashxis.presentation.ui.nav_drawer.profile.ProfilFragment"
+        android:name="com.example.tashxis.presentation.ui.nav_drawer.profile.ui.ProfileFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" />
     <fragment

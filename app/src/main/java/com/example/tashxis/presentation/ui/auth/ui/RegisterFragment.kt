@@ -4,26 +4,21 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.tashxis.R
+import com.example.tashxis.business.util.Status
+import com.example.tashxis.data.RetrofitClient
 import com.example.tashxis.databinding.FragmentRegisterBinding
+import com.example.tashxis.framework.base.BaseFragment
 import com.example.tashxis.framework.repo.AuthRepository
 import com.example.tashxis.framework.viewModel.AuthViewModel
 import com.example.tashxis.framework.viewModel.AuthViewModelFactory
-import com.example.tashxis.business.util.Status
-import com.example.tashxis.data.RetrofitClient
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
     private val TAG = "TAG"
-    private var _binding: FragmentRegisterBinding? = null
     private lateinit var authViewModel: AuthViewModel
-    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +32,9 @@ class RegisterFragment : Fragment() {
         )[AuthViewModel::class.java]
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.telRaqam.addTextChangedListener(object :TextWatcher{
+    override fun viewCreated() {
+        super.viewCreated()
+        binding.telRaqam.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -58,14 +44,14 @@ class RegisterFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (binding.telRaqam.rawText.length ==9){
+                if (binding.telRaqam.rawText.length == 9) {
                     val _phoneNumber = "+998" + binding.telRaqam.rawText.trim()
                     binding.btnTasdiqlash.isEnabled = true
                 }
             }
 
         })
-        binding.btnTasdiqlash.setOnClickListener{
+        binding.btnTasdiqlash.setOnClickListener {
             authViewModel.register("+998" + binding.telRaqam.rawText.trim())
 
         }
@@ -87,10 +73,6 @@ class RegisterFragment : Fragment() {
         authViewModel.toast.observe(viewLifecycleOwner, {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
 }

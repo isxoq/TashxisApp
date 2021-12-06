@@ -19,7 +19,7 @@ data class LoginVerifyData(
     @SerializedName("first_name")
     val firstName: String?, // Abduqahhor
     @SerializedName("gender")
-    val gender: Int?, // 1
+    val gender: Int, // 1
     @SerializedName("hospital_id")
     val hospitalId: String?, // null
     @SerializedName("id")

@@ -9,6 +9,8 @@ object Constants {
     const val LOG = 2
 
 
+    const val REQUEST_CODE_LOCATION_PERMISSION = 0
+
     const val SUCCESS: Int = 200
     const val SMS_ALREADY_SENT = 477;
     const val UNKNOWN_ERROR = 520;

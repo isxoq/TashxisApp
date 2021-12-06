@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
     <style name="Theme.Tashxis" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorControlNormal">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
-    <style name="BottomNavigationView.Active"
-        parent="@style/TextAppearance.AppCompat.Caption">
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">9sp</item>
     </style>
-    <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
+
+    <style name="ToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textSize">30sp</item>
 
         <item name="background">@drawable/mutahassis_shape</item>
@@ -37,5 +40,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="windowMinWidthMajor">0%</item>
         <item name="windowMinWidthMinor">0%</item>
+    </style>
+    <style name="Corner50Percent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

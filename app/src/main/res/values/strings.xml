@@ -29,5 +29,11 @@
     <string name="dr_name">DR %s</string>
     <string name="speciality">%s</string>
     <string name="shifokor_xaqida">Shifokor xaqida</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="take_photo">Take photo</string>
 
+    <string name="grant_permission">Grant permission</string>
+    <string name="grant_permission_settings">You have to grant permission in the settings</string>
+    <string name="positive_button_text">Yes</string>
+    <string name="negative_button_text">No</string>
 </resources>

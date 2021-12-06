@@ -45,6 +45,7 @@
             android:layout_marginTop="24dp"
             app:layout_constraintBottom_toTopOf="@id/btn_navbat"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_stack_time">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,7 +79,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_fio_index" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_yosh_index"
+                    android:id="@+id/tv_age_index"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -86,12 +87,12 @@
                     android:text="Yoshi"
                     android:textSize="18sp"
                     app:fontFamily="@font/product_sans_regular"
-                    app:layout_constraintEnd_toStartOf="@id/tv_yosh"
+                    app:layout_constraintEnd_toStartOf="@id/tvAge"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_fio" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_yosh"
+                    android:id="@+id/tvAge"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
@@ -99,7 +100,7 @@
                     android:textSize="18sp"
                     app:fontFamily="@font/product_sans_bold"
                     app:layout_constraintEnd_toStartOf="@id/tv_sex_index"
-                    app:layout_constraintStart_toEndOf="@id/tv_yosh_index"
+                    app:layout_constraintStart_toEndOf="@id/tv_age_index"
                     app:layout_constraintTop_toBottomOf="@id/tv_fio"
                     tools:text="25" />
 
@@ -140,7 +141,7 @@
                     app:fontFamily="@font/product_sans_regular"
                     app:layout_constraintEnd_toStartOf="@id/tv_number"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_yosh" />
+                    app:layout_constraintTop_toBottomOf="@id/tvAge" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_number"
@@ -152,7 +153,7 @@
                     android:textSize="18sp"
                     app:fontFamily="@font/product_sans_bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_yosh"
+                    app:layout_constraintTop_toBottomOf="@id/tvAge"
                     tools:text="+9821390128013" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

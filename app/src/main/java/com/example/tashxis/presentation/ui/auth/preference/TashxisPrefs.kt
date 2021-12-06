@@ -4,7 +4,9 @@ import android.content.SharedPreferences
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.BIRTH_DATE
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.FATHERNAME
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.FIREBASE_TOKEN
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.GENDER
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.ID
+import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.IMAGE_URI
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.ISM
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.IS_ON_BOARD
 import com.example.tashxis.presentation.ui.auth.preference.TashxisPrefs.Companion.LANGUAGE
@@ -27,6 +29,8 @@ interface TashxisPrefs {
     var language: String?
     var firebaseToken: String?
     var isOnBoard: Boolean
+    var imageUri: String?
+    var gender: String?
     fun clearAll()
 
     companion object {
@@ -43,6 +47,8 @@ interface TashxisPrefs {
         const val LANGUAGE = "language"
         const val FIREBASE_TOKEN = "firebase_token"
         const val IS_ON_BOARD = "on_board"
+        const val IMAGE_URI = ""
+        const val GENDER = "gender"
     }
 }
 
@@ -74,7 +80,7 @@ class TashxisPrefsImpl(
         get() = prefs.getString(FATHERNAME, null)
         set(value) = prefs.edit().putString(FATHERNAME, value).apply()
     override var token: String?
-        get() = prefs.getString(TOKEN, null)
+        get() = prefs.getString(TOKEN, "")
         set(value) {
             prefs.edit().putString(TOKEN, value).apply()
             /*if (value == null) {
@@ -95,6 +101,16 @@ class TashxisPrefsImpl(
     override var isOnBoard: Boolean
         get() = prefs.getBoolean(IS_ON_BOARD, true)
         set(value) = prefs.edit().putBoolean(IS_ON_BOARD, value).apply()
+    override var imageUri: String?
+        get() = prefs.getString(IMAGE_URI, "")
+        set(value) {
+            prefs.edit().putString(IMAGE_URI, value).apply()
+        }
+    override var gender: String?
+        get() = prefs.getString(GENDER, "Erkak")!!
+        set(value) {
+            prefs.edit().putString(GENDER, value).apply()
+        }
 
     override fun clearAll() {
         val lang = language
