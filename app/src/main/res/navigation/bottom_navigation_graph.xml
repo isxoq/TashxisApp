@@ -7,73 +7,80 @@
 
     <fragment
         android:id="@+id/boshFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.bosh_oyna.ui.BoshFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.bosh_oyna.ui.BoshFragment"
         android:label="fragment_bosh"
-        tools:layout="@layout/fragment_bosh" />
+        tools:layout="@layout/fragment_bosh" >
+        <action
+            android:id="@+id/action_boshFragment_to_navbatFragment"
+            app:destination="@id/navbatFragment" />
+        <action
+            android:id="@+id/action_boshFragment_to_aboutDoctorFragment"
+            app:destination="@id/aboutDoctorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navbatFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.navbat_oyna.NavbatFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.navbat_oyna.QueueFragment"
         android:label="Navbat"
-        tools:layout="@layout/fragment_navbat" />
+        tools:layout="@layout/fragment_navbat" >
+        <action
+            android:id="@+id/action_navbatFragment_to_queueInfoFragment"
+            app:destination="@id/queueInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shifokorFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui.SpecialityFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.shifokor_oyna.ui.SpecialityFragment"
         android:label="Shifokorlar"
         tools:layout="@layout/fragment_speciality">
         <action
             android:id="@+id/action_shifokorFragment_to_doctorsFragment"
-            app:destination="@id/doctorsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/doctorsFragment" />
         <argument
             android:name="idSpeciality"
             android:defaultValue="0"
             app:argType="integer" />
         <action
             android:id="@+id/action_shifokorFragment_to_aboutDoctorFragment"
-            app:destination="@id/aboutDoctorFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/aboutDoctorFragment" />
     </fragment>
     <fragment
         android:id="@+id/tashxisFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.tashxis_oyna.TashxisFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.tashxis_oyna.TashxisFragment"
         android:label="Tashxis"
         tools:layout="@layout/fragment_tashxis" />
     <fragment
         android:id="@+id/doctorsFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui.DoctorsFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.shifokor_oyna.ui.DoctorsFragment"
         android:label="fragment_doctors"
         tools:layout="@layout/fragment_doctors">
         <action
             android:id="@+id/action_doctorsFragment_to_aboutDoctorFragment"
-            app:destination="@id/aboutDoctorFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/aboutDoctorFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutDoctorFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui.AboutDoctorFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.shifokor_oyna.ui.AboutDoctorFragment"
         android:label="Doktor haqida"
         tools:layout="@layout/fragment_about_doctor">
         <action
             android:id="@+id/action_aboutDoctorFragment_to_stackFragment"
-            app:destination="@id/stackFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/stackFragment" />
     </fragment>
     <fragment
         android:id="@+id/stackFragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.shifokor_oyna.ui.StackFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.shifokor_oyna.ui.StackFragment"
         android:label="Navbat"
-        tools:layout="@layout/fragment_stack" />
+        tools:layout="@layout/fragment_stack">
+        <action
+            android:id="@+id/action_stackFragment_to_boshFragment"
+            app:destination="@id/boshFragment"
+            app:popUpTo="@id/bottom_navigation_graph"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/queueInfoFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.navbat_oyna.QueueInfoFragment"
+        android:label="fragment_queue_info"
+        tools:layout="@layout/fragment_queue_info" />
 
 </navigation>

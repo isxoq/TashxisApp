@@ -5,8 +5,7 @@
     android:id="@+id/mcvNearDoctor"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
-    >
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clNearDoctor"
@@ -29,23 +28,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            tools:text="Hamidov Jasur"
-            android:textSize="18dp"
             android:fontFamily="@font/product_sans_bold"
-            app:layout_constraintStart_toStartOf="@id/ivDoctor"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivDoctor" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivDoctor"
+            tools:text="Hamidov Jasur" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvSpeciality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            tools:text="Stomatolog"
-            android:textSize="14dp"
             android:fontFamily="@font/product_sans_regular"
-            app:layout_constraintStart_toStartOf="@id/ivDoctor"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="Stomatolog" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

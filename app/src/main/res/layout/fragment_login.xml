@@ -37,7 +37,7 @@
                     android:textSize="@dimen/_18sdp"
                     />
 
-                <br.com.sapereaude.maskedEditText.MaskedEditText
+                <uz.tashxis.client.business.util.maskeditText.MaskedEditText
                     android:id="@+id/tel_raqam"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,6 +46,7 @@
                     android:inputType="phone"
                     android:textSize="@dimen/_18sdp"
                     android:typeface="monospace"
+
                     app:allowed_chars="1234567890"
                     app:mask="+998(##)###-##-##"
                     android:hint="901234567"

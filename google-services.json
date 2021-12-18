@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "869824338636",
+    "firebase_url": "https://tashxis-online-default-rtdb.firebaseio.com",
+    "project_id": "tashxis-online",
+    "storage_bucket": "tashxis-online.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869824338636:android:964698a35156b307574069",
+        "android_client_info": {
+          "package_name": "uz.tashxis.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869824338636-2bc8jlra3cajvt1s0lssuu2ibj4pkch9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.tashxis.client",
+            "certificate_hash": "927ed31ae02ccb5aae837f994b1bd5481fd608b5"
+          }
+        },
+        {
+          "client_id": "869824338636-g8iivf7r0t4bo6idmbrkpjvfbhet08ot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC30H8pDHjy_yYWLpkrKYZJ3vsnjpxeZBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869824338636-g8iivf7r0t4bo6idmbrkpjvfbhet08ot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

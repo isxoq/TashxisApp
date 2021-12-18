@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="16dp"
+    android:background="#EEEEEE"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    tools:context=".presentation.ui.bottom_nav.navbat_oyna.QueueInfoFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDoctor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivDoctorImage"
+                android:layout_width="71dp"
+                android:layout_height="71dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_alert"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:shapeAppearanceOverlay="@style/Corner50Percent"
+                tools:src="@tools:sample/avatars" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDoctorName"
+                android:layout_width="0dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:lines="2"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/iv_logo"
+                app:layout_constraintStart_toEndOf="@id/ivDoctorImage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Abdumo`minov Akbarali" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDoctorSpeciality"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toStartOf="@id/tv_date"
+                app:layout_constraintStart_toStartOf="@id/tvDoctorName"
+                app:layout_constraintTop_toBottomOf="@id/tvDoctorName"
+                tools:text="Stomatolog" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvDoctorSpeciality"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDoctorSpeciality"
+                tools:text="11-05-2021" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPriceIndex"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Summa:"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvDoctorSpeciality"
+                app:layout_constraintTop_toBottomOf="@id/ivDoctorImage" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/product_sans_bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvTime"
+                app:layout_constraintStart_toEndOf="@id/tvPriceIndex"
+                app:layout_constraintTop_toBottomOf="@id/ivDoctorImage"
+                tools:text="30000" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tvPriceIndex"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivDoctorImage"
+                app:layout_constraintTop_toTopOf="@id/tvPriceIndex"
+                tools:text="08:10" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@id/cvCancel"
+        app:layout_constraintTop_toBottomOf="@id/cvDoctor">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_bemor_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvDoctor">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="20dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_query_number_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:text="Navbat ID"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/product_sans_regular"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_query_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+
+                        android:layout_marginTop="14dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/product_sans_bold"
+                        app:layout_constraintStart_toEndOf="@id/tv_query_number_index"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="100" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_name_hospital_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="Shifoxona nomi: "
+                        android:textSize="14sp"
+                        app:fontFamily="@font/product_sans_bold"
+                        app:layout_constraintStart_toStartOf="@id/tv_query_number_index"
+                        app:layout_constraintTop_toBottomOf="@id/tv_query_number_index" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_name_hospital"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/product_sans_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_name_hospital_index"
+                        app:layout_constraintTop_toBottomOf="@id/tv_query_number_index"
+                        tools:text="Xolis klinikasi" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_fio_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:text="Bemor F.I.O"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/product_sans_regular"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name_hospital_index" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_fio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/product_sans_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_fio_index"
+                        tools:text="Hoshimxon Mamaqo'ziyov Teshaboyevich" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_age_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:text="Yoshi"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/product_sans_regular"
+                        app:layout_constraintEnd_toStartOf="@id/tvAge"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_fio" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvAge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/product_sans_bold"
+                        app:layout_constraintEnd_toStartOf="@id/tv_sex_index"
+                        app:layout_constraintStart_toEndOf="@id/tv_age_index"
+                        app:layout_constraintTop_toBottomOf="@id/tv_fio"
+                        tools:text="25" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_sex_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:text="Jinsi"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/product_sans_regular"
+                        app:layout_constraintEnd_toStartOf="@id/tv_sex"
+                        app:layout_constraintTop_toBottomOf="@id/tv_fio" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="131dp"
+                        android:paddingStart="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/product_sans_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_fio"
+                        tools:text="Erkak" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_number_index"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="11dp"
+                        android:text="Bemor telefon raqami"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/product_sans_regular"
+                        app:layout_constraintEnd_toStartOf="@id/tv_number"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAge" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="17dp"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/product_sans_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAge"
+                        tools:text="+9821390128013" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:paddingTop="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_number_index">
+
+                        <fragment
+                            android:id="@+id/mapFragment"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </com.google.android.material.card.MaterialCardView>
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="17dp"
+        app:layout_constraintBottom_toTopOf="@id/cvTransfer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#1A95D5"
+            android:maxLines="1"
+            android:paddingHorizontal="45dp"
+            android:paddingVertical="14dp"
+            android:shadowColor="#1A95D5"
+            android:text="Navbatni bekor qilish"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvTransfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvtransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#1A95D5"
+            android:maxLines="1"
+            android:paddingHorizontal="45dp"
+            android:paddingVertical="14dp"
+            android:shadowColor="#1A95D5"
+            android:text="Boshqa kunga ko'chirish"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

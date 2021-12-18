@@ -54,29 +54,41 @@
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/drawable/ic_rectangle_bottom_sheet.xml" value="0.22777777777777777" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/drawable/image_near_doctor.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/drawable/item_layout_near_doctors.xml" value="0.225" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/drawable/my_shape_btn.xml" value="0.2703125" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/drawable/rounded_dialog.xml" value="0.22777777777777777" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/drawable/shape_bacground.xml" value="0.2703125" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/drawable/shape_btn.xml" value="0.2703125" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/activity_slide.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/activity_splash.xml" value="0.24094202898550723" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/alert_dialog.xml" value="0.2076700434153401" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/bottomsheet_chooser.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_about_doctor.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_bosh.xml" value="0.2" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_bosh.xml" value="0.1949660407510987" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_bottom_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_doctors.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_image_capture.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_navbat.xml" value="0.264" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_otp.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_profil.xml" value="0.2" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_queue_info.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_register.xml" value="0.2318840579710145" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_royxatdan_otish.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_royxatdan_otish_test.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_speciality.xml" value="0.29010416666666666" />
-        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_stack.xml" value="0.29010416666666666" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/fragment_stack.xml" value="0.1" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/ic_photo_camera.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_doctors_layout.xml" value="0.536" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_layout_near_doctor.xml" value="0.536" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_query.xml" value="0.264" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_queue.xml" value="0.264" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_speciality.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_stack_date.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_stack_time.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/layout_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/item_waiting_queues.xml" value="0.176" />
+        <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/layout_dialog.xml" value="0.2" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/navigation_header.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/progress_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Dev/AndroidStudioProjects/TashxisApp/app/src/main/res/layout/slide_1.xml" value="0.25416666666666665" />
@@ -161,7 +173,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.2" />
+        <option name="scale" value="0.264" />
       </ProjectState>
     </option>
   </component>

@@ -32,7 +32,7 @@
 sms orqali faollashtirish kodini yubordik." />
 
 
-            <com.example.tashxis.business.util.maskeditText.MaskedEditText
+            <uz.tashxis.client.business.util.maskeditText.MaskedEditText
                 android:id="@+id/sms_kod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,16 +47,17 @@ sms orqali faollashtirish kodini yubordik." />
                 app:keep_hint="false"
 
                 mask:mask="#-#-#-#-#" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_timer"
-                android:layout_gravity="center"
-                app:fontFamily="@font/product_sans_regular"
-                android:textSize="14sp"
-                tools:text ="2:54"
-
-                android:layout_marginTop="14dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+
+                android:textSize="14sp"
+                app:fontFamily="@font/product_sans_regular"
+                tools:text="2:54" />
 
 
             <TextView

@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/bottom_nav_fragment"
-        android:name="com.example.tashxis.presentation.ui.bottom_nav.BottomNavFragment"
+        android:name="uz.tashxis.client.presentation.ui.bottom_nav.BottomNavFragment"
         android:label="BottomNavFragment"
         tools:layout="@layout/fragment_bottom_nav" />
     <fragment
         android:id="@+id/id_profil_fragment"
-        android:name="com.example.tashxis.presentation.ui.nav_drawer.profile.ui.ProfileFragment"
+        android:name="uz.tashxis.client.presentation.ui.nav_drawer.profile.ui.ProfileFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/id_settings_fragment"
-        android:name="com.example.tashxis.presentation.ui.nav_drawer.settings.SettingsFragment"
+        android:name="uz.tashxis.client.presentation.ui.nav_drawer.settings.SettingsFragment"
         android:label="fragment_settig"
         tools:layout="@layout/fragment_settig" />
     <fragment
         android:id="@+id/id_share_fragment"
-        android:name="com.example.tashxis.presentation.ui.nav_drawer.share.ShareFragment"
+        android:name="uz.tashxis.client.presentation.ui.nav_drawer.share.ShareFragment"
         android:label="fragment_share"
         tools:layout="@layout/fragment_share" />
     <fragment
         android:id="@+id/id_aloqa_fragment"
-        android:name="com.example.tashxis.presentation.ui.nav_drawer.aloqa.AloqaFragment"
+        android:name="uz.tashxis.client.presentation.ui.nav_drawer.aloqa.AloqaFragment"
         android:label="fragment_aloqa"
         tools:layout="@layout/fragment_aloqa" />
 </navigation>
